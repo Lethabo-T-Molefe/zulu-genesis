@@ -1,11 +1,11 @@
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useCallback } from "react";
+import anime from "animejs";
 import heroVillage from "@/assets/hero-village.jpg";
 
 const CodeRainColumn = ({ delay, left }: { delay: number; left: string }) => {
   const chars = "∞∑∫∂πΔΩλφψ01";
   const randomChar = () => chars[Math.floor(Math.random() * chars.length)];
-  
+
   return (
     <div
       className="absolute top-0 text-mono text-xs text-gold/20 animate-code-rain whitespace-nowrap"
@@ -20,21 +20,146 @@ const CodeRainColumn = ({ delay, left }: { delay: number; left: string }) => {
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const taglineRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const subtextRef = useRef<HTMLParagraphElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLImageElement>(null);
+  const particlesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Master timeline for hero entrance
+    const tl = anime.timeline({
+      easing: "easeOutExpo",
+    });
+
+    // Background image zoom-in
+    tl.add({
+      targets: bgRef.current,
+      scale: [1.15, 1],
+      opacity: [0, 0.2],
+      duration: 2000,
+    }, 0);
+
+    // Tagline — letter-by-letter reveal
+    if (taglineRef.current) {
+      const text = taglineRef.current.textContent || "";
+      taglineRef.current.innerHTML = text
+        .split("")
+        .map((char) => `<span class="inline-block" style="opacity:0">${char === " " ? "&nbsp;" : char}</span>`)
+        .join("");
+
+      tl.add({
+        targets: taglineRef.current.querySelectorAll("span"),
+        opacity: [0, 1],
+        translateY: [8, 0],
+        duration: 600,
+        delay: anime.stagger(25),
+      }, 200);
+    }
+
+    // Headline — word stagger with scale
+    if (headlineRef.current) {
+      const words = headlineRef.current.querySelectorAll(".hero-word");
+      tl.add({
+        targets: words,
+        opacity: [0, 1],
+        translateY: [40, 0],
+        scale: [0.95, 1],
+        duration: 900,
+        delay: anime.stagger(120),
+      }, 400);
+    }
+
+    // Subtext — fade & slide
+    tl.add({
+      targets: subtextRef.current,
+      opacity: [0, 1],
+      translateY: [20, 0],
+      duration: 800,
+    }, 900);
+
+    // Buttons — stagger in
+    if (buttonsRef.current) {
+      tl.add({
+        targets: buttonsRef.current.children,
+        opacity: [0, 1],
+        translateX: [-20, 0],
+        duration: 600,
+        delay: anime.stagger(150),
+      }, 1100);
+    }
+
+    // Stats — count up with stagger
+    if (statsRef.current) {
+      const statEls = statsRef.current.querySelectorAll(".stat-item");
+      tl.add({
+        targets: statEls,
+        opacity: [0, 1],
+        translateY: [16, 0],
+        duration: 700,
+        delay: anime.stagger(100),
+      }, 1400);
+
+      // Animate stat divider line
+      tl.add({
+        targets: statsRef.current.querySelector(".stat-divider"),
+        scaleX: [0, 1],
+        duration: 1000,
+        easing: "easeInOutQuart",
+      }, 1300);
+    }
+
+    // Floating particles
+    if (particlesRef.current) {
+      const particles = particlesRef.current.children;
+      anime({
+        targets: particles,
+        translateX: () => anime.random(-80, 80),
+        translateY: () => anime.random(-80, 80),
+        scale: () => [0, anime.random(5, 15) / 10],
+        opacity: () => [0, anime.random(2, 6) / 10],
+        duration: () => anime.random(3000, 6000),
+        delay: () => anime.random(0, 2000),
+        direction: "alternate",
+        loop: true,
+        easing: "easeInOutSine",
+      });
+    }
+  }, []);
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Background image with overlay */}
+      {/* Background image */}
       <div className="absolute inset-0">
         <img
+          ref={bgRef}
           src={heroVillage}
           alt=""
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover"
+          style={{ opacity: 0, transform: "scale(1.15)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
       </div>
 
-      {/* Code rain effect */}
+      {/* Floating gold particles */}
+      <div ref={particlesRef} className="absolute inset-0 pointer-events-none overflow-hidden">
+        {Array.from({ length: 20 }, (_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-gold/30"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              opacity: 0,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Code rain */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {Array.from({ length: 12 }, (_, i) => (
           <CodeRainColumn key={i} delay={i * 0.7} left={`${8 + i * 8}%`} />
@@ -44,70 +169,56 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 md:px-12">
         <div className="max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          <div
+            ref={taglineRef}
             className="text-mono text-xs uppercase tracking-[0.3em] text-gold mb-8"
           >
             United Minds · Infinite Solutions
-          </motion.div>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          <h1
+            ref={headlineRef}
             className="text-display text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] text-foreground mb-8"
           >
-            Engineering
+            <span className="hero-word inline-block" style={{ opacity: 0 }}>Engineering</span>
             <br />
-            <span className="text-gold-gradient">The Future</span>
-          </motion.h1>
+            <span className="hero-word inline-block text-gold-gradient" style={{ opacity: 0 }}>The&nbsp;Future</span>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          <p
+            ref={subtextRef}
             className="text-lg md:text-xl text-ash max-w-2xl mb-12 leading-relaxed"
+            style={{ opacity: 0 }}
           >
-            Through the Divine Triangle of Success — Deep Work, Kaizen, 
-            and the Goldilocks Rule — we forge multidisciplinary solutions 
+            Through the Divine Triangle of Success — Deep Work, Kaizen,
+            and the Goldilocks Rule — we forge multidisciplinary solutions
             for complex global problems.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap gap-4"
-          >
-            <a href="#fields" className="btn-ember">
+          <div ref={buttonsRef} className="flex flex-wrap gap-4">
+            <a href="#fields" className="btn-ember" style={{ opacity: 0 }}>
               Enter the Village
               <span className="infinity-symbol text-lg">∞</span>
             </a>
-            <a href="#about" className="btn-gold-outline">
+            <a href="#about" className="btn-gold-outline" style={{ opacity: 0 }}>
               Our Mission
             </a>
-          </motion.div>
+          </div>
 
-          {/* Stats bar */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-wrap gap-12 mt-20 pt-8 border-t border-gold-subtle"
-          >
+          {/* Stats */}
+          <div ref={statsRef} className="flex flex-wrap gap-12 mt-20 pt-8 relative">
+            <div className="stat-divider absolute top-0 left-0 right-0 h-px bg-gold/20" style={{ transformOrigin: "left", transform: "scaleX(0)" }} />
             {[
               { value: "12", label: "Fields of Mastery" },
               { value: "36", label: "Elite Specialists" },
               { value: "∞", label: "Solutions Engineered" },
             ].map((stat) => (
-              <div key={stat.label}>
+              <div key={stat.label} className="stat-item" style={{ opacity: 0 }}>
                 <div className="text-display text-3xl md:text-4xl text-gold-gradient">{stat.value}</div>
                 <div className="text-mono text-xs uppercase tracking-widest text-ash mt-1">{stat.label}</div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
