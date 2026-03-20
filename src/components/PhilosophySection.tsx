@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import anime from "animejs";
 
 const pillars = [
   {
@@ -23,65 +23,133 @@ const pillars = [
 ];
 
 const PhilosophySection = () => {
-  const ref = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const topLineRef = useRef<HTMLDivElement>(null);
+  const bottomLineRef = useRef<HTMLDivElement>(null);
+  const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      ([entry]) => {
+        if (entry.isIntersecting && !revealed) {
+          setRevealed(true);
+
+          // Decorative lines — draw from center outward
+          anime({
+            targets: [topLineRef.current, bottomLineRef.current],
+            scaleX: [0, 1],
+            duration: 1200,
+            easing: "easeInOutQuart",
+          });
+
+          // Header — stagger lines
+          if (headerRef.current) {
+            anime({
+              targets: headerRef.current.querySelectorAll(".phil-line"),
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 800,
+              delay: anime.stagger(120, { start: 300 }),
+              easing: "easeOutExpo",
+            });
+          }
+
+          // Cards — stagger from center with 3D rotation
+          if (cardsRef.current) {
+            anime({
+              targets: cardsRef.current.querySelectorAll(".pillar-card"),
+              opacity: [0, 1],
+              translateY: [50, 0],
+              rotateY: [15, 0],
+              duration: 900,
+              delay: anime.stagger(180, { start: 700, from: "center" }),
+              easing: "easeOutExpo",
+            });
+
+            // Symbols — separate bouncy animation
+            anime({
+              targets: cardsRef.current.querySelectorAll(".pillar-symbol"),
+              scale: [0, 1],
+              rotate: [180, 0],
+              opacity: [0, 0.3],
+              duration: 800,
+              delay: anime.stagger(200, { start: 1200, from: "center" }),
+              easing: "easeOutElastic(1, .5)",
+            });
+          }
+        }
+      },
       { threshold: 0.15 }
     );
-    if (ref.current) observer.observe(ref.current);
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [revealed]);
+
+  // Hover: symbol spins
+  const handleSymbolHover = (e: React.MouseEvent) => {
+    const symbol = e.currentTarget.querySelector(".pillar-symbol");
+    if (symbol) {
+      anime({
+        targets: symbol,
+        rotate: "+=360",
+        scale: [1, 1.3, 1],
+        opacity: [0.3, 0.7, 0.3],
+        duration: 800,
+        easing: "easeInOutSine",
+      });
+    }
+  };
 
   return (
-    <section id="philosophy" ref={ref} className="relative py-32 md:py-48 bg-charcoal">
-      {/* Decorative border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
-      
+    <section id="philosophy" ref={sectionRef} className="relative py-32 md:py-48 bg-charcoal">
+      <div
+        ref={topLineRef}
+        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"
+        style={{ transform: "scaleX(0)" }}
+      />
+
       <div className="container mx-auto px-6 md:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-20"
-        >
-          <div className="text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4">
+        <div ref={headerRef} className="text-center mb-20">
+          <div className="phil-line text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>
             Philosophical Foundations
           </div>
           <h2 className="text-display text-4xl md:text-6xl lg:text-7xl text-foreground mb-6">
-            The Divine Triangle
+            <span className="phil-line inline-block" style={{ opacity: 0 }}>The Divine Triangle</span>
             <br />
-            <span className="text-gold-gradient">of Success</span>
+            <span className="phil-line inline-block text-gold-gradient" style={{ opacity: 0 }}>of Success</span>
           </h2>
-          <p className="text-ash max-w-xl mx-auto leading-relaxed">
-            Three interlocking principles engineered for sustainable excellence — 
+          <p className="phil-line text-ash max-w-xl mx-auto leading-relaxed" style={{ opacity: 0 }}>
+            Three interlocking principles engineered for sustainable excellence —
             scientifically modelled, rigorously applied.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {pillars.map((pillar, i) => (
-            <motion.div
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {pillars.map((pillar) => (
+            <div
               key={pillar.name}
-              initial={{ opacity: 0, y: 24, filter: "blur(4px)" }}
-              animate={visible ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-              transition={{ duration: 0.7, delay: 0.2 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-hut rounded-sm p-8 md:p-10 relative overflow-hidden group"
+              className="pillar-card bg-hut rounded-sm p-8 md:p-10 relative overflow-hidden group cursor-pointer"
+              style={{ opacity: 0, perspective: "800px" }}
+              onMouseEnter={handleSymbolHover}
             >
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/0 to-transparent group-hover:via-ember/50 transition-all duration-700" />
-              
+
               <div className="text-mono text-xs text-gold/40 mb-6">{pillar.number}</div>
-              <div className="text-4xl text-gold/30 mb-4 group-hover:text-gold/60 transition-colors duration-500">{pillar.symbol}</div>
+              <div className="pillar-symbol text-4xl text-gold/30 mb-4" style={{ opacity: 0 }}>{pillar.symbol}</div>
               <h3 className="text-display text-2xl text-foreground mb-4">{pillar.name}</h3>
               <p className="text-sm text-ash leading-relaxed">{pillar.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+      <div
+        ref={bottomLineRef}
+        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"
+        style={{ transform: "scaleX(0)" }}
+      />
     </section>
   );
 };
