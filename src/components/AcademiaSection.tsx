@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const AcademiaSection = () => {
@@ -15,7 +16,7 @@ const AcademiaSection = () => {
   }, []);
 
   return (
-    <section id="academia" ref={ref} className="relative py-32 md:py-48 bg-charcoal">
+    <section id="academia" ref={ref} className="relative py-20 md:py-32 lg:py-48 bg-charcoal">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
       <div className="container mx-auto px-6 md:px-12">
@@ -26,7 +27,7 @@ const AcademiaSection = () => {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4">Sec(t) Academia</div>
-            <h2 className="text-display text-4xl md:text-5xl text-foreground mb-6">
+            <h2 className="text-display text-3xl md:text-5xl text-foreground mb-6">
               Cultivating<br />
               <span className="text-gold-gradient">Hybrid Professionals</span>
             </h2>
@@ -35,9 +36,9 @@ const AcademiaSection = () => {
               thinkers who can bridge Science and Commerce, Engineering and Law, 
               Technology and African Heritage.
             </p>
-            <a href="#contact" className="btn-ember text-xs">
-              Apply Now <span className="text-base leading-none">→</span>
-            </a>
+            <Link to="/academia" className="btn-ember text-xs">
+              Explore Academia <span className="text-base leading-none">→</span>
+            </Link>
           </motion.div>
 
           <motion.div

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import anime from "animejs";
+import { Link } from "react-router-dom";
+import { animate, stagger } from "animejs";
 
 const pillars = [
   {
@@ -37,46 +38,42 @@ const PhilosophySection = () => {
           setRevealed(true);
 
           // Decorative lines — draw from center outward
-          anime({
-            targets: [topLineRef.current, bottomLineRef.current],
+          animate([topLineRef.current, bottomLineRef.current], {
             scaleX: [0, 1],
             duration: 1200,
-            easing: "easeInOutQuart",
+            easing: "inOutQuart",
           });
 
           // Header — stagger lines
           if (headerRef.current) {
-            anime({
-              targets: headerRef.current.querySelectorAll(".phil-line"),
+            animate(headerRef.current.querySelectorAll(".phil-line"), {
               opacity: [0, 1],
               translateY: [20, 0],
               duration: 800,
-              delay: anime.stagger(120, { start: 300 }),
-              easing: "easeOutExpo",
+              delay: stagger(120, { start: 300 }),
+              easing: "outExpo",
             });
           }
 
           // Cards — stagger from center with 3D rotation
           if (cardsRef.current) {
-            anime({
-              targets: cardsRef.current.querySelectorAll(".pillar-card"),
+            animate(cardsRef.current.querySelectorAll(".pillar-card"), {
               opacity: [0, 1],
               translateY: [50, 0],
               rotateY: [15, 0],
               duration: 900,
-              delay: anime.stagger(180, { start: 700, from: "center" }),
-              easing: "easeOutExpo",
+              delay: stagger(180, { start: 700, from: "center" }),
+              easing: "outExpo",
             });
 
             // Symbols — separate bouncy animation
-            anime({
-              targets: cardsRef.current.querySelectorAll(".pillar-symbol"),
+            animate(cardsRef.current.querySelectorAll(".pillar-symbol"), {
               scale: [0, 1],
               rotate: [180, 0],
               opacity: [0, 0.3],
               duration: 800,
-              delay: anime.stagger(200, { start: 1200, from: "center" }),
-              easing: "easeOutElastic(1, .5)",
+              delay: stagger(200, { start: 1200, from: "center" }),
+              easing: "outElastic(1, .5)",
             });
           }
         }
@@ -91,19 +88,18 @@ const PhilosophySection = () => {
   const handleSymbolHover = (e: React.MouseEvent) => {
     const symbol = e.currentTarget.querySelector(".pillar-symbol");
     if (symbol) {
-      anime({
-        targets: symbol,
+      animate(symbol, {
         rotate: "+=360",
         scale: [1, 1.3, 1],
         opacity: [0.3, 0.7, 0.3],
         duration: 800,
-        easing: "easeInOutSine",
+        easing: "inOutSine",
       });
     }
   };
 
   return (
-    <section id="philosophy" ref={sectionRef} className="relative py-32 md:py-48 bg-charcoal">
+    <section id="philosophy" ref={sectionRef} className="relative py-20 md:py-32 lg:py-48 bg-charcoal">
       <div
         ref={topLineRef}
         className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"
@@ -111,26 +107,29 @@ const PhilosophySection = () => {
       />
 
       <div className="container mx-auto px-6 md:px-12">
-        <div ref={headerRef} className="text-center mb-20">
+        <div ref={headerRef} className="text-center mb-12 md:mb-16 lg:mb-20">
           <div className="phil-line text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>
             Philosophical Foundations
           </div>
-          <h2 className="text-display text-4xl md:text-6xl lg:text-7xl text-foreground mb-6">
+          <h2 className="text-display text-3xl md:text-5xl lg:text-7xl text-foreground mb-6">
             <span className="phil-line inline-block" style={{ opacity: 0 }}>The Divine Triangle</span>
             <br />
             <span className="phil-line inline-block text-gold-gradient" style={{ opacity: 0 }}>of Success</span>
           </h2>
-          <p className="phil-line text-ash max-w-xl mx-auto leading-relaxed" style={{ opacity: 0 }}>
+          <p className="phil-line text-ash max-w-xl mx-auto leading-relaxed mb-8" style={{ opacity: 0 }}>
             Three interlocking principles engineered for sustainable excellence —
             scientifically modelled, rigorously applied.
           </p>
+          <Link to="/philosophies" className="phil-line btn-gold-outline text-xs inline-flex" style={{ opacity: 0 }}>
+            Explore the Divine Triangle
+          </Link>
         </div>
 
-        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {pillars.map((pillar) => (
             <div
               key={pillar.name}
-              className="pillar-card bg-hut rounded-sm p-8 md:p-10 relative overflow-hidden group cursor-pointer"
+              className="pillar-card bg-hut rounded-sm p-6 md:p-8 lg:p-10 relative overflow-hidden group cursor-pointer"
               style={{ opacity: 0, perspective: "800px" }}
               onMouseEnter={handleSymbolHover}
             >

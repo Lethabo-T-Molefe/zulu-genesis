@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import anime from "animejs";
+import { animate, stagger } from "animejs";
 import logoGold from "@/assets/logo-gold.png";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Fields", href: "#fields" },
-  { label: "Philosophy", href: "#philosophy" },
-  { label: "Academia", href: "#academia" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Fields", href: "/fields" },
+  { label: "Philosophies", href: "/philosophies" },
+  { label: "Solution Lab", href: "/solution-lab" },
+  { label: "Academia", href: "/academia" },
 ];
 
 const Navbar = () => {
@@ -18,29 +19,24 @@ const Navbar = () => {
   const linksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Logo entrance spin
-    anime({
-      targets: logoRef.current,
+    animate(logoRef.current, {
       rotate: ["-90deg", "0deg"],
       scale: [0.5, 1],
       opacity: [0, 1],
       duration: 1000,
-      easing: "easeOutElastic(1, .6)",
+      ease: "outElastic(1, .6)",
     });
 
-    // Nav links stagger
     if (linksRef.current) {
-      anime({
-        targets: linksRef.current.querySelectorAll("a"),
+      animate(linksRef.current.querySelectorAll("a"), {
         opacity: [0, 1],
         translateY: [-10, 0],
         duration: 500,
-        delay: anime.stagger(60, { start: 400 }),
-        easing: "easeOutExpo",
+        delay: stagger(60, { start: 400 }),
+        ease: "outExpo",
       });
     }
 
-    // Subtle scroll-based nav background opacity
     const handleScroll = () => {
       if (navRef.current) {
         const scrollY = window.scrollY;
@@ -52,13 +48,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Logo hover — continuous spin
   const handleLogoHover = () => {
-    anime({
-      targets: logoRef.current,
+    animate(logoRef.current, {
       rotate: "+=360",
       duration: 1200,
-      easing: "easeInOutSine",
+      ease: "inOutSine",
     });
   };
 
@@ -66,40 +60,40 @@ const Navbar = () => {
     <>
       <nav
         ref={navRef}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-5 backdrop-blur-md border-b border-gold-subtle"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 md:px-12 py-4 sm:py-5 backdrop-blur-md border-b border-gold-subtle"
         style={{ backgroundColor: "hsl(0 0% 4% / 0)" }}
       >
-        <a href="#" className="flex items-center gap-3" onMouseEnter={handleLogoHover}>
+        <Link to="/" className="flex items-center gap-3" onMouseEnter={handleLogoHover}>
           <img
             ref={logoRef}
             src={logoGold}
             alt="Sec(t) Infinity SolutionZ"
-            className="h-10 w-10 object-contain"
+            className="h-12 w-12 object-contain"
             style={{ opacity: 0 }}
           />
-          <span className="text-display text-lg text-gold-gradient hidden sm:inline">
+          <span className="text-display text-base sm:text-lg text-gold-gradient hidden sm:inline">
             SEC(T) ∞
           </span>
-        </a>
+        </Link>
 
         <div ref={linksRef} className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.label}
-              href={link.href}
+              to={link.href}
               className="text-mono text-xs uppercase tracking-widest text-ash hover:text-gold transition-colors duration-300"
               style={{ opacity: 0 }}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
         <div className="flex items-center gap-4">
-          <a href="#contact" className="btn-ember text-xs hidden sm:inline-flex">
+          <Link to="/join" className="btn-ember text-xs hidden sm:inline-flex">
             Join the Network
             <span className="text-base leading-none">+</span>
-          </a>
+          </Link>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden text-mono text-xs uppercase tracking-widest text-foreground hover:text-gold transition-colors"
@@ -109,7 +103,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -120,28 +113,34 @@ const Navbar = () => {
             className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8 pt-20"
           >
             {navLinks.map((link, i) => (
-              <motion.a
+              <motion.div
                 key={link.label}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="text-display text-4xl text-gold-gradient hover:text-foreground transition-colors"
               >
-                {link.label}
-              </motion.a>
+                <Link
+                  to={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-display text-2xl sm:text-4xl text-gold-gradient hover:text-foreground transition-colors"
+                >
+                  {link.label}
+                </Link>
+              </motion.div>
             ))}
-            <motion.a
-              href="#contact"
-              onClick={() => setMenuOpen(false)}
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="btn-ember mt-8"
             >
-              Join the Network +
-            </motion.a>
+              <Link
+                to="/join"
+                onClick={() => setMenuOpen(false)}
+                className="btn-ember mt-8"
+              >
+                Join the Network +
+              </Link>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

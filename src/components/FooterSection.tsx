@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import anime from "animejs";
+import { Link } from "react-router-dom";
+import { animate, stagger } from "animejs";
 import logoGold from "@/assets/logo-gold.png";
 
 const FooterSection = () => {
@@ -19,59 +20,54 @@ const FooterSection = () => {
           // CTA heading — letter morphing effect
           if (ctaRef.current) {
             const lines = ctaRef.current.querySelectorAll(".cta-line");
-            anime({
-              targets: lines,
+            animate(lines, {
               opacity: [0, 1],
               translateY: [30, 0],
               duration: 900,
-              delay: anime.stagger(150),
-              easing: "easeOutExpo",
+              delay: stagger(150),
+              easing: "outExpo",
             });
 
             // CTA button bounce
-            anime({
-              targets: ctaRef.current.querySelector(".cta-btn"),
+            animate(ctaRef.current.querySelector(".cta-btn"), {
               opacity: [0, 1],
               scale: [0.8, 1],
               duration: 600,
               delay: 700,
-              easing: "easeOutElastic(1, .6)",
+              easing: "outElastic(1, .6)",
             });
           }
 
           // Divider draw
           if (dividerRef.current) {
-            anime({
-              targets: dividerRef.current,
+            animate(dividerRef.current, {
               scaleX: [0, 1],
               duration: 1000,
               delay: 900,
-              easing: "easeInOutQuart",
+              easing: "inOutQuart",
             });
           }
 
           // Footer grid columns stagger
           if (gridRef.current) {
-            anime({
-              targets: gridRef.current.querySelectorAll(".footer-col"),
+            animate(gridRef.current.querySelectorAll(".footer-col"), {
               opacity: [0, 1],
               translateY: [20, 0],
               duration: 700,
-              delay: anime.stagger(120, { start: 1100 }),
-              easing: "easeOutExpo",
+              delay: stagger(120, { start: 1100 }),
+              easing: "outExpo",
             });
           }
 
           // Big logo — dramatic reveal
           if (bigLogoRef.current) {
-            anime({
-              targets: bigLogoRef.current,
+            animate(bigLogoRef.current, {
               opacity: [0, 0.04],
               scale: [0.8, 1],
               letterSpacing: ["0.1em", "0em"],
               duration: 1500,
               delay: 1500,
-              easing: "easeOutExpo",
+              easing: "outExpo",
             });
           }
         }
@@ -83,11 +79,11 @@ const FooterSection = () => {
   }, [revealed]);
 
   return (
-    <footer id="contact" ref={sectionRef} className="relative py-24 md:py-32">
+    <footer id="contact" ref={sectionRef} className="relative py-16 md:py-24 lg:py-32">
       <div className="container mx-auto px-6 md:px-12">
         {/* CTA */}
-        <div ref={ctaRef} className="text-center mb-24">
-          <h2 className="text-display text-4xl md:text-6xl lg:text-7xl text-foreground mb-6">
+        <div ref={ctaRef} className="text-center mb-16 md:mb-20 lg:mb-24">
+          <h2 className="text-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-foreground mb-6">
             <span className="cta-line inline-block" style={{ opacity: 0 }}>Join the</span>
             <br />
             <span className="cta-line inline-block text-gold-gradient" style={{ opacity: 0 }}>Network</span>
@@ -96,9 +92,9 @@ const FooterSection = () => {
             Are you a researcher, scientist, engineer, entrepreneur, or intellectual
             ready to contribute to infinite solutions?
           </p>
-          <a href="mailto:contact@sectinfinity.com" className="cta-btn btn-ember inline-flex" style={{ opacity: 0 }}>
+          <Link to="/join" className="cta-btn btn-ember inline-flex" style={{ opacity: 0 }}>
             Let's Connect <span className="text-base leading-none">+</span>
-          </a>
+          </Link>
         </div>
 
         {/* Divider */}
@@ -109,10 +105,10 @@ const FooterSection = () => {
         />
 
         {/* Footer grid */}
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-16">
           <div className="footer-col" style={{ opacity: 0 }}>
             <div className="flex items-center gap-3 mb-4">
-              <img src={logoGold} alt="" className="h-8 w-8 object-contain" />
+              <img src={logoGold} alt="" className="h-10 w-10 object-contain" />
               <span className="text-display text-sm text-gold-gradient">Sec(t) Infinity SolutionZ</span>
             </div>
             <p className="text-xs text-ash leading-relaxed">
@@ -124,14 +120,20 @@ const FooterSection = () => {
           <div className="footer-col" style={{ opacity: 0 }}>
             <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">Navigate</div>
             <div className="space-y-2">
-              {["About", "Fields", "Philosophy", "Academia"].map((link) => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
+              {[
+                { label: "About", href: "/about" },
+                { label: "Fields", href: "/fields" },
+                { label: "Philosophies", href: "/philosophies" },
+                { label: "Solution Lab", href: "/solution-lab" },
+                { label: "Academia", href: "/academia" },
+              ].map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.href}
                   className="block text-sm text-ash hover:text-gold transition-colors duration-300"
                 >
-                  {link}
-                </a>
+                  {link.label}
+                </Link>
               ))}
             </div>
           </div>
@@ -153,7 +155,7 @@ const FooterSection = () => {
 
         {/* Massive logo */}
         <div className="text-center" style={{ opacity: 0 }} ref={bigLogoRef}>
-          <div className="text-display text-[8rem] md:text-[14rem] lg:text-[18rem] text-foreground leading-none select-none">
+          <div className="text-display text-[3.5rem] sm:text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[16rem] text-foreground leading-none select-none">
             SEC(T)&nbsp;∞
           </div>
         </div>

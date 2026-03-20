@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
-import anime from "animejs";
+import { animate, stagger, createTimeline, utils } from "animejs";
 import heroVillage from "@/assets/hero-village.jpg";
 
 const CodeRainColumn = ({ delay, left }: { delay: number; left: string }) => {
@@ -30,15 +30,14 @@ const HeroSection = () => {
 
   useEffect(() => {
     // Master timeline for hero entrance
-    const tl = anime.timeline({
-      easing: "easeOutExpo",
+    const tl = createTimeline({
+      defaults: { ease: "outExpo" },
     });
 
     // Background image zoom-in
-    tl.add({
-      targets: bgRef.current,
+    tl.add(bgRef.current, {
       scale: [1.15, 1],
-      opacity: [0, 0.2],
+      opacity: [0, 0.45],
       duration: 2000,
     }, 0);
 
@@ -50,31 +49,28 @@ const HeroSection = () => {
         .map((char) => `<span class="inline-block" style="opacity:0">${char === " " ? "&nbsp;" : char}</span>`)
         .join("");
 
-      tl.add({
-        targets: taglineRef.current.querySelectorAll("span"),
+      tl.add(taglineRef.current.querySelectorAll("span"), {
         opacity: [0, 1],
         translateY: [8, 0],
         duration: 600,
-        delay: anime.stagger(25),
+        delay: stagger(25),
       }, 200);
     }
 
     // Headline — word stagger with scale
     if (headlineRef.current) {
       const words = headlineRef.current.querySelectorAll(".hero-word");
-      tl.add({
-        targets: words,
+      tl.add(words, {
         opacity: [0, 1],
         translateY: [40, 0],
         scale: [0.95, 1],
         duration: 900,
-        delay: anime.stagger(120),
+        delay: stagger(120),
       }, 400);
     }
 
     // Subtext — fade & slide
-    tl.add({
-      targets: subtextRef.current,
+    tl.add(subtextRef.current, {
       opacity: [0, 1],
       translateY: [20, 0],
       duration: 800,
@@ -82,55 +78,51 @@ const HeroSection = () => {
 
     // Buttons — stagger in
     if (buttonsRef.current) {
-      tl.add({
-        targets: buttonsRef.current.children,
+      tl.add(buttonsRef.current.children, {
         opacity: [0, 1],
         translateX: [-20, 0],
         duration: 600,
-        delay: anime.stagger(150),
+        delay: stagger(150),
       }, 1100);
     }
 
     // Stats — count up with stagger
     if (statsRef.current) {
       const statEls = statsRef.current.querySelectorAll(".stat-item");
-      tl.add({
-        targets: statEls,
+      tl.add(statEls, {
         opacity: [0, 1],
         translateY: [16, 0],
         duration: 700,
-        delay: anime.stagger(100),
+        delay: stagger(100),
       }, 1400);
 
       // Animate stat divider line
-      tl.add({
-        targets: statsRef.current.querySelector(".stat-divider"),
+      tl.add(statsRef.current.querySelector(".stat-divider"), {
         scaleX: [0, 1],
         duration: 1000,
-        easing: "easeInOutQuart",
+        ease: "inOutQuart",
       }, 1300);
     }
 
     // Floating particles
     if (particlesRef.current) {
       const particles = particlesRef.current.children;
-      anime({
-        targets: particles,
-        translateX: () => anime.random(-80, 80),
-        translateY: () => anime.random(-80, 80),
-        scale: () => [0, anime.random(5, 15) / 10],
-        opacity: () => [0, anime.random(2, 6) / 10],
-        duration: () => anime.random(3000, 6000),
-        delay: () => anime.random(0, 2000),
-        direction: "alternate",
+      animate(particles, {
+        translateX: () => utils.random(-80, 80),
+        translateY: () => utils.random(-80, 80),
+        scale: () => [0, utils.random(5, 15) / 10],
+        opacity: () => [0, utils.random(2, 6) / 10],
+        duration: () => utils.random(3000, 6000),
+        delay: () => utils.random(0, 2000),
+        alternate: true,
         loop: true,
-        easing: "easeInOutSine",
+        ease: "inOutSine",
       });
     }
   }, []);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden pt-20">
+    <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden pt-28 md:pt-36 lg:pt-40">
       {/* Background image */}
       <div className="absolute inset-0">
         <img
@@ -140,8 +132,8 @@ const HeroSection = () => {
           className="w-full h-full object-cover"
           style={{ opacity: 0, transform: "scale(1.15)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-background/80" />
       </div>
 
       {/* Floating gold particles */}
@@ -171,14 +163,14 @@ const HeroSection = () => {
         <div className="max-w-5xl">
           <div
             ref={taglineRef}
-            className="text-mono text-xs uppercase tracking-[0.3em] text-gold mb-8"
+            className="text-mono text-xs uppercase tracking-[0.15em] sm:tracking-[0.3em] text-gold mb-8"
           >
             United Minds · Infinite Solutions
           </div>
 
           <h1
             ref={headlineRef}
-            className="text-display text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] text-foreground mb-8"
+            className="text-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-foreground mb-8"
           >
             <span className="hero-word inline-block" style={{ opacity: 0 }}>Engineering</span>
             <br />
@@ -206,7 +198,7 @@ const HeroSection = () => {
           </div>
 
           {/* Stats */}
-          <div ref={statsRef} className="flex flex-wrap gap-12 mt-20 pt-8 relative">
+          <div ref={statsRef} className="flex flex-wrap gap-6 sm:gap-8 md:gap-12 mt-12 md:mt-20 pt-8 relative">
             <div className="stat-divider absolute top-0 left-0 right-0 h-px bg-gold/20" style={{ transformOrigin: "left", transform: "scaleX(0)" }} />
             {[
               { value: "12", label: "Fields of Mastery" },
@@ -214,7 +206,7 @@ const HeroSection = () => {
               { value: "∞", label: "Solutions Engineered" },
             ].map((stat) => (
               <div key={stat.label} className="stat-item" style={{ opacity: 0 }}>
-                <div className="text-display text-3xl md:text-4xl text-gold-gradient">{stat.value}</div>
+                <div className="text-display text-2xl sm:text-3xl md:text-4xl text-gold-gradient">{stat.value}</div>
                 <div className="text-mono text-xs uppercase tracking-widest text-ash mt-1">{stat.label}</div>
               </div>
             ))}

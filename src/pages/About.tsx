@@ -1,0 +1,145 @@
+import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { animate, stagger } from "animejs";
+import PageLayout from "@/components/PageLayout";
+import PageHeader from "@/components/PageHeader";
+import {
+  Cpu, FlaskConical, Building2, Scale, ArrowRight,
+} from "lucide-react";
+
+const whatWeDo = [
+  { icon: FlaskConical, title: "Invest in Research", desc: "Funding and conducting deep scientific inquiry across all 12 fields of specialization to generate breakthrough knowledge." },
+  { icon: Cpu, title: "Design Systems", desc: "Architecting integrated solutions through systems thinking — connecting disciplines into coherent, measurable models." },
+  { icon: Building2, title: "Build Enterprises", desc: "Each specialization runs its own Infinity Business Department — self-sustaining commercial engines that fund continuous innovation." },
+  { icon: Scale, title: "Champion Financial Intelligence", desc: "Embedding entrepreneurial and commercial thinking into every field, ensuring research translates into real-world economic impact." },
+];
+
+const pipeline = [
+  { step: "01", label: "Concept", desc: "Ideation, research synthesis, and problem framing across disciplines." },
+  { step: "02", label: "Design", desc: "Systems architecture, prototyping, and integrated solution modelling." },
+  { step: "03", label: "Execution", desc: "Disciplined implementation through Deep Work and Kaizen principles." },
+  { step: "04", label: "Commissioning", desc: "Deployment, measurement, and continuous refinement of delivered solutions." },
+];
+
+const About = () => {
+  const missionRef = useRef<HTMLDivElement>(null);
+  const whatRef = useRef<HTMLDivElement>(null);
+  const pipeRef = useRef<HTMLDivElement>(null);
+  const [revealed, setRevealed] = useState({ mission: false, what: false, pipe: false });
+
+  useEffect(() => {
+    const observe = (el: HTMLElement | null, key: keyof typeof revealed) => {
+      if (!el) return;
+      const obs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting && !revealed[key]) {
+          setRevealed((p) => ({ ...p, [key]: true }));
+          animate(el.querySelectorAll(".anim-item"), {
+            opacity: [0, 1], translateY: [30, 0], duration: 800,
+            delay: stagger(100), ease: "outExpo",
+          });
+        }
+      }, { threshold: 0.12 });
+      obs.observe(el);
+      return () => obs.disconnect();
+    };
+    const c1 = observe(missionRef.current, "mission");
+    const c2 = observe(whatRef.current, "what");
+    const c3 = observe(pipeRef.current, "pipe");
+    return () => { c1?.(); c2?.(); c3?.(); };
+  }, [revealed]);
+
+  return (
+    <PageLayout>
+      <PageHeader
+        label="About Us"
+        title="A Multidisciplinary"
+        titleAccent="Innovation Ecosystem"
+        description="A global intellectual ecosystem where leading thinkers collaborate to develop integrated solutions for complex challenges. Inspired by African knowledge traditions and powered by modern innovation."
+      />
+
+      <section ref={missionRef} className="py-20 md:py-32">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>Our Mission</div>
+              <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-6" style={{ opacity: 0 }}>
+                Position Africa as a <span className="text-gold-gradient">Global Producer</span>
+              </h2>
+              <p className="anim-item text-ash leading-relaxed mb-6" style={{ opacity: 0 }}>
+                To position Africa as a global hub of innovation, invention, and production —
+                not merely a consumer, but a world-class producer leading in scientific discovery,
+                technological invention, industrial production, and entrepreneurial innovation.
+              </p>
+              <p className="anim-item text-ash leading-relaxed" style={{ opacity: 0 }}>
+                Our platform unites specialists across disciplines to design impactful models for
+                the future. Through the village metaphor of interconnected knowledge huts, we create
+                an ecosystem where every field strengthens and sustains the others.
+              </p>
+            </div>
+            <div className="anim-item bg-hut rounded-sm p-8 md:p-12 border border-gold/10" style={{ opacity: 0 }}>
+              <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-6">Target Audience</div>
+              <div className="space-y-4">
+                {["Researchers & Scientists", "Engineers & Technologists", "Entrepreneurs & Business Leaders", "Policy Makers & Legal Professionals", "Academic Institutions & Innovation Hubs", "Students & Intellectual Communities"].map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <span className="text-gold text-xs mt-1">◆</span>
+                    <span className="text-sm text-foreground">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section ref={whatRef} className="py-20 md:py-32 bg-charcoal relative">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>What We Do</div>
+          <h2 className="anim-item text-display text-3xl md:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
+            Building <span className="text-gold-gradient">Infinite Solutions</span>
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {whatWeDo.map((item) => (
+              <div key={item.title} className="anim-item bg-hut rounded-sm p-8 group hover:border-gold/30 border border-transparent transition-colors duration-500" style={{ opacity: 0 }}>
+                <item.icon className="w-8 h-8 text-gold/60 mb-4 group-hover:text-gold transition-colors" strokeWidth={1.5} />
+                <h3 className="text-display text-xl text-foreground mb-3">{item.title}</h3>
+                <p className="text-sm text-ash leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+      </section>
+
+      <section ref={pipeRef} className="py-20 md:py-32">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>How We Operate</div>
+          <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
+            End-to-End <span className="text-gold-gradient">Project Management</span>
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {pipeline.map((item, i) => (
+              <div key={item.step} className="anim-item relative" style={{ opacity: 0 }}>
+                <div className="bg-hut rounded-sm p-8 h-full">
+                  <div className="text-display text-4xl text-gold/20 mb-4">{item.step}</div>
+                  <h3 className="text-display text-xl text-foreground mb-3">{item.label}</h3>
+                  <p className="text-sm text-ash leading-relaxed">{item.desc}</p>
+                </div>
+                {i < pipeline.length - 1 && (
+                  <ArrowRight className="hidden md:block absolute top-1/2 -right-3 w-6 h-6 text-gold/30 -translate-y-1/2 z-10" />
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-16">
+            <Link to="/solution-lab" className="btn-ember text-xs inline-flex">
+              See the Solution Lab <span className="text-base leading-none">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </PageLayout>
+  );
+};
+
+export default About;

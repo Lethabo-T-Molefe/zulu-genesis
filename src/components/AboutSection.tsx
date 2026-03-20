@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import anime from "animejs";
+import { Link } from "react-router-dom";
+import { animate, stagger } from "animejs";
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -15,44 +16,40 @@ const AboutSection = () => {
 
           // Left column — slide in from left with text line stagger
           if (leftRef.current) {
-            anime({
-              targets: leftRef.current.querySelectorAll(".about-line"),
+            animate(leftRef.current.querySelectorAll(".about-line"), {
               opacity: [0, 1],
               translateX: [-30, 0],
               duration: 800,
-              delay: anime.stagger(100),
-              easing: "easeOutExpo",
+              delay: stagger(100),
+              easing: "outExpo",
             });
           }
 
           // Right column — capability rows stagger from right
           if (rightRef.current) {
-            anime({
-              targets: rightRef.current.querySelectorAll(".capability-row"),
+            animate(rightRef.current.querySelectorAll(".capability-row"), {
               opacity: [0, 1],
               translateX: [40, 0],
               duration: 600,
-              delay: anime.stagger(80, { start: 400 }),
-              easing: "easeOutExpo",
+              delay: stagger(80, { start: 400 }),
+              easing: "outExpo",
             });
 
             // Animate the capability number counters
-            anime({
-              targets: rightRef.current.querySelectorAll(".cap-number"),
+            animate(rightRef.current.querySelectorAll(".cap-number"), {
               opacity: [0, 1],
               scale: [0.5, 1],
               duration: 400,
-              delay: anime.stagger(80, { start: 500 }),
-              easing: "easeOutBack",
+              delay: stagger(80, { start: 500 }),
+              easing: "outBack",
             });
 
             // Draw underlines on each row
-            anime({
-              targets: rightRef.current.querySelectorAll(".cap-underline"),
+            animate(rightRef.current.querySelectorAll(".cap-underline"), {
               scaleX: [0, 1],
               duration: 600,
-              delay: anime.stagger(80, { start: 600 }),
-              easing: "easeOutQuart",
+              delay: stagger(80, { start: 600 }),
+              easing: "outQuart",
             });
           }
         }
@@ -65,20 +62,18 @@ const AboutSection = () => {
 
   // Hover effect on capability rows
   const handleRowHover = (e: React.MouseEvent<HTMLDivElement>) => {
-    anime({
-      targets: e.currentTarget,
+    animate(e.currentTarget, {
       paddingLeft: [16, 24],
       duration: 300,
-      easing: "easeOutQuart",
+      easing: "outQuart",
     });
   };
 
   const handleRowLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    anime({
-      targets: e.currentTarget,
+    animate(e.currentTarget, {
       paddingLeft: [24, 16],
       duration: 300,
-      easing: "easeOutQuart",
+      easing: "outQuart",
     });
   };
 
@@ -92,15 +87,15 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" ref={sectionRef} className="relative py-32 md:py-48">
+    <section id="about" ref={sectionRef} className="relative py-20 md:py-32 lg:py-48">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-center">
           {/* Left */}
           <div ref={leftRef}>
             <div className="about-line text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>
               Our Mission
             </div>
-            <h2 className="text-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-8">
+            <h2 className="text-display text-3xl md:text-5xl lg:text-6xl text-foreground mb-8">
               <span className="about-line inline-block" style={{ opacity: 0 }}>Africa as a</span>
               <br />
               <span className="about-line inline-block text-gold-gradient" style={{ opacity: 0 }}>Global Producer</span>
@@ -117,6 +112,9 @@ const AboutSection = () => {
                 in our ecosystem.
               </p>
             </div>
+            <Link to="/about" className="about-line btn-gold-outline text-xs mt-8 inline-flex" style={{ opacity: 0 }}>
+              Learn More About Us
+            </Link>
           </div>
 
           {/* Right */}
