@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { animate, stagger } from "animejs";
+import { brandLogos } from "@/lib/brand-assets";
 
 interface PageHeaderProps {
   label: string;
@@ -26,8 +27,13 @@ const PageHeader = ({ label, title, titleAccent, description }: PageHeaderProps)
     <section className="relative pt-24 md:pt-36 lg:pt-44 pb-16 md:pb-20 lg:pb-28">
       <div className="container mx-auto px-6 md:px-12">
         <div ref={ref} className="max-w-4xl">
-          <div className="ph-line text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>
-            {label}
+          <div className="ph-line flex items-center gap-3 mb-4" style={{ opacity: 0 }}>
+            <img
+              src={brandLogos.submark}
+              alt=""
+              className="h-9 w-9 sm:h-10 sm:w-10 shrink-0 object-contain opacity-85"
+            />
+            <span className="text-mono text-xs uppercase tracking-[0.3em] text-gold">{label}</span>
           </div>
           <h1 className="text-display text-3xl md:text-5xl lg:text-7xl text-foreground mb-6">
             <span className="ph-line inline-block" style={{ opacity: 0 }}>{title}</span>

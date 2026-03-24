@@ -1,6 +1,7 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import { animate, stagger, createTimeline, utils } from "animejs";
 import heroVillage from "@/assets/hero-village.jpg";
+import { brandLogos } from "@/lib/brand-assets";
 
 const CodeRainColumn = ({ delay, left }: { delay: number; left: string }) => {
   const chars = "∞∑∫∂πΔΩλφψ01";
@@ -160,45 +161,55 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 md:px-12">
-        <div className="max-w-5xl">
+        <div className="max-w-6xl w-full">
           <div
             ref={taglineRef}
-            className="text-mono text-xs uppercase tracking-[0.15em] sm:tracking-[0.3em] text-gold mb-8"
+            className="text-mono text-xs uppercase tracking-[0.15em] sm:tracking-[0.3em] text-gold mb-6 md:mb-7"
           >
             United Minds · Infinite Solutions
           </div>
 
-          <h1
-            ref={headlineRef}
-            className="text-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-foreground mb-8"
-          >
-            <span className="hero-word inline-block" style={{ opacity: 0 }}>Engineering</span>
-            <br />
-            <span className="hero-word inline-block text-gold-gradient" style={{ opacity: 0 }}>The&nbsp;Future</span>
-          </h1>
+          <div className="-translate-y-5 sm:-translate-y-6 md:-translate-y-8 lg:-translate-y-10 xl:-translate-y-12">
+            <div className="grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-end gap-3 sm:gap-5 md:gap-8 lg:gap-10 mb-8">
+              <h1
+                ref={headlineRef}
+                className="text-display min-w-0 text-2xl min-[400px]:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground pr-2 sm:pr-3"
+              >
+                <span className="hero-word inline-block" style={{ opacity: 0 }}>Engineering</span>
+                <br />
+                <span className="hero-word inline-block text-gold-gradient" style={{ opacity: 0 }}>The&nbsp;Future</span>
+              </h1>
+              <div className="flex min-w-0 shrink-0 justify-end self-end pb-0.5 translate-y-6 sm:translate-y-7 md:translate-y-9 lg:translate-y-11 xl:translate-y-14">
+                <img
+                  src={brandLogos.primary}
+                  alt=""
+                  className="h-36 w-auto min-[400px]:h-44 sm:h-52 md:h-64 lg:h-72 xl:h-80 max-h-[48vh] max-w-[min(44vw,640px)] object-contain object-right opacity-95 drop-shadow-[0_0_36px_hsl(var(--gold)/0.22)]"
+                />
+              </div>
+            </div>
 
-          <p
-            ref={subtextRef}
-            className="text-lg md:text-xl text-ash max-w-2xl mb-12 leading-relaxed"
-            style={{ opacity: 0 }}
-          >
-            Through the Divine Triangle of Success — Deep Work, Kaizen,
-            and the Goldilocks Rule — we forge multidisciplinary solutions
-            for complex global problems.
-          </p>
+            <p
+              ref={subtextRef}
+              className="text-lg md:text-xl text-ash max-w-2xl mb-12 leading-relaxed"
+              style={{ opacity: 0 }}
+            >
+              Through the Divine Triangle of Success — Deep Work, Kaizen,
+              and the Goldilocks Rule — we forge multidisciplinary solutions
+              for complex global problems.
+            </p>
 
-          <div ref={buttonsRef} className="flex flex-wrap gap-4">
-            <a href="#fields" className="btn-ember" style={{ opacity: 0 }}>
-              Enter the Village
-              <span className="infinity-symbol text-lg">∞</span>
-            </a>
-            <a href="#about" className="btn-gold-outline" style={{ opacity: 0 }}>
-              Our Mission
-            </a>
-          </div>
+            <div ref={buttonsRef} className="flex flex-wrap gap-4">
+              <a href="#fields" className="btn-ember" style={{ opacity: 0 }}>
+                Enter the Village
+                <span className="infinity-symbol text-lg">∞</span>
+              </a>
+              <a href="#about" className="btn-gold-outline" style={{ opacity: 0 }}>
+                Our Mission
+              </a>
+            </div>
 
-          {/* Stats */}
-          <div ref={statsRef} className="flex flex-wrap gap-6 sm:gap-8 md:gap-12 mt-12 md:mt-20 pt-8 relative">
+            {/* Stats */}
+            <div ref={statsRef} className="flex flex-wrap gap-6 sm:gap-8 md:gap-12 mt-12 md:mt-20 pt-8 relative">
             <div className="stat-divider absolute top-0 left-0 right-0 h-px bg-gold/20" style={{ transformOrigin: "left", transform: "scaleX(0)" }} />
             {[
               { value: "12", label: "Fields of Mastery" },
@@ -210,6 +221,7 @@ const HeroSection = () => {
                 <div className="text-mono text-xs uppercase tracking-widest text-ash mt-1">{stat.label}</div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </div>

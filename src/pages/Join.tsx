@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
+import { brandLogos } from "@/lib/brand-assets";
 import { Microscope, Cog, Lightbulb, Palette, BookOpen, Globe } from "lucide-react";
 
 const roles = [
@@ -95,6 +96,11 @@ const Join = () => {
             </div>
 
             <div className="anim-item bg-hut glow-gold rounded-sm p-6 md:p-8 lg:p-12 border border-gold/20" style={{ opacity: 0 }}>
+              <img
+                src={brandLogos.secondary}
+                alt=""
+                className="h-12 sm:h-14 w-auto max-w-full object-contain mb-6 opacity-95"
+              />
               <h3 className="text-display text-2xl text-foreground mb-4">Ready to Contribute?</h3>
               <p className="text-ash leading-relaxed mb-8">
                 Whether you're a seasoned researcher, an emerging innovator, or a student with

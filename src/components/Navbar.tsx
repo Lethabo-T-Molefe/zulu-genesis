@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { animate, stagger } from "animejs";
-import logoGold from "@/assets/logo-gold.png";
+import { brandLogos } from "@/lib/brand-assets";
 
 const navLinks = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Fields", href: "/fields" },
   { label: "Philosophies", href: "/philosophies" },
@@ -66,34 +68,48 @@ const Navbar = () => {
         <Link to="/" className="flex items-center gap-3" onMouseEnter={handleLogoHover}>
           <img
             ref={logoRef}
-            src={logoGold}
+            src={brandLogos.secondary}
             alt="Sec(t) Infinity SolutionZ"
-            className="h-12 w-12 object-contain"
+            className="h-9 sm:h-10 w-auto max-w-[220px] object-contain object-left"
             style={{ opacity: 0 }}
           />
-          <span className="text-display text-base sm:text-lg text-gold-gradient hidden sm:inline">
-            SEC(T) ∞
-          </span>
+          
         </Link>
 
         <div ref={linksRef} className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link
+            <NavLink
               key={link.label}
               to={link.href}
-              className="text-mono text-xs uppercase tracking-widest text-ash hover:text-gold transition-colors duration-300"
+              end={link.href === "/"}
+              className={({ isActive }) =>
+                cn(
+                  "text-mono text-xs uppercase tracking-widest transition-colors duration-300 border-b-2 pb-0.5",
+                  isActive
+                    ? "text-gold border-gold"
+                    : "border-transparent text-ash hover:text-gold",
+                )
+              }
               style={{ opacity: 0 }}
             >
               {link.label}
-            </Link>
+            </NavLink>
           ))}
         </div>
 
         <div className="flex items-center gap-4">
-          <Link to="/join" className="btn-ember text-xs hidden sm:inline-flex">
+          <NavLink
+            to="/join"
+            className={({ isActive }) =>
+              cn(
+                "btn-ember text-xs hidden sm:inline-flex",
+                isActive && "ring-2 ring-gold/50 ring-offset-2 ring-offset-background",
+              )
+            }
+          >
             Join the Network
             <span className="text-base leading-none">+</span>
-          </Link>
+          </NavLink>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden text-mono text-xs uppercase tracking-widest text-foreground hover:text-gold transition-colors"
@@ -112,6 +128,17 @@ const Navbar = () => {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8 pt-20"
           >
+            <Link
+              to="/"
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-20 left-1/2 -translate-x-1/2"
+            >
+              <img
+                src={brandLogos.secondary}
+                alt=""
+                className="h-9 w-auto max-w-[min(220px,85vw)] object-contain opacity-90"
+              />
+            </Link>
             {navLinks.map((link, i) => (
               <motion.div
                 key={link.label}
@@ -119,13 +146,19 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
-                <Link
+                <NavLink
                   to={link.href}
+                  end={link.href === "/"}
                   onClick={() => setMenuOpen(false)}
-                  className="text-display text-2xl sm:text-4xl text-gold-gradient hover:text-foreground transition-colors"
+                  className={({ isActive }) =>
+                    cn(
+                      "text-display text-2xl sm:text-4xl transition-colors",
+                      isActive ? "text-gold" : "text-gold-gradient hover:text-foreground",
+                    )
+                  }
                 >
                   {link.label}
-                </Link>
+                </NavLink>
               </motion.div>
             ))}
             <motion.div
@@ -133,13 +166,15 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              <Link
+              <NavLink
                 to="/join"
                 onClick={() => setMenuOpen(false)}
-                className="btn-ember mt-8"
+                className={({ isActive }) =>
+                  cn("btn-ember mt-8", isActive && "ring-2 ring-gold/50 ring-offset-2 ring-offset-background")
+                }
               >
                 Join the Network +
-              </Link>
+              </NavLink>
             </motion.div>
           </motion.div>
         )}

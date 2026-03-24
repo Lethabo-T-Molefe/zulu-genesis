@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { animate, stagger } from "animejs";
-import logoGold from "@/assets/logo-gold.png";
+import { brandLogos } from "@/lib/brand-assets";
 
 const FooterSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -62,9 +62,8 @@ const FooterSection = () => {
           // Big logo — dramatic reveal
           if (bigLogoRef.current) {
             animate(bigLogoRef.current, {
-              opacity: [0, 0.04],
-              scale: [0.8, 1],
-              letterSpacing: ["0.1em", "0em"],
+              opacity: [0, 1],
+              scale: [0.92, 1],
               duration: 1500,
               delay: 1500,
               easing: "outExpo",
@@ -83,6 +82,13 @@ const FooterSection = () => {
       <div className="container mx-auto px-6 md:px-12">
         {/* CTA */}
         <div ref={ctaRef} className="text-center mb-16 md:mb-20 lg:mb-24">
+          <div className="cta-line flex justify-center mb-8" style={{ opacity: 0 }}>
+            <img
+              src={brandLogos.secondary}
+              alt=""
+              className="h-14 sm:h-16 md:h-20 w-auto max-w-[min(320px,90vw)] object-contain opacity-90"
+            />
+          </div>
           <h2 className="text-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-foreground mb-6">
             <span className="cta-line inline-block" style={{ opacity: 0 }}>Join the</span>
             <br />
@@ -108,8 +114,8 @@ const FooterSection = () => {
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-16">
           <div className="footer-col" style={{ opacity: 0 }}>
             <div className="flex items-center gap-3 mb-4">
-              <img src={logoGold} alt="" className="h-10 w-10 object-contain" />
-              <span className="text-display text-sm text-gold-gradient">Sec(t) Infinity SolutionZ</span>
+              <img src={brandLogos.primary} alt="" className="h-30 w-auto max-w-[140px] object-contain object-left" />
+              
             </div>
             <p className="text-xs text-ash leading-relaxed">
               Engineering the future through disciplined thinking,
@@ -153,12 +159,14 @@ const FooterSection = () => {
           </div>
         </div>
 
-        {/* Massive logo */}
-        <div className="text-center" style={{ opacity: 0 }} ref={bigLogoRef}>
-          <div className="text-display text-[3.5rem] sm:text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[16rem] text-foreground leading-none select-none">
-            SEC(T)&nbsp;∞
-          </div>
-        </div>
+        {/* Massive mark + wordmark
+        <div className="text-center flex flex-col items-center gap-6 md:gap-8" style={{ opacity: 0 }} ref={bigLogoRef}>
+          <img
+            src={brandLogos.secondary}
+            alt=""
+            className="h-24 sm:h-32 md:h-44 lg:h-56 w-auto max-w-[min(95vw,720px)] object-contain opacity-95"
+          />
+        </div> */}
 
         {/* Copyright */}
         <div className="text-center mt-8">

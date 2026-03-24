@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
+import { brandLogos } from "@/lib/brand-assets";
 import {
   Cpu, FlaskConical, Building2, Scale, ArrowRight,
 } from "lucide-react";
@@ -61,6 +62,13 @@ const About = () => {
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
+              <div className="anim-item mb-6" style={{ opacity: 0 }}>
+                <img
+                  src={brandLogos.sect}
+                  alt=""
+                  className="h-14 sm:h-16 w-auto max-w-[min(260px,90vw)] object-contain object-left opacity-95"
+                />
+              </div>
               <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>Our Mission</div>
               <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-6" style={{ opacity: 0 }}>
                 Position Africa as a <span className="text-gold-gradient">Global Producer</span>
