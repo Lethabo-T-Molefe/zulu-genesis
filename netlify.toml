@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Single-page app: all routes must return index.html so React Router can run
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
