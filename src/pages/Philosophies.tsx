@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 
 const pillars = [
   {
@@ -73,6 +74,12 @@ const Philosophies = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="Philosophies — The Divine Triangle of Success"
+        description="Discover the three governing principles of Sec(t) Infinity: Deep Work, Kaizen, and the Goldilocks Rule. The Divine Triangle of Success is the constitutional framework behind every business and solution."
+        path="/philosophies"
+        keywords="Divine Triangle of Success, Deep Work, Kaizen, Goldilocks Rule, Sec(t) Infinity philosophy, productivity framework, innovation principles"
+      />
       <PageHeader
         label="Philosophical Foundations"
         title="The Divine Triangle"

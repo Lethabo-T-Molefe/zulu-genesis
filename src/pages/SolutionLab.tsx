@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import { Users, Atom, BarChart3, Infinity } from "lucide-react";
 
 const process = [
@@ -47,6 +48,12 @@ const SolutionLab = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="Solution Lab — The Central Hall"
+        description="The Sec(t) Infinity Solution Lab is where 36 elite specialists from 12 disciplines converge to synthesize multidisciplinary knowledge into powerful Integrated Solution Models that address real-world challenges."
+        path="/solution-lab"
+        keywords="Sec(t) Infinity Solution Lab, Central Hall, integrated solutions, multidisciplinary research, 36 specialists, knowledge synthesis, innovation lab Africa"
+      />
       <PageHeader
         label="Integrated Solution Lab"
         title="The Central Hall"

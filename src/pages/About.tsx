@@ -8,6 +8,7 @@ import { brandLogos } from "@/lib/brand-assets";
 import {
   Cpu, FlaskConical, Building2, Scale, ArrowRight,
 } from "lucide-react";
+import SEOHead from "@/components/SEOHead";
 
 const whatWeDo = [
   { icon: FlaskConical, title: "Invest in Research", desc: "Funding and conducting deep scientific inquiry across all 12 fields of specialization to generate breakthrough knowledge." },
@@ -83,6 +84,12 @@ const About = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="About Us"
+        description="Learn about Sec(t) Infinity SolutionZ — our mission to position Africa as a global hub of innovation, our multidisciplinary team, and the systems we use to build infinite solutions."
+        path="/about"
+        keywords="Sec(t) Infinity about, Sibusiso Gumede, African innovation, multidisciplinary team, innovation ecosystem Africa"
+      />
       <PageHeader
         label="About Us"
         title="A Multidisciplinary"

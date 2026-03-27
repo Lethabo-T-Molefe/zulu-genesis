@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import { GraduationCap, Code, BookOpen, Users, Globe, Lightbulb } from "lucide-react";
 
 const programs = [
@@ -62,6 +63,12 @@ const Academia = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="Sec(t) Academia — Hybrid Learning"
+        description="Sec(t) Academia offers hybrid tutoring, holiday coding classes, and multidisciplinary programmes for Grade 8 to postgraduate students — bridging Science, Technology, and African Heritage to cultivate the next generation."
+        path="/academia"
+        keywords="Sec(t) Academia, hybrid tutoring, coding classes Africa, multidisciplinary education, STEM Africa, Lethabo Molefe, online tutoring South Africa, postgraduate programmes"
+      />
       <PageHeader
         label="Sec(t) Academia"
         title="Cultivating"

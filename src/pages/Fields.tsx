@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type ElementType } from "react";
 import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import {
   Microscope, Cog, BarChart3, Monitor, Scale, Scroll,
   Palette, Sparkles, Globe, Lightbulb, FlaskConical, Target,
@@ -107,6 +108,12 @@ const Fields = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="12 Fields of Specialization"
+        description="Explore the 12 interconnected disciplines of Sec(t) Infinity's Village of Knowledge — from Chemical Engineering and AI to Law, Philosophy, and Entrepreneurship — each with its own Infinity Business Department."
+        path="/fields"
+        keywords="Sec(t) Infinity fields, 12 fields of specialization, Village of Knowledge, chemical engineering, artificial intelligence, entrepreneurship Africa, research disciplines"
+      />
       <PageHeader
         label="Fields of Specialization"
         title="12 Fields."

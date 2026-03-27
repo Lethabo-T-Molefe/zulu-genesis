@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
+import SEOHead from "@/components/SEOHead";
 import { brandLogos } from "@/lib/brand-assets";
 import { Microscope, Cog, Lightbulb, Palette, BookOpen, Globe } from "lucide-react";
 
@@ -51,6 +52,12 @@ const Join = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="Join the Network"
+        description="Join the Sec(t) Infinity intellectual network. We welcome researchers, scientists, engineers, innovators, entrepreneurs, and thinkers committed to building Africa's future through multidisciplinary collaboration."
+        path="/join"
+        keywords="join Sec(t) Infinity, innovation network Africa, research community, engineering jobs Africa, entrepreneur network, intellectual community"
+      />
       <PageHeader
         label="Join the Network"
         title="Together We Build"
