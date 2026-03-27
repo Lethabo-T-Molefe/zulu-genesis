@@ -23,6 +23,27 @@ const pipeline = [
   { step: "04", label: "Commissioning", desc: "Deployment, measurement, and continuous refinement of delivered solutions." },
 ];
 
+const directors = [
+  {
+    name: "Tebogo Sako",
+    image: "/tebogo-sako.jpeg",
+    role: "Director · Sec(t) Infinity",
+    bio: [
+      "Tebogo Sako is a technology professional and aspiring data scientist with a strong focus on artificial intelligence, machine learning, and full-stack development. She is currently advancing her academic journey in computer science, equipping herself with both technical expertise and practical insight.",
+      "She has built a solid reputation as a speaker, panel moderator, and facilitator, contributing to discussions on technology, entrepreneurship, and innovation. Tebogo is particularly passionate about digital transformation and the role of technology in empowering individuals and communities.",
+    ],
+  },
+  {
+    name: "Lethabo Molefe",
+    image: "/lethabo-molefe.jpeg",
+    role: "Director · Sec(t) Infinity",
+    bio: [
+      "Lethabo Tshegofatso Molefe is the Director of Sec(t) Academia and Curriculum Developer for Sec(t) Infinity Tutoring, the education arm of Sec(t) Infinity SolutionZ. He designs and leads hybrid learning programmes (physical + online) for students from Grade 8 to postgraduate level, integrating the organisation's 12 fields of specialisation with the Divine Triangle of Success — Deep Work, Kaizen, and the Goldilocks Rule.",
+      "With over four years of experience at Tshwane University of Technology, Lethabo has served as an Academic Java Tutor, facilitated first-year orientation bootcamps, and led leadership development camps. As Lead Developer and mentor at the Informatics Community Engagement Project (ICEP), he guided intern teams through real-world projects using Agile methodologies.",
+    ],
+  },
+];
+
 const teamProfileParagraphs = [
   "Sibusiso Bhekani Nhlonipho Gumede, known as Mnguni or Zafenate Infinity, is a Chemical Engineering Honours graduate from the University of Cape Town and the University of Johannesburg. He is an experienced Process and Project Management Chemical Engineer with a strong track record in designing, optimizing, and managing efficient process systems that deliver high yield, recovery, and sustainable results.",
   "His expertise focuses on ensuring process integrity, maximizing resource efficiency, minimizing waste, and driving economically viable engineering solutions. He has worked with prestigious companies, delivering measurable impact through system optimization and performance improvement.",
@@ -116,7 +137,7 @@ const About = () => {
             Team
           </div>
           <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-2" style={{ opacity: 0 }}>
-            Founder & <span className="text-gold-gradient">CEO</span>
+            Founder & <span className="text-gold-gradient">Executive Director</span>
           </h2>
           <p className="anim-item text-mono text-xs text-gold/60 uppercase tracking-widest mb-12 md:mb-16" style={{ opacity: 0 }}>
             Sibusiso Bhekani Nhlonipho Gumede (Mnguni / Zafenate Infinity)
@@ -143,6 +164,30 @@ const About = () => {
                 <p key={i} className="anim-item text-sm md:text-base text-ash leading-relaxed" style={{ opacity: 0 }}>
                   {text}
                 </p>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-20 md:mt-28">
+            <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>
+              Directors
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {directors.map((d) => (
+                <div key={d.name} className="anim-item bg-hut rounded-sm border border-gold/10 overflow-hidden flex flex-col" style={{ opacity: 0 }}>
+                  <div className="w-full aspect-[4/3] overflow-hidden">
+                    <img src={d.image} alt={d.name} className="w-full h-full object-cover object-top" />
+                  </div>
+                  <div className="p-8 flex flex-col gap-4">
+                    <div>
+                      <h3 className="text-display text-xl text-foreground">{d.name}</h3>
+                      <p className="mt-1 text-mono text-xs uppercase tracking-[0.2em] text-gold/60">{d.role}</p>
+                    </div>
+                    {d.bio.map((para, i) => (
+                      <p key={i} className="text-sm text-ash leading-relaxed">{para}</p>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>

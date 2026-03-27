@@ -68,9 +68,9 @@ const Navbar = () => {
         <Link to="/" className="flex items-center gap-3" onMouseEnter={handleLogoHover}>
           <img
             ref={logoRef}
-            src={brandLogos.secondary}
+            src={brandLogos.sect}
             alt="Sec(t) Infinity SolutionZ"
-            className="h-9 sm:h-10 w-auto max-w-[220px] object-contain object-left"
+            className="h-12 sm:h-14 w-auto max-w-[220px] object-contain object-left"
             style={{ opacity: 0 }}
           />
           
@@ -134,9 +134,9 @@ const Navbar = () => {
               className="absolute top-20 left-1/2 -translate-x-1/2"
             >
               <img
-                src={brandLogos.secondary}
+                src={brandLogos.sect}
                 alt=""
-                className="h-9 w-auto max-w-[min(220px,85vw)] object-contain opacity-90"
+                className="h-12 w-auto max-w-[min(220px,85vw)] object-contain opacity-90"
               />
             </Link>
             {navLinks.map((link, i) => (
