@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
+import SEOHead from "@/components/SEOHead";
 import { brandLogos } from "@/lib/brand-assets";
 
 const NotFound = () => {
@@ -12,6 +13,12 @@ const NotFound = () => {
 
   return (
     <PageLayout>
+      <SEOHead
+        title="Page not found"
+        description="The page you requested is not on sectinfinity.com. Return home to explore Sec(t) Infinity SolutionZ — our innovation ecosystem, fields, and programmes."
+        path={location.pathname}
+        noindex
+      />
       <div className="flex min-h-[65vh] flex-col items-center justify-center px-6 py-24 text-center">
         <img
           src={brandLogos.submark}

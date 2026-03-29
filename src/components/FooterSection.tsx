@@ -121,6 +121,13 @@ const FooterSection = () => {
               Engineering the future through disciplined thinking,
               continuous improvement, and optimally challenging innovation.
             </p>
+            <p className="mt-4 text-xs text-ash/80 leading-relaxed">
+              Sec(t) Infinity SolutionZ at sectinfinity.com unites science, engineering, commerce,
+              technology, law, African history, visual and creative arts, social sciences, innovation,
+              research and development, and strategic design—the Village of Knowledge with Deep Work,
+              Kaizen, and the Goldilocks Rule. Explore Sec(t) Academia, the Solution Lab, and how to
+              join our Africa innovation network.
+            </p>
           </div>
 
           <div className="footer-col" style={{ opacity: 0 }}>
@@ -132,6 +139,7 @@ const FooterSection = () => {
                 { label: "Philosophies", href: "/philosophies" },
                 { label: "Solution Lab", href: "/solution-lab" },
                 { label: "Academia", href: "/academia" },
+                { label: "Join", href: "/join" },
               ].map((link) => (
                 <Link
                   key={link.label}
@@ -171,7 +179,7 @@ const FooterSection = () => {
         {/* Copyright */}
         <div className="text-center mt-8">
           <div className="text-mono text-[10px] text-ash/40 uppercase tracking-widest">
-            © 2025 Sec(t) Infinity SolutionZ · United Minds. Infinite Solutions.
+            © 2026 Sec(t) Infinity SolutionZ · United Minds. Infinite Solutions.
           </div>
         </div>
       </div>

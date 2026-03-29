@@ -13,7 +13,7 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="noise-overlay min-h-screen bg-background">
       <Navbar />
-      {children}
+      <main id="main-content">{children}</main>
       <FooterSection />
     </div>
   );

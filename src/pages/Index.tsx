@@ -11,7 +11,7 @@ const Index = () => {
     <PageLayout>
       <SEOHead
         title="United Minds. Infinite Solutions."
-        description="Sec(t) Infinity SolutionZ is a multidisciplinary innovation ecosystem uniting 12 fields of mastery to position Africa as a global producer of science, technology, and entrepreneurial excellence. Guided by Deep Work, Kaizen, and the Goldilocks Rule."
+        description="Sec(t) Infinity SolutionZ (sectinfinity.com) is a multidisciplinary innovation ecosystem uniting 12 fields of mastery to position Africa as a global producer of science, technology, and entrepreneurial excellence. Guided by Deep Work, Kaizen, and the Goldilocks Rule."
         path="/"
         keywords="Sec(t) Infinity SolutionZ, multidisciplinary innovation, Africa innovation ecosystem, Deep Work, Kaizen, Goldilocks Rule, 12 fields of mastery, United Minds Infinite Solutions"
       />

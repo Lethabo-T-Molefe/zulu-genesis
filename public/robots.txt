@@ -1,5 +1,6 @@
+# https://sectinfinity.com — public content; crawlers welcome.
 User-agent: *
 Allow: /
-Disallow: /404
 
+# Sitemap (all main routes)
 Sitemap: https://sectinfinity.com/sitemap.xml
