@@ -54,7 +54,7 @@ const SEOHead = ({
       normalizedPath === "/" ? `${SITE_URL}/` : `${SITE_URL}${normalizedPath}`;
     const keywordContent = mergeKeywords(MASTER_KEYWORDS, keywords);
     const robotsContent = noindex
-      ? "noindex, nofollow"
+      ? "noindex, follow"
       : "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1";
 
     document.title = fullTitle;
