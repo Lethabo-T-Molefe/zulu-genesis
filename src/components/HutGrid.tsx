@@ -1,35 +1,7 @@
-import { useEffect, useRef, useState, type ElementType } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { animate, stagger, utils } from "animejs";
-import {
-  Microscope,
-  Cog,
-  BarChart3,
-  Monitor,
-  Scale,
-  Scroll,
-  Palette,
-  Sparkles,
-  Globe,
-  Lightbulb,
-  FlaskConical,
-  Target,
-} from "lucide-react";
-
-const huts: { name: string; prefix: string; icon: ElementType; desc: string }[] = [
-  { name: "Science", prefix: "i-Science", icon: Microscope, desc: "Fundamental research and scientific discovery" },
-  { name: "Engineering", prefix: "i-Engineering", icon: Cog, desc: "Design, build, and innovate systems" },
-  { name: "Commerce", prefix: "i-Commerce", icon: BarChart3, desc: "Financial strategy and commercial intelligence" },
-  { name: "Technology", prefix: "i-Technology", icon: Monitor, desc: "Digital systems and AI-aligned development" },
-  { name: "Law", prefix: "i-Law", icon: Scale, desc: "Governance, policy, and legal frameworks" },
-  { name: "African History", prefix: "i-History", icon: Scroll, desc: "Heritage preservation and cultural wisdom" },
-  { name: "Visual Arts", prefix: "i-Visual Arts", icon: Palette, desc: "Visual communication and design thinking" },
-  { name: "Creative Arts", prefix: "i-Creative Arts", icon: Sparkles, desc: "Expression, narrative, and cultural production" },
-  { name: "Social Sciences", prefix: "i-Social", icon: Globe, desc: "Understanding societies and human behavior" },
-  { name: "Innovation", prefix: "i-Innovation", icon: Lightbulb, desc: "Invention and breakthrough methodologies" },
-  { name: "Research & Dev", prefix: "i-R&D", icon: FlaskConical, desc: "Applied research and product development" },
-  { name: "Strategic Design", prefix: "i-Strategy", icon: Target, desc: "Systems architecture and strategic planning" },
-];
+import { fieldsData } from "@/data/fieldsData";
 
 const HutGrid = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -97,7 +69,7 @@ const HutGrid = () => {
   }, [revealed]);
 
   // Hover ripple effect for cards
-  const handleCardHover = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleCardHover = (e: React.MouseEvent<HTMLElement>) => {
     const card = e.currentTarget;
     const glowLine = card.querySelector(".glow-line") as HTMLElement;
     if (glowLine) {
@@ -131,9 +103,10 @@ const HutGrid = () => {
 
         {/* Hut grid */}
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mb-12">
-          {huts.map((hut) => (
-            <div
-              key={hut.name}
+          {fieldsData.map((hut) => (
+            <Link
+              key={hut.slug}
+              to={`/fields/${hut.slug}`}
               className="hut-card bg-hut rounded-sm p-6 md:p-8 cursor-pointer group transition-all duration-500 relative overflow-hidden"
               style={{ opacity: 0, perspective: "600px" }}
               onMouseEnter={handleCardHover}
@@ -148,12 +121,13 @@ const HutGrid = () => {
               </h3>
               <p className="text-sm text-ash leading-relaxed">{hut.desc}</p>
 
-              <div className="mt-4 pt-4 border-t border-gold-subtle">
+              <div className="mt-4 pt-4 border-t border-gold-subtle flex items-center justify-between">
                 <span className="text-mono text-[9px] uppercase tracking-widest text-gold/40 group-hover:text-gold/70 transition-colors">
                   ∞ Business Dept. Active
                 </span>
+                <span className="text-mono text-[9px] text-gold/30 group-hover:text-gold transition-colors">→</span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

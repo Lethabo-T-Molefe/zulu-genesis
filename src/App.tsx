@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import About from "./pages/About.tsx";
 import Philosophies from "./pages/Philosophies.tsx";
 import Fields from "./pages/Fields.tsx";
+import FieldDetail from "./pages/FieldDetail.tsx";
 import SolutionLab from "./pages/SolutionLab.tsx";
 import Academia from "./pages/Academia.tsx";
 import Join from "./pages/Join.tsx";
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/philosophies" element={<Philosophies />} />
           <Route path="/fields" element={<Fields />} />
+          <Route path="/fields/:slug" element={<FieldDetail />} />
           <Route path="/solution-lab" element={<SolutionLab />} />
           <Route path="/academia" element={<Academia />} />
           <Route path="/join" element={<Join />} />
