@@ -56,30 +56,49 @@ const EngineeringIllustration = () => {
   const Gear = ({
     cx, cy, r, teeth, rot = 0, strokeC = goldA,
   }: { cx: number; cy: number; r: number; teeth: number; rot?: number; strokeC?: string }) => {
+    const toothW = r * 0.2;
     const toothH = r * 0.22;
-    const angleStep = (2 * Math.PI) / teeth;
-    const pts: string[] = [];
-    for (let i = 0; i < teeth; i++) {
-      const a = rot * (Math.PI / 180) + i * angleStep;
-      const a1 = a - angleStep * 0.2;
-      const a2 = a + angleStep * 0.2;
-      pts.push(`${cx + r * Math.cos(a1)},${cy + r * Math.sin(a1)}`);
-      pts.push(`${cx + (r + toothH) * Math.cos(a)},${cy + (r + toothH) * Math.sin(a)}`);
-      pts.push(`${cx + r * Math.cos(a2)},${cy + r * Math.sin(a2)}`);
-    }
+    const stepDeg = 360 / teeth;
+    const baseDeg = rot - 90;
     return (
-      <g>
-        <polygon points={pts.join(" ")} stroke={strokeC} strokeWidth="1.2" fill={goldC} />
-        <circle cx={cx} cy={cy} r={r * 0.38} stroke={strokeC} strokeWidth="1" fill="none" />
-        <circle cx={cx} cy={cy} r="3" fill={strokeC} />
+      <g transform={`translate(${cx} ${cy})`}>
+        {Array.from({ length: teeth }).map((_, i) => (
+          <g key={i} transform={`rotate(${baseDeg + i * stepDeg})`}>
+            <rect
+              x={-toothW / 2}
+              y={-(r + toothH)}
+              width={toothW}
+              height={toothH}
+              rx={toothW * 0.22}
+              fill={goldC}
+              stroke={strokeC}
+              strokeWidth="1"
+            />
+          </g>
+        ))}
+        <circle cx="0" cy="0" r={r * 0.98} stroke={strokeC} strokeWidth="1.2" fill={goldC} />
+        <circle cx="0" cy="0" r={r * 0.72} stroke={strokeC} strokeWidth="1.1" fill="none" />
+        {[0, 120, 240].map((a) => (
+          <line
+            key={a}
+            x1="0"
+            y1="0"
+            x2={r * 0.62 * Math.cos((a * Math.PI) / 180)}
+            y2={r * 0.62 * Math.sin((a * Math.PI) / 180)}
+            stroke={strokeC}
+            strokeWidth="1"
+          />
+        ))}
+        <circle cx="0" cy="0" r={r * 0.38} stroke={strokeC} strokeWidth="1" fill="none" />
+        <circle cx="0" cy="0" r="3" fill={strokeC} />
       </g>
     );
   };
   return (
     <Base>
-      <Gear cx={155} cy={135} r={68} teeth={16} rot={0} strokeC={goldA} />
-      <Gear cx={290} cy={110} r={44} teeth={11} rot={8} strokeC={goldA} />
-      <Gear cx={270} cy={215} r={32} teeth={9} rot={-5} strokeC={goldB} />
+      <Gear cx={155} cy={135} r={68} teeth={14} rot={0} strokeC={goldA} />
+      <Gear cx={290} cy={110} r={44} teeth={12} rot={8} strokeC={goldA} />
+      <Gear cx={270} cy={215} r={32} teeth={10} rot={-5} strokeC={goldB} />
       {/* connect lines */}
       <line x1="60" y1="200" x2="100" y2="180" stroke={goldC} strokeWidth="1" />
       <line x1="360" y1="230" x2="310" y2="210" stroke={goldC} strokeWidth="1" />
