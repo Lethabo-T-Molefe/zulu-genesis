@@ -29,8 +29,8 @@ const Fields = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="12 Fields of Specialization"
-        description="Explore the 12 interconnected disciplines of Sec(t) Infinity's Village of Knowledge — from Chemical Engineering and AI to Law, Philosophy, and Entrepreneurship — each with its own Infinity Business Department."
+        title="12 Fields of Specialization in Africa | Sec(t) Infinity"
+        description="Explore the 12 interconnected Sec(t) Infinity fields of specialization in science, engineering, commerce, technology, law, arts, social sciences, innovation, R&D, and strategic design—each with an active Infinity Business Department."
         path="/fields"
         keywords="Sec(t) Infinity fields, 12 fields of specialization, Village of Knowledge, chemical engineering, artificial intelligence, entrepreneurship Africa, research disciplines"
       />

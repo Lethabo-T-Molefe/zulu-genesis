@@ -64,8 +64,8 @@ const Academia = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Sec(t) Academia — Hybrid Learning"
-        description="Sec(t) Academia offers hybrid tutoring, holiday coding classes, and multidisciplinary programmes for Grade 8 to postgraduate students — bridging Science, Technology, and African Heritage to cultivate the next generation."
+        title="Sec(t) Academia | Hybrid Tutoring and Coding Classes"
+        description="Sec(t) Academia provides hybrid tutoring, holiday coding classes, and multidisciplinary learning from Grade 8 to postgraduate level, helping learners in South Africa build STEM, AI, and innovation capabilities."
         path="/academia"
         keywords="Sec(t) Academia, hybrid tutoring, coding classes Africa, multidisciplinary education, STEM Africa, Lethabo Molefe, online tutoring South Africa, postgraduate programmes"
       />

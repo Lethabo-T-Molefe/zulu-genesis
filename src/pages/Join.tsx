@@ -53,8 +53,8 @@ const Join = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Join the Network"
-        description="Join the Sec(t) Infinity intellectual network. We welcome researchers, scientists, engineers, innovators, entrepreneurs, and thinkers committed to building Africa's future through multidisciplinary collaboration."
+        title="Join Sec(t) Infinity Network | Researchers, Engineers, Innovators"
+        description="Apply to join Sec(t) Infinity's multidisciplinary innovation network for researchers, engineers, scientists, educators, creators, and entrepreneurs committed to building practical, high-impact solutions for Africa."
         path="/join"
         keywords="join Sec(t) Infinity, innovation network Africa, research community, engineering jobs Africa, entrepreneur network, intellectual community"
       />

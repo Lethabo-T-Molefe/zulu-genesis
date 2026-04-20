@@ -61,6 +61,8 @@ const SEOHead = ({
 
     setMeta('meta[name="description"]', "content", description);
     setMeta('meta[name="robots"]', "content", robotsContent);
+    setOrCreateMeta("name", "googlebot", robotsContent);
+    setOrCreateMeta("name", "bingbot", robotsContent);
     setMeta('meta[name="keywords"]', "content", keywordContent);
 
     setOrCreateMeta("property", "og:type", "website");
@@ -88,6 +90,24 @@ const SEOHead = ({
       document.head.appendChild(canonical);
     }
     canonical.href = url;
+
+    let hreflangEnZa = document.querySelector('link[rel="alternate"][hreflang="en-ZA"]') as HTMLLinkElement | null;
+    if (!hreflangEnZa) {
+      hreflangEnZa = document.createElement("link");
+      hreflangEnZa.rel = "alternate";
+      hreflangEnZa.hreflang = "en-ZA";
+      document.head.appendChild(hreflangEnZa);
+    }
+    hreflangEnZa.href = url;
+
+    let hreflangDefault = document.querySelector('link[rel="alternate"][hreflang="x-default"]') as HTMLLinkElement | null;
+    if (!hreflangDefault) {
+      hreflangDefault = document.createElement("link");
+      hreflangDefault.rel = "alternate";
+      hreflangDefault.hreflang = "x-default";
+      document.head.appendChild(hreflangDefault);
+    }
+    hreflangDefault.href = url;
 
     const setJsonLd = (id: string, data: object | null) => {
       const existing = document.getElementById(id);

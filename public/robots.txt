@@ -4,3 +4,6 @@ Allow: /
 
 # Sitemap (all main routes)
 Sitemap: https://sectinfinity.com/sitemap.xml
+
+# Preferred host
+Host: https://sectinfinity.com

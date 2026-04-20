@@ -75,8 +75,8 @@ const Philosophies = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Philosophies — The Divine Triangle of Success"
-        description="Discover the three governing principles of Sec(t) Infinity: Deep Work, Kaizen, and the Goldilocks Rule. The Divine Triangle of Success is the constitutional framework behind every business and solution."
+        title="Deep Work, Kaizen, Goldilocks Rule | Sec(t) Infinity"
+        description="Understand the Sec(t) Infinity Divine Triangle of Success—Deep Work, Kaizen, and the Goldilocks Rule—and how this framework drives disciplined productivity, innovation quality, and sustainable performance."
         path="/philosophies"
         keywords="Divine Triangle of Success, Deep Work, Kaizen, Goldilocks Rule, Sec(t) Infinity philosophy, productivity framework, innovation principles"
       />

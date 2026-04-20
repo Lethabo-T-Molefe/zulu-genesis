@@ -85,8 +85,8 @@ const About = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="About Us"
-        description="Learn about Sec(t) Infinity SolutionZ — our mission to position Africa as a global hub of innovation, our multidisciplinary team, and the systems we use to build infinite solutions."
+        title="About Sec(t) Infinity | Mission, Founder, Directors"
+        description="Learn the mission, leadership, and operating model of Sec(t) Infinity SolutionZ in South Africa, including founder Sibusiso Gumede, multidisciplinary directors, and the end-to-end system used to build integrated innovation solutions for Africa."
         path="/about"
         keywords="Sec(t) Infinity about, Sibusiso Gumede, African innovation, multidisciplinary team, innovation ecosystem Africa"
       />

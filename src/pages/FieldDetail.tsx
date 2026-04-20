@@ -124,14 +124,48 @@ const FieldDetail = () => {
 
   if (!field) return <Navigate to="/fields" replace />;
   const FieldIcon = field.icon;
+  const shortOverview = field.overview.length > 250 ? `${field.overview.slice(0, 247)}...` : field.overview;
+  const fieldPageLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `https://sectinfinity.com/fields/${field.slug}#article`,
+    headline: `${field.prefix} — ${field.name}`,
+    description: shortOverview,
+    inLanguage: "en-ZA",
+    mainEntityOfPage: `https://sectinfinity.com/fields/${field.slug}`,
+    about: [
+      field.name,
+      "Sec(t) Infinity SolutionZ",
+      "Village of Knowledge",
+      "Africa innovation ecosystem",
+      "Research and development",
+    ],
+    author: {
+      "@type": "Organization",
+      name: "Sec(t) Infinity SolutionZ",
+      url: "https://sectinfinity.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Sec(t) Infinity SolutionZ",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://sectinfinity.com/primary-logo.png",
+      },
+    },
+  };
 
   return (
     <PageLayout>
       <SEOHead
-        title={`${field.prefix} — ${field.name}`}
-        description={field.overview}
+        title={`${field.name} in South Africa | ${field.prefix} at Sec(t) Infinity`}
+        description={shortOverview}
         path={`/fields/${field.slug}`}
-        keywords={`${field.prefix}, ${field.name}, Sec(t) Infinity, Village of Knowledge, 12 fields, Africa innovation`}
+        keywords={`${field.prefix}, ${field.name}, Sec(t) Infinity, Village of Knowledge, 12 fields, Africa innovation, South Africa, multidisciplinary innovation`}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(fieldPageLd) }}
       />
 
       {/* ── Hero ─────────────────────────────────────────────── */}
@@ -302,6 +336,28 @@ const FieldDetail = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Related pages for stronger internal linking */}
+        <div className="reveal-block" style={{ opacity: 0 }}>
+          <div className="bg-hut rounded-sm border border-gold/10 p-6 md:p-8">
+            <SectionLabel>Related Resources</SectionLabel>
+            <SectionTitle>Explore connected pages</SectionTitle>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Link to="/solution-lab" className="bg-background/40 border border-gold/10 rounded-sm p-4 hover:border-gold/30 transition-colors">
+                <p className="text-sm text-foreground">Solution Lab</p>
+                <p className="text-xs text-ash mt-1">See how this field contributes to integrated models.</p>
+              </Link>
+              <Link to="/academia" className="bg-background/40 border border-gold/10 rounded-sm p-4 hover:border-gold/30 transition-colors">
+                <p className="text-sm text-foreground">Sec(t) Academia</p>
+                <p className="text-xs text-ash mt-1">View the learning pathway for this specialization.</p>
+              </Link>
+              <Link to="/join" className="bg-background/40 border border-gold/10 rounded-sm p-4 hover:border-gold/30 transition-colors">
+                <p className="text-sm text-foreground">Join the Network</p>
+                <p className="text-xs text-ash mt-1">Apply to collaborate with field specialists.</p>
+              </Link>
             </div>
           </div>
         </div>

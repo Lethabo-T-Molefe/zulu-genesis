@@ -49,8 +49,8 @@ const SolutionLab = () => {
   return (
     <PageLayout>
       <SEOHead
-        title="Solution Lab — The Central Hall"
-        description="The Sec(t) Infinity Solution Lab is where 36 elite specialists from 12 disciplines converge to synthesize multidisciplinary knowledge into powerful Integrated Solution Models that address real-world challenges."
+        title="Solution Lab in South Africa | 36 Specialist Model"
+        description="Discover how Sec(t) Infinity's Central Hall brings together 36 elite specialists from 12 fields to design, test, and deploy integrated solution models for complex African and global challenges."
         path="/solution-lab"
         keywords="Sec(t) Infinity Solution Lab, Central Hall, integrated solutions, multidisciplinary research, 36 specialists, knowledge synthesis, innovation lab Africa"
       />
