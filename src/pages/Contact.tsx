@@ -53,6 +53,11 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitState, setSubmitState] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
   useEffect(() => {
     const observe = (el: HTMLElement | null, key: keyof typeof revealed) => {
@@ -83,13 +88,34 @@ const Contact = () => {
     };
   }, [revealed]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { name, email, subject, message } = formData;
-    const body = `From: ${name} (${email})\n\n${message}`;
-    window.location.href = `mailto:info@sectinfinity.com?subject=${encodeURIComponent(
-      subject || "Enquiry from sectinfinity.com"
-    )}&body=${encodeURIComponent(body)}`;
+    setIsSubmitting(true);
+    setSubmitState({ type: null, message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.error || "Unable to send message right now.");
+      }
+
+      setSubmitState({
+        type: "success",
+        message: "Message sent successfully. We'll get back to you soon.",
+      });
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to send message right now.";
+      setSubmitState({ type: "error", message });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const inputClass =
@@ -198,9 +224,8 @@ const Contact = () => {
                     Send a Message
                   </div>
                   <p className="text-base text-ash leading-relaxed mb-6">
-                    Fill in the form below and clicking Send will open your email
-                    client with your message pre-filled, ready to send directly to
-                    our team.
+                    Fill in the form below to send your enquiry directly to
+                    info@sectinfinity.com.
                   </p>
                 </div>
 
@@ -271,16 +296,22 @@ const Contact = () => {
 
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="btn-ember text-xs w-full justify-center"
                 >
-                  Send Message{" "}
+                  {isSubmitting ? "Sending..." : "Send Message"}{" "}
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <p className="text-[11px] text-ash/50 text-center leading-relaxed">
-                  Clicking Send opens your email client with your message
-                  pre-filled to info@sectinfinity.com.
-                </p>
+                {submitState.type && (
+                  <p
+                    className={`text-[11px] text-center leading-relaxed ${
+                      submitState.type === "success" ? "text-emerald-300" : "text-rose-300"
+                    }`}
+                  >
+                    {submitState.message}
+                  </p>
+                )}
               </form>
             </div>
           </div>
