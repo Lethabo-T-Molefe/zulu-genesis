@@ -147,6 +147,7 @@ const FooterSection = () => {
                   { label: "Philosophies", href: "/philosophies" },
                   { label: "Solution Lab", href: "/solution-lab" },
                   { label: "Academia", href: "/academia" },
+                  { label: "Services", href: "/services" },
                   { label: "Join", href: "/join" },
                   { label: "Contact", href: "/contact" },
                 ].map((link) => (
