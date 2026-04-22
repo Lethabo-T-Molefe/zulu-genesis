@@ -6,12 +6,14 @@ import PageHeader from "@/components/PageHeader";
 import SEOHead from "@/components/SEOHead";
 import { Mail, Globe, Clock, Phone, ArrowRight } from "lucide-react";
 
+const contactEmail = ["info", "sectinfinity.com"].join("@");
+
 const contactDetails = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@sectinfinity.com",
-    href: "mailto:info@sectinfinity.com",
+    value: contactEmail,
+    href: `mailto:${contactEmail}`,
   },
   {
     icon: Phone,
@@ -127,7 +129,7 @@ const Contact = () => {
         title="Contact Sec(t) Infinity | Get In Touch"
         description="Contact Sec(t) Infinity SolutionZ for research collaboration, project enquiries, partnership opportunities, or to join our multidisciplinary innovation network across South Africa and beyond."
         path="/contact"
-        keywords="contact Sec(t) Infinity, innovation network enquiry, research collaboration, sectinfinity email, info@sectinfinity.com"
+        keywords="contact Sec(t) Infinity, innovation network enquiry, research collaboration, sectinfinity email, Sec(t) Infinity contact email"
       />
       <PageHeader
         label="Contact"
@@ -225,7 +227,7 @@ const Contact = () => {
                   </div>
                   <p className="text-base text-ash leading-relaxed mb-6">
                     Fill in the form below to send your enquiry directly to
-                    info@sectinfinity.com.
+                    {" "}{contactEmail}.
                   </p>
                 </div>
 

@@ -1,6 +1,9 @@
 import nodemailer from "nodemailer";
 
 const requiredFields = ["name", "email", "subject", "message"];
+const DEFAULT_CONTACT_LOCAL = "info";
+const DEFAULT_CONTACT_DOMAIN = "sectinfinity.com";
+const DEFAULT_CONTACT_TO = `${DEFAULT_CONTACT_LOCAL}@${DEFAULT_CONTACT_DOMAIN}`;
 
 function json(res, status, payload) {
   res.statusCode = status;
@@ -51,7 +54,7 @@ export default async function handler(req, res) {
 
     await transporter.sendMail({
       from: process.env.SMTP_FROM || `"Sec(t) Infinity Website" <${process.env.SMTP_USER}>`,
-      to: process.env.CONTACT_TO || "info@sectinfinity.com",
+      to: process.env.CONTACT_TO || process.env.SMTP_USER || DEFAULT_CONTACT_TO,
       replyTo: `${senderName} <${senderEmail}>`,
       subject: `[Website Contact] ${subject}`,
       text: [

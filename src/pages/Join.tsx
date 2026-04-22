@@ -7,6 +7,8 @@ import SEOHead from "@/components/SEOHead";
 import { brandLogos } from "@/lib/brand-assets";
 import { Microscope, Cog, Lightbulb, Palette, BookOpen, Globe } from "lucide-react";
 
+const joinContactEmail = ["info", "sectinfinity.com"].join("@");
+
 const roles = [
   { icon: Microscope, title: "Researchers & Scientists", desc: "Pushing the boundaries of human knowledge through rigorous scientific inquiry." },
   { icon: Cog, title: "Engineers & Technologists", desc: "Designing and building systems that transform ideas into operational reality." },
@@ -115,7 +117,7 @@ const Join = () => {
               </p>
               <div className="space-y-4">
                 <a
-                  href="mailto:info@sectinfinity.com"
+                  href={`mailto:${joinContactEmail}`}
                   className="btn-ember text-xs w-full justify-center"
                 >
                   Contact Us <span className="text-base leading-none">+</span>

@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { animate, stagger } from "animejs";
 import { brandLogos } from "@/lib/brand-assets";
 
+const footerContactEmail = ["info", "sectinfinity.com"].join("@");
+
 const FooterSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -165,8 +167,8 @@ const FooterSection = () => {
             <div>
               <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">Connect</div>
               <div className="space-y-2 text-sm text-ash">
-                <a href="mailto:info@sectinfinity.com" className="block hover:text-gold transition-colors duration-300">
-                  info@sectinfinity.com
+                <a href={`mailto:${footerContactEmail}`} className="block hover:text-gold transition-colors duration-300">
+                  {footerContactEmail}
                 </a>
                 <div>Working Globally</div>
                 <div className="flex items-center gap-2 mt-3">
