@@ -79,7 +79,7 @@ const Academia = () => {
       <section ref={progRef} className="py-20 md:py-32">
         <div className="container mx-auto px-6 md:px-12">
           <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>Programs</div>
-          <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
+          <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
             ∞ Infinity <span className="text-gold-gradient">Tutoring</span>
           </h2>
           <div className="space-y-8">
@@ -90,7 +90,7 @@ const Academia = () => {
                     <prog.icon className="w-8 h-8 text-gold/70 mb-4" strokeWidth={1.5} />
                     <h3 className="text-display text-2xl text-foreground mb-1">{prog.title}</h3>
                     <div className="text-mono text-[10px] uppercase tracking-widest text-gold/60 mb-4">{prog.subtitle}</div>
-                    <p className="text-ash leading-relaxed">{prog.desc}</p>
+                    <p className="text-base text-ash leading-relaxed">{prog.desc}</p>
                   </div>
                   <div>
                     <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">Includes</div>
@@ -98,7 +98,7 @@ const Academia = () => {
                       {prog.details.map((d) => (
                         <div key={d} className="flex items-start gap-3">
                           <span className="text-gold text-xs mt-1">◆</span>
-                          <span className="text-sm text-foreground">{d}</span>
+                          <span className="text-base text-foreground">{d}</span>
                         </div>
                       ))}
                     </div>
@@ -114,7 +114,7 @@ const Academia = () => {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
         <div className="container mx-auto px-6 md:px-12">
           <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>Why Choose Academia</div>
-          <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
+          <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
             Built for <span className="text-gold-gradient">Excellence</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
@@ -122,13 +122,13 @@ const Academia = () => {
               <div key={f.title} className="anim-item bg-hut rounded-sm p-8 border border-gold/10" style={{ opacity: 0 }}>
                 <f.icon className="w-8 h-8 text-gold/60 mb-4" strokeWidth={1.5} />
                 <h3 className="text-display text-xl text-foreground mb-3">{f.title}</h3>
-                <p className="text-sm text-ash leading-relaxed">{f.desc}</p>
+                <p className="text-base text-ash leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
           <div className="anim-item bg-hut glow-gold rounded-sm p-8 md:p-12 text-center border border-gold/20" style={{ opacity: 0 }}>
             <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">Specializations Aligned With</div>
-            <div className="text-sm text-foreground leading-relaxed max-w-2xl mx-auto mb-6">
+            <div className="text-base text-foreground leading-relaxed max-w-2xl mx-auto mb-6">
               AI · Science · Engineering · Commerce · Technology · Law · African History · Visual Arts · Creative Arts · Social Sciences · Innovation · Strategic Design
             </div>
             <Link to="/join" className="btn-ember text-xs inline-flex">

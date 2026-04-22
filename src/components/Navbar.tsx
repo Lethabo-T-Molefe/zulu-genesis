@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Philosophies", href: "/philosophies" },
   { label: "Solution Lab", href: "/solution-lab" },
   { label: "Academia", href: "/academia" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {

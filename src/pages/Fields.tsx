@@ -68,7 +68,7 @@ const Fields = () => {
                         </h3>
                       </div>
                     </div>
-                    <p className="text-sm text-ash leading-relaxed">{field.desc}</p>
+                    <p className="text-base text-ash leading-relaxed">{field.desc}</p>
                   </div>
 
                   {/* Middle: focus areas */}
@@ -78,7 +78,7 @@ const Fields = () => {
                       {field.focus.map((f) => (
                         <div key={f} className="flex items-start gap-2">
                           <span className="text-gold text-[8px] mt-1.5">◆</span>
-                          <span className="text-sm text-foreground">{f}</span>
+                          <span className="text-base text-foreground">{f}</span>
                         </div>
                       ))}
                     </div>
@@ -87,7 +87,7 @@ const Fields = () => {
                   {/* Right: business dept + explore CTA */}
                   <div className="lg:col-span-3">
                     <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-3">∞ Business Department</div>
-                    <p className="text-sm text-ash leading-relaxed">{field.business}</p>
+                    <p className="text-base text-ash leading-relaxed">{field.business}</p>
                     <div className="flex items-center gap-2 mt-4">
                       <span className="w-2 h-2 rounded-full bg-ember animate-pulse-gold" />
                       <span className="text-mono text-[9px] uppercase tracking-widest text-ember">Active</span>

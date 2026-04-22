@@ -200,7 +200,7 @@ const FieldDetail = () => {
                   <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-2">
                     {field.prefix} · Field {String(fieldIndex + 1).padStart(2, "0")} of 12
                   </div>
-                  <h1 className="text-display text-4xl md:text-5xl lg:text-6xl text-foreground leading-none">
+                  <h1 className="text-display text-4xl md:text-5xl text-foreground leading-none">
                     i-{field.name}
                   </h1>
                 </div>
@@ -288,7 +288,7 @@ const FieldDetail = () => {
               {field.coreFocusPoints.map((point) => (
                 <div key={point} className="flex items-start gap-3">
                   <span className="text-gold text-[8px] mt-2 flex-shrink-0">◆</span>
-                  <p className="text-sm text-foreground leading-relaxed">{point}</p>
+                  <p className="text-base text-foreground leading-relaxed">{point}</p>
                 </div>
               ))}
             </div>
@@ -306,7 +306,7 @@ const FieldDetail = () => {
                 className="bg-hut border border-gold/10 rounded-sm p-4 hover:border-gold/30 transition-colors duration-300"
               >
                 <span className="text-gold text-[8px]">◆</span>
-                <p className="text-sm text-foreground mt-2 leading-snug">{area}</p>
+                <p className="text-base text-foreground mt-2 leading-snug">{area}</p>
               </div>
             ))}
           </div>
@@ -332,7 +332,7 @@ const FieldDetail = () => {
                     <div className="text-sm font-medium text-gold">{phase.phase}</div>
                   </div>
                   <div className="md:col-span-9">
-                    <p className="text-sm text-ash leading-relaxed">{phase.content}</p>
+                    <p className="text-base text-ash leading-relaxed">{phase.content}</p>
                   </div>
                 </div>
               ))}
@@ -384,7 +384,7 @@ const FieldDetail = () => {
                 </div>
               ))}
             </div>
-            <p className="text-sm text-ash leading-relaxed p-6 md:p-8 pt-4">{field.researchHub}</p>
+            <p className="text-base text-ash leading-relaxed p-6 md:p-8 pt-4">{field.researchHub}</p>
             <div className="flex items-center gap-2 px-6 md:px-8 pb-6 border-t border-gold/10 pt-4">
               <span className="w-2 h-2 rounded-full bg-gold animate-pulse-gold flex-shrink-0" />
               <span className="text-mono text-[9px] uppercase tracking-widest text-gold/50">
@@ -410,7 +410,7 @@ const FieldDetail = () => {
                 />
               ))}
             </div>
-            <p className="text-sm text-ash leading-relaxed p-6 md:p-8 pt-4">{field.centralHall}</p>
+            <p className="text-base text-ash leading-relaxed p-6 md:p-8 pt-4">{field.centralHall}</p>
             <div className="flex items-center gap-2 px-6 md:px-8 pb-6 border-t border-gold/10 pt-4">
               <span className="w-2 h-2 rounded-full bg-ember animate-pulse-gold flex-shrink-0" />
               <span className="text-mono text-[9px] uppercase tracking-widest text-ember">
@@ -443,7 +443,7 @@ const FieldDetail = () => {
                   </span>
                 ))}
               </div>
-              <p className="text-sm text-ash leading-relaxed p-6 md:p-10 pt-4">
+              <p className="text-base text-ash leading-relaxed p-6 md:p-10 pt-4">
                 {field.businessDept}
               </p>
               <div className="flex items-center gap-2 px-6 md:px-10 pb-6 border-t border-gold/10 pt-4">

@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
-import { TeamPortraitFrame } from "@/components/TeamPortraitFrame";
 import { brandLogos } from "@/lib/brand-assets";
 import {
   Cpu, FlaskConical, Building2, Scale, ArrowRight,
@@ -45,20 +44,13 @@ const directors = [
   },
 ];
 
-const teamProfileParagraphs = [
-  "Sibusiso Bhekani Nhlonipho Gumede, known as Mnguni or Zafenate Infinity, is a Chemical Engineering Honours graduate from the University of Cape Town and the University of Johannesburg. He is an experienced Process and Project Management Chemical Engineer with a strong track record in designing, optimizing, and managing efficient process systems that deliver high yield, recovery, and sustainable results.",
-  "His expertise focuses on ensuring process integrity, maximizing resource efficiency, minimizing waste, and driving economically viable engineering solutions. He has worked with prestigious companies, delivering measurable impact through system optimization and performance improvement.",
-  "Mnguni is deeply passionate about the integration of computer science, coding, data science, and artificial intelligence across all disciplines. He advocates for leveraging Fourth and Fifth Industrial Revolution technologies to transform industries, enhance productivity, and solve complex global challenges.",
-  "He is a strong proponent of the circular economy, promoting sustainable systems that enable clean environments, efficient resource use, and economically active communities. His vision emphasizes the convergence of engineering, science, and technology to develop practical, scalable solutions.",
-  "As a researcher, philosopher, innovator, and problem solver, he is the founder of the Sec(t) Infinity Family Businesses, which brings together multidisciplinary experts to develop integrated, future-focused solutions. His work is guided by key philosophies of Deep Work, Kaizen, and the Goldilocks Rule, forming a blueprint for continuous growth, innovation, and excellence.",
-];
-
 const About = () => {
   const missionRef = useRef<HTMLDivElement>(null);
   const teamRef = useRef<HTMLDivElement>(null);
   const whatRef = useRef<HTMLDivElement>(null);
   const pipeRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState({ mission: false, team: false, what: false, pipe: false });
+
 
   useEffect(() => {
     const observe = (el: HTMLElement | null, key: keyof typeof revealed) => {
@@ -109,15 +101,15 @@ const About = () => {
                 />
               </div>
               <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>Our Mission</div>
-              <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-6" style={{ opacity: 0 }}>
+              <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6" style={{ opacity: 0 }}>
                 Position Africa as a <span className="text-gold-gradient">Global Producer</span>
               </h2>
-              <p className="anim-item text-ash leading-relaxed mb-6" style={{ opacity: 0 }}>
+              <p className="anim-item text-base md:text-lg text-ash leading-relaxed mb-6" style={{ opacity: 0 }}>
                 To position Africa as a global hub of innovation, invention, and production —
                 not merely a consumer, but a world-class producer leading in scientific discovery,
                 technological invention, industrial production, and entrepreneurial innovation.
               </p>
-              <p className="anim-item text-ash leading-relaxed" style={{ opacity: 0 }}>
+              <p className="anim-item text-base md:text-lg text-ash leading-relaxed" style={{ opacity: 0 }}>
                 Our platform unites specialists across disciplines to design impactful models for
                 the future. Through the village metaphor of interconnected knowledge huts, we create
                 an ecosystem where every field strengthens and sustains the others.
@@ -129,7 +121,7 @@ const About = () => {
                 {["Researchers & Scientists", "Engineers & Technologists", "Entrepreneurs & Business Leaders", "Policy Makers & Legal Professionals", "Academic Institutions & Innovation Hubs", "Students & Intellectual Communities"].map((item) => (
                   <div key={item} className="flex items-start gap-3">
                     <span className="text-gold text-xs mt-1">◆</span>
-                    <span className="text-sm text-foreground">{item}</span>
+                    <span className="text-base text-foreground">{item}</span>
                   </div>
                 ))}
               </div>
@@ -143,60 +135,26 @@ const About = () => {
           <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>
             Team
           </div>
-          <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-2" style={{ opacity: 0 }}>
-            Founder & <span className="text-gold-gradient">Executive Director</span>
+          <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-12 md:mb-16" style={{ opacity: 0 }}>
+            Meet the <span className="text-gold-gradient">Leadership</span>
           </h2>
-          <p className="anim-item text-mono text-xs text-gold/60 uppercase tracking-widest mb-12 md:mb-16" style={{ opacity: 0 }}>
-            Sibusiso Bhekani Nhlonipho Gumede (Mnguni / Zafenate Infinity)
-          </p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            <div className="lg:col-span-5 anim-item" style={{ opacity: 0 }}>
-              <TeamPortraitFrame
-                src="/sibusiso.jpeg"
-                alt="Sibusiso Bhekani Nhlonipho Gumede"
-                caption="Sec(t) Infinity · United Minds"
-              />
-            </div>
-            <div className="lg:col-span-7 space-y-6">
-              <div className="anim-item" style={{ opacity: 0 }}>
-                <h3 className="text-display text-xl md:text-2xl text-foreground">
-                  Sibusiso Bhekani Nhlonipho Gumede
-                </h3>
-                <p className="mt-2 text-mono text-xs uppercase tracking-[0.2em] text-gold/70">
-                  Mnguni · Zafenate Infinity
-                </p>
-              </div>
-              {teamProfileParagraphs.map((text, i) => (
-                <p key={i} className="anim-item text-sm md:text-base text-ash leading-relaxed" style={{ opacity: 0 }}>
-                  {text}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-20 md:mt-28">
-            <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>
-              Directors
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {directors.map((d) => (
-                <div key={d.name} className="anim-item bg-hut rounded-sm border border-gold/10 overflow-hidden flex flex-col" style={{ opacity: 0 }}>
-                  <div className="w-full aspect-[4/3] overflow-hidden">
-                    <img src={d.image} alt={d.name} className="w-full h-full object-cover object-top" />
-                  </div>
-                  <div className="p-8 flex flex-col gap-4">
-                    <div>
-                      <h3 className="text-display text-xl text-foreground">{d.name}</h3>
-                      <p className="mt-1 text-mono text-xs uppercase tracking-[0.2em] text-gold/60">{d.role}</p>
-                    </div>
-                    {d.bio.map((para, i) => (
-                      <p key={i} className="text-sm text-ash leading-relaxed">{para}</p>
-                    ))}
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {directors.map((d) => (
+              <div key={d.name} className="anim-item bg-hut rounded-sm border border-gold/10 overflow-hidden flex flex-col" style={{ opacity: 0 }}>
+                <div className="w-full aspect-[4/3] overflow-hidden">
+                  <img src={d.image} alt={d.name} className="w-full h-full object-cover object-top" />
                 </div>
-              ))}
-            </div>
+                <div className="p-8 flex flex-col gap-4">
+                  <div>
+                    <h3 className="text-display text-xl text-foreground">{d.name}</h3>
+                    <p className="mt-1 text-mono text-xs uppercase tracking-[0.2em] text-gold/60">{d.role}</p>
+                  </div>
+                  {d.bio.map((para, i) => (
+                    <p key={i} className="text-base text-ash leading-relaxed">{para}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -205,7 +163,7 @@ const About = () => {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
         <div className="container mx-auto px-6 md:px-12">
           <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>What We Do</div>
-          <h2 className="anim-item text-display text-3xl md:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
+          <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
             Building <span className="text-gold-gradient">Infinite Solutions</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -213,7 +171,7 @@ const About = () => {
               <div key={item.title} className="anim-item bg-hut rounded-sm p-8 group hover:border-gold/30 border border-transparent transition-colors duration-500" style={{ opacity: 0 }}>
                 <item.icon className="w-8 h-8 text-gold/60 mb-4 group-hover:text-gold transition-colors" strokeWidth={1.5} />
                 <h3 className="text-display text-xl text-foreground mb-3">{item.title}</h3>
-                <p className="text-sm text-ash leading-relaxed">{item.desc}</p>
+                <p className="text-base text-ash leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -224,7 +182,7 @@ const About = () => {
       <section ref={pipeRef} className="py-20 md:py-32">
         <div className="container mx-auto px-6 md:px-12">
           <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>How We Operate</div>
-          <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
+          <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
             End-to-End <span className="text-gold-gradient">Project Management</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -233,7 +191,7 @@ const About = () => {
                 <div className="bg-hut rounded-sm p-8 h-full">
                   <div className="text-display text-4xl text-gold/20 mb-4">{item.step}</div>
                   <h3 className="text-display text-xl text-foreground mb-3">{item.label}</h3>
-                  <p className="text-sm text-ash leading-relaxed">{item.desc}</p>
+                  <p className="text-base text-ash leading-relaxed">{item.desc}</p>
                 </div>
                 {i < pipeline.length - 1 && (
                   <ArrowRight className="hidden md:block absolute top-1/2 -right-3 w-6 h-6 text-gold/30 -translate-y-1/2 z-10" />

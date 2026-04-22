@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { animate, stagger } from "animejs";
 import { brandLogos } from "@/lib/brand-assets";
 
@@ -10,6 +10,8 @@ const FooterSection = () => {
   const bigLogoRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState(false);
+  const { pathname } = useLocation();
+  const showCTA = pathname === "/";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -17,8 +19,8 @@ const FooterSection = () => {
         if (entry.isIntersecting && !revealed) {
           setRevealed(true);
 
-          // CTA heading — letter morphing effect
-          if (ctaRef.current) {
+          // CTA heading — only on home page
+          if (showCTA && ctaRef.current) {
             const lines = ctaRef.current.querySelectorAll(".cta-line");
             animate(lines, {
               opacity: [0, 1],
@@ -28,14 +30,16 @@ const FooterSection = () => {
               easing: "outExpo",
             });
 
-            // CTA button bounce
-            animate(ctaRef.current.querySelector(".cta-btn"), {
-              opacity: [0, 1],
-              scale: [0.8, 1],
-              duration: 600,
-              delay: 700,
-              easing: "outElastic(1, .6)",
-            });
+            const ctaBtn = ctaRef.current.querySelector(".cta-btn");
+            if (ctaBtn) {
+              animate(ctaBtn, {
+                opacity: [0, 1],
+                scale: [0.8, 1],
+                duration: 600,
+                delay: 700,
+                easing: "outElastic(1, .6)",
+              });
+            }
           }
 
           // Divider draw
@@ -43,7 +47,7 @@ const FooterSection = () => {
             animate(dividerRef.current, {
               scaleX: [0, 1],
               duration: 1000,
-              delay: 900,
+              delay: showCTA ? 900 : 0,
               easing: "inOutQuart",
             });
           }
@@ -54,7 +58,7 @@ const FooterSection = () => {
               opacity: [0, 1],
               translateY: [20, 0],
               duration: 700,
-              delay: stagger(120, { start: 1100 }),
+              delay: stagger(120, { start: showCTA ? 1100 : 200 }),
               easing: "outExpo",
             });
           }
@@ -75,33 +79,35 @@ const FooterSection = () => {
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, [revealed]);
+  }, [revealed, showCTA]);
 
   return (
     <footer id="contact" ref={sectionRef} className="relative py-16 md:py-24 lg:py-32">
       <div className="container mx-auto px-6 md:px-12">
-        {/* CTA */}
-        <div ref={ctaRef} className="text-center mb-16 md:mb-20 lg:mb-24">
-          <div className="cta-line flex justify-center mb-8" style={{ opacity: 0 }}>
-            <img
-              src={brandLogos.secondary}
-              alt=""
-              className="h-14 sm:h-16 md:h-20 w-auto max-w-[min(320px,90vw)] object-contain opacity-90"
-            />
+        {/* CTA — home page only */}
+        {showCTA && (
+          <div ref={ctaRef} className="text-center mb-16 md:mb-20 lg:mb-24">
+            <div className="cta-line flex justify-center mb-8" style={{ opacity: 0 }}>
+              <img
+                src={brandLogos.secondary}
+                alt=""
+                className="h-14 sm:h-16 md:h-20 w-auto max-w-[min(320px,90vw)] object-contain opacity-90"
+              />
+            </div>
+            <h2 className="text-display text-3xl sm:text-4xl md:text-5xl text-foreground mb-6">
+              <span className="cta-line inline-block" style={{ opacity: 0 }}>Join the</span>
+              <br />
+              <span className="cta-line inline-block text-gold-gradient" style={{ opacity: 0 }}>Network</span>
+            </h2>
+            <p className="cta-line text-base text-ash max-w-lg mx-auto mb-8 leading-relaxed" style={{ opacity: 0 }}>
+              Are you a researcher, scientist, engineer, entrepreneur, or intellectual
+              ready to contribute to infinite solutions?
+            </p>
+            <Link to="/join" className="cta-btn btn-ember inline-flex" style={{ opacity: 0 }}>
+              Let's Connect <span className="text-base leading-none">+</span>
+            </Link>
           </div>
-          <h2 className="text-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-foreground mb-6">
-            <span className="cta-line inline-block" style={{ opacity: 0 }}>Join the</span>
-            <br />
-            <span className="cta-line inline-block text-gold-gradient" style={{ opacity: 0 }}>Network</span>
-          </h2>
-          <p className="cta-line text-ash max-w-lg mx-auto mb-8 leading-relaxed" style={{ opacity: 0 }}>
-            Are you a researcher, scientist, engineer, entrepreneur, or intellectual
-            ready to contribute to infinite solutions?
-          </p>
-          <Link to="/join" className="cta-btn btn-ember inline-flex" style={{ opacity: 0 }}>
-            Let's Connect <span className="text-base leading-none">+</span>
-          </Link>
-        </div>
+        )}
 
         {/* Divider */}
         <div
@@ -111,11 +117,11 @@ const FooterSection = () => {
         />
 
         {/* Footer grid */}
-        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-16">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-16">
+          {/* Brand */}
           <div className="footer-col" style={{ opacity: 0 }}>
             <div className="flex items-center gap-3 mb-4">
               <img src={brandLogos.primary} alt="" className="h-30 w-auto max-w-[140px] object-contain object-left" />
-              
             </div>
             <p className="text-xs text-ash leading-relaxed">
               Engineering the future through disciplined thinking,
@@ -130,51 +136,48 @@ const FooterSection = () => {
             </p>
           </div>
 
-          <div className="footer-col" style={{ opacity: 0 }}>
-            <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">Navigate</div>
-            <div className="space-y-2">
-              {[
-                { label: "About", href: "/about" },
-                { label: "Fields", href: "/fields" },
-                { label: "Philosophies", href: "/philosophies" },
-                { label: "Solution Lab", href: "/solution-lab" },
-                { label: "Academia", href: "/academia" },
-                { label: "Join", href: "/join" },
-              ].map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  className="block text-sm text-ash hover:text-gold transition-colors duration-300"
-                >
-                  {link.label}
-                </Link>
-              ))}
+          {/* Navigate + Connect — share a self-end wrapper so their tops align */}
+          <div className="footer-col md:col-span-2 md:self-end grid grid-cols-1 sm:grid-cols-2 gap-8" style={{ opacity: 0 }}>
+            <div>
+              <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">Navigate</div>
+              <div className="space-y-2">
+                {[
+                  { label: "About", href: "/about" },
+                  { label: "Fields", href: "/fields" },
+                  { label: "Philosophies", href: "/philosophies" },
+                  { label: "Solution Lab", href: "/solution-lab" },
+                  { label: "Academia", href: "/academia" },
+                  { label: "Join", href: "/join" },
+                  { label: "Contact", href: "/contact" },
+                ].map((link) => (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="block text-sm text-ash hover:text-gold transition-colors duration-300"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className="footer-col" style={{ opacity: 0 }}>
-            <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">Connect</div>
-            <div className="space-y-2 text-sm text-ash">
-              <div>contact@sectinfinity.com</div>
-              <div>Working Globally</div>
-              <div className="flex items-center gap-2 mt-3">
-                <span className="w-2 h-2 rounded-full bg-ember animate-pulse-gold" />
-                <span className="text-mono text-[10px] uppercase tracking-widest text-ember">
-                  Accepting Projects
-                </span>
+            <div>
+              <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">Connect</div>
+              <div className="space-y-2 text-sm text-ash">
+                <a href="mailto:info@sectinfinity.com" className="block hover:text-gold transition-colors duration-300">
+                  info@sectinfinity.com
+                </a>
+                <div>Working Globally</div>
+                <div className="flex items-center gap-2 mt-3">
+                  <span className="w-2 h-2 rounded-full bg-ember animate-pulse-gold" />
+                  <span className="text-mono text-[10px] uppercase tracking-widest text-ember">
+                    Accepting Projects
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Massive mark + wordmark
-        <div className="text-center flex flex-col items-center gap-6 md:gap-8" style={{ opacity: 0 }} ref={bigLogoRef}>
-          <img
-            src={brandLogos.secondary}
-            alt=""
-            className="h-24 sm:h-32 md:h-44 lg:h-56 w-auto max-w-[min(95vw,720px)] object-contain opacity-95"
-          />
-        </div> */}
 
         {/* Copyright */}
         <div className="text-center mt-8">

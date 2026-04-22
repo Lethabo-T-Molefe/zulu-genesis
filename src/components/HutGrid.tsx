@@ -119,7 +119,7 @@ const HutGrid = () => {
               <h3 className="text-display text-xl text-foreground mb-2 group-hover:text-gold-gradient transition-colors duration-300">
                 {hut.name}
               </h3>
-              <p className="text-sm text-ash leading-relaxed">{hut.desc}</p>
+              <p className="text-base text-ash leading-relaxed">{hut.desc}</p>
 
               <div className="mt-4 pt-4 border-t border-gold-subtle flex items-center justify-between">
                 <span className="text-mono text-[9px] uppercase tracking-widest text-gold/40 group-hover:text-gold/70 transition-colors">
@@ -143,7 +143,7 @@ const HutGrid = () => {
             <h3 className="text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-4">
               Integrated Innovation Council
             </h3>
-            <p className="text-ash max-w-2xl mx-auto leading-relaxed mb-6">
+            <p className="text-base text-ash max-w-2xl mx-auto leading-relaxed mb-6">
               36 elite specialists — three from each field — converge to synthesize
               multidisciplinary knowledge into unified, powerful solution models.
               Where quantum entanglement meets intellectual collaboration.

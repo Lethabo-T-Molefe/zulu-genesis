@@ -173,7 +173,7 @@ const HeroSection = () => {
             <div className="grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-end gap-3 sm:gap-5 md:gap-8 lg:gap-10 mb-8">
               <h1
                 ref={headlineRef}
-                className="text-display min-w-0 text-2xl min-[400px]:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-foreground pr-2 sm:pr-3"
+                className="text-display min-w-0 text-[30px] sm:text-4xl md:text-[44px] lg:text-[50px] text-foreground pr-2 sm:pr-3"
               >
                 <span className="hero-word inline-block" style={{ opacity: 0 }}>Engineering</span>
                 <br />
@@ -190,7 +190,7 @@ const HeroSection = () => {
 
             <p
               ref={subtextRef}
-              className="text-lg md:text-xl text-ash max-w-2xl mb-12 leading-relaxed"
+              className="text-base md:text-lg text-ash max-w-2xl mb-12 leading-relaxed"
               style={{ opacity: 0 }}
             >
               Through the Divine Triangle of Success — Deep Work, Kaizen,

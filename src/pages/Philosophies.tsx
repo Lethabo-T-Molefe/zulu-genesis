@@ -97,14 +97,14 @@ const Philosophies = () => {
                   <div className="text-5xl text-gold/30 mb-4">{pillar.symbol}</div>
                   <h3 className="text-display text-2xl md:text-3xl lg:text-4xl text-foreground mb-2">{pillar.name}</h3>
                   <div className="text-mono text-xs uppercase tracking-widest text-gold/60 mb-4">{pillar.tagline}</div>
-                  <p className="text-ash leading-relaxed">{pillar.description}</p>
+                  <p className="text-base text-ash leading-relaxed">{pillar.description}</p>
                 </div>
                 <div className="lg:col-span-3 space-y-4">
                   <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">How It Applies</div>
                   {pillar.details.map((detail, i) => (
                     <div key={i} className="flex items-start gap-3 p-4 bg-background/50 rounded-sm">
                       <span className="text-gold text-xs mt-1 shrink-0">◆</span>
-                      <span className="text-sm text-foreground leading-relaxed">{detail}</span>
+                      <span className="text-base text-foreground leading-relaxed">{detail}</span>
                     </div>
                   ))}
                 </div>
@@ -119,16 +119,16 @@ const Philosophies = () => {
         <div className="container mx-auto px-6 md:px-12 text-center">
           <div className="max-w-3xl mx-auto">
             <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>Integrated Governance</div>
-            <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-8" style={{ opacity: 0 }}>
+            <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-8" style={{ opacity: 0 }}>
               The Constitution of <span className="text-gold-gradient">Our Ecosystem</span>
             </h2>
-            <p className="anim-item text-ash leading-relaxed mb-6" style={{ opacity: 0 }}>
+            <p className="anim-item text-base text-ash leading-relaxed mb-6" style={{ opacity: 0 }}>
               The Divine Triangle is not merely a suggestion — it is the integrated constitution
               and governance philosophy that underpins every decision, project, and interaction
               within the Sec(t) Infinity network. Deep Work produces quality. Kaizen ensures
               evolution. The Goldilocks Rule sustains momentum.
             </p>
-            <p className="anim-item text-ash leading-relaxed mb-10" style={{ opacity: 0 }}>
+            <p className="anim-item text-base text-ash leading-relaxed mb-10" style={{ opacity: 0 }}>
               Together, they form a self-reinforcing system where focused effort leads to
               refined output, which generates perfectly calibrated new challenges — creating
               an infinite cycle of growth, mastery, and innovation.

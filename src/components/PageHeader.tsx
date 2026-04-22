@@ -35,7 +35,7 @@ const PageHeader = ({ label, title, titleAccent, description }: PageHeaderProps)
             />
             <span className="text-mono text-xs uppercase tracking-[0.3em] text-gold">{label}</span>
           </div>
-          <h1 className="text-display text-3xl md:text-5xl lg:text-7xl text-foreground mb-6">
+          <h1 className="text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
             <span className="ph-line inline-block" style={{ opacity: 0 }}>{title}</span>
             <br />
             <span className="ph-line inline-block text-gold-gradient" style={{ opacity: 0 }}>{titleAccent}</span>

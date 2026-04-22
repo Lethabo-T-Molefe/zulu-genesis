@@ -64,7 +64,7 @@ const SolutionLab = () => {
       <section ref={prinRef} className="py-20 md:py-32">
         <div className="container mx-auto px-6 md:px-12">
           <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>Core Principles</div>
-          <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
+          <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
             How <span className="text-gold-gradient">Integration Works</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -72,7 +72,7 @@ const SolutionLab = () => {
               <div key={p.title} className="anim-item bg-hut rounded-sm p-8 border border-gold/10 group hover:border-gold/30 transition-colors duration-500" style={{ opacity: 0 }}>
                 <p.icon className="w-8 h-8 text-gold/60 mb-4 group-hover:text-gold transition-colors" strokeWidth={1.5} />
                 <h3 className="text-display text-xl text-foreground mb-3">{p.title}</h3>
-                <p className="text-sm text-ash leading-relaxed">{p.desc}</p>
+                <p className="text-base text-ash leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -83,7 +83,7 @@ const SolutionLab = () => {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
         <div className="container mx-auto px-6 md:px-12">
           <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>The Process</div>
-          <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
+          <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-16" style={{ opacity: 0 }}>
             From Field to <span className="text-gold-gradient">Integrated Solution</span>
           </h2>
           <div className="space-y-6">
@@ -99,7 +99,7 @@ const SolutionLab = () => {
                 </div>
                 <div className="pb-6">
                   <h3 className="text-display text-xl text-foreground mb-2">{item.title}</h3>
-                  <p className="text-sm text-ash leading-relaxed">{item.desc}</p>
+                  <p className="text-base text-ash leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}

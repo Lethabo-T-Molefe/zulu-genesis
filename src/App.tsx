@@ -11,6 +11,7 @@ import FieldDetail from "./pages/FieldDetail.tsx";
 import SolutionLab from "./pages/SolutionLab.tsx";
 import Academia from "./pages/Academia.tsx";
 import Join from "./pages/Join.tsx";
+import Contact from "./pages/Contact.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/solution-lab" element={<SolutionLab />} />
           <Route path="/academia" element={<Academia />} />
           <Route path="/join" element={<Join />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
