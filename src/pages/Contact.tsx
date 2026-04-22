@@ -98,13 +98,26 @@ const Contact = () => {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const raw = await response.text();
+      let data: { error?: string; ok?: boolean } = {};
+      try {
+        data = raw ? JSON.parse(raw) : {};
+      } catch {
+        data = {};
+      }
+
       if (!response.ok) {
-        throw new Error(data?.error || "Unable to send message right now.");
+        throw new Error(
+          data?.error ||
+            `Unable to send message right now (status ${response.status}).`,
+        );
       }
 
       setSubmitState({
@@ -214,7 +227,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Right: contact form */}
+            {/* Right: contact form (temporarily disabled)
             <div ref={formContainerRef}>
               <form
                 onSubmit={handleSubmit}
@@ -316,6 +329,7 @@ const Contact = () => {
                 )}
               </form>
             </div>
+            */}
           </div>
         </div>
       </section>
