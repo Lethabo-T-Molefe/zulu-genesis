@@ -1,0 +1,91 @@
+import nodemailer from "nodemailer";
+
+const requiredFields = ["name", "email", "subject", "message"];
+const DEFAULT_CONTACT_LOCAL = "info";
+const DEFAULT_CONTACT_DOMAIN = "sectinfinity.com";
+const DEFAULT_CONTACT_TO = `${DEFAULT_CONTACT_LOCAL}@${DEFAULT_CONTACT_DOMAIN}`;
+
+const json = (statusCode, payload) => ({
+  statusCode,
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(payload),
+});
+
+const getMissingEnv = () => {
+  const needed = ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASS"];
+  return needed.filter((k) => !process.env[k]);
+};
+
+export const handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return json(405, { error: "Method not allowed" });
+  }
+
+  const missing = getMissingEnv();
+  if (missing.length > 0) {
+    return json(500, {
+      error: `Email service is not configured. Missing: ${missing.join(", ")}`,
+    });
+  }
+
+  let body = {};
+  try {
+    body = JSON.parse(event.body || "{}");
+  } catch {
+    return json(400, { error: "Invalid JSON payload." });
+  }
+
+  const invalidField = requiredFields.find((field) => !String(body[field] || "").trim());
+  if (invalidField) {
+    return json(400, { error: `Missing required field: ${invalidField}` });
+  }
+
+  const senderName = String(body.name).trim();
+  const senderEmail = String(body.email).trim();
+  const subject = String(body.subject).trim();
+  const message = String(body.message).trim();
+
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT),
+    secure: Number(process.env.SMTP_PORT) === 465,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
+
+  try {
+    await transporter.verify();
+
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM || `"Sec(t) Infinity Website" <${process.env.SMTP_USER}>`,
+      to: process.env.CONTACT_TO || process.env.SMTP_USER || DEFAULT_CONTACT_TO,
+      replyTo: `${senderName} <${senderEmail}>`,
+      subject: `[Website Contact] ${subject}`,
+      text: [
+        "New message from sectinfinity.com contact form",
+        "",
+        `Name: ${senderName}`,
+        `Email: ${senderEmail}`,
+        `Subject: ${subject}`,
+        "",
+        "Message:",
+        message,
+      ].join("\n"),
+      html: `
+        <h2>New message from sectinfinity.com contact form</h2>
+        <p><strong>Name:</strong> ${senderName}</p>
+        <p><strong>Email:</strong> ${senderEmail}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, "<br/>")}</p>
+      `,
+    });
+
+    return json(200, { ok: true });
+  } catch (error) {
+    console.error("Contact email failed:", error);
+    return json(500, { error: "Unable to send email. Please try again." });
+  }
+};
