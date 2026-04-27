@@ -1,0 +1,5 @@
+﻿{
+  "Description": "Domain ownership verification file for Microsoft 365 - place in the website root",
+  "Domain": "sectinfinity.com",
+  "Id": "f5a58ffd-7df1-45a5-afe7-da453986a97c"
+}
