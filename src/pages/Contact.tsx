@@ -7,7 +7,7 @@ import SEOHead from "@/components/SEOHead";
 import { Mail, Globe, Clock, Phone, ArrowRight } from "lucide-react";
 import { brandLogos } from "@/lib/brand-assets";
 
-const CONTACT_EMAIL = "info@sectinfinity.com";
+const CONTACT_EMAIL = ["info", "sectinfinity.com"].join("@");
 const CONTACT_PHONE = "+27 73 386 3841";
 const CONTACT_TEL = "tel:+27733863841";
 
