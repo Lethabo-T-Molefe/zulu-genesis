@@ -175,9 +175,9 @@ const HeroSection = () => {
                 ref={headlineRef}
                 className="text-display min-w-0 text-[30px] sm:text-4xl md:text-[44px] lg:text-[50px] text-foreground pr-2 sm:pr-3"
               >
-                <span className="hero-word inline-block" style={{ opacity: 0 }}>Engineering</span>
+                <span className="hero-word inline-block" style={{ opacity: 0 }}>African Innovation</span>
                 <br />
-                <span className="hero-word inline-block text-gold-gradient" style={{ opacity: 0 }}>The&nbsp;Future</span>
+                <span className="hero-word inline-block text-gold-gradient" style={{ opacity: 0 }}>For&nbsp;The&nbsp;Future</span>
               </h1>
               <div className="flex min-w-0 shrink-0 justify-end self-end pb-0.5 translate-y-6 sm:translate-y-7 md:translate-y-9 lg:translate-y-11 xl:translate-y-14">
                 <img
@@ -193,9 +193,10 @@ const HeroSection = () => {
               className="text-base md:text-lg text-ash max-w-2xl mb-12 leading-relaxed"
               style={{ opacity: 0 }}
             >
-              Through the Divine Triangle of Success — Deep Work, Kaizen,
-              and the Goldilocks Rule — we forge multidisciplinary solutions
-              for complex global problems.
+              Sec(t) Infinity combines research, engineering, technology,
+              education, strategy, and entrepreneurship to build practical,
+              multidisciplinary solutions for South Africa and the wider
+              African continent.
             </p>
 
             <div ref={buttonsRef} className="flex flex-wrap gap-4">

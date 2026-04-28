@@ -15,6 +15,7 @@ import {
   Lightbulb,
   ArrowRight,
 } from "lucide-react";
+import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const services = [
   {
@@ -109,6 +110,33 @@ const highlights = [
   { icon: Atom, title: "Multidisciplinary", desc: "No silo thinking. All 12 fields contribute to every major solution." },
 ];
 
+const servicesStructuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/services#service-list`,
+    name: `${SITE_NAME} services`,
+    itemListElement: services.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${SITE_URL}${service.cta.href}`,
+      item: {
+        "@type": "Service",
+        name: service.title,
+        description: service.desc,
+        provider: {
+          "@type": "Organization",
+          "@id": `${SITE_URL}/#organization`,
+        },
+        areaServed: {
+          "@type": "Place",
+          name: "Africa",
+        },
+      },
+    })),
+  },
+];
+
 const Services = () => {
   const servicesRef = useRef<HTMLDivElement>(null);
   const highlightsRef = useRef<HTMLDivElement>(null);
@@ -149,6 +177,7 @@ const Services = () => {
         description="Discover the full range of services offered by Sec(t) Infinity SolutionZ — integrated solution modelling, applied research, education and tutoring, business consulting, strategic design, and innovation partnerships across 12 disciplines."
         path="/services"
         keywords="Sec(t) Infinity services, integrated solution modelling, applied research Africa, hybrid tutoring, business consulting Africa, strategic design, innovation consulting, Sec(t) Academia"
+        structuredData={servicesStructuredData}
       />
       <PageHeader
         label="Services Offered"

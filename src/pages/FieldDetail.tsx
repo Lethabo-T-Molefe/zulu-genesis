@@ -1,10 +1,11 @@
-import { Link, useParams, Navigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import SEOHead from "@/components/SEOHead";
 import { FieldIllustration } from "@/components/FieldIllustration";
 import { fieldsData } from "@/data/fieldsData";
+import NotFound from "./NotFound";
 import {
   ArrowLeft, ArrowRight, BookOpen, Briefcase,
   FlaskConical, Globe2, Users, TrendingUp,
@@ -122,10 +123,20 @@ const FieldDetail = () => {
     return () => obs.disconnect();
   }, [revealed, slug]);
 
-  if (!field) return <Navigate to="/fields" replace />;
+  if (!field) return <NotFound />;
   const FieldIcon = field.icon;
   const shortOverview = field.overview.length > 250 ? `${field.overview.slice(0, 247)}...` : field.overview;
-  const fieldPageLd = {
+  const fieldPageLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "DefinedTerm",
+      "@id": `https://sectinfinity.com/fields/${field.slug}#field`,
+      name: `${field.prefix} ${field.name}`,
+      description: shortOverview,
+      inDefinedTermSet: "https://sectinfinity.com/fields",
+      url: `https://sectinfinity.com/fields/${field.slug}`,
+    },
+    {
     "@context": "https://schema.org",
     "@type": "Article",
     "@id": `https://sectinfinity.com/fields/${field.slug}#article`,
@@ -153,7 +164,8 @@ const FieldDetail = () => {
         url: "https://sectinfinity.com/primary-logo.png",
       },
     },
-  };
+    },
+  ];
 
   return (
     <PageLayout>
@@ -162,10 +174,8 @@ const FieldDetail = () => {
         description={shortOverview}
         path={`/fields/${field.slug}`}
         keywords={`${field.prefix}, ${field.name}, Sec(t) Infinity, Village of Knowledge, 12 fields, Africa innovation, South Africa, multidisciplinary innovation`}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(fieldPageLd) }}
+        breadcrumbLabel={field.name}
+        structuredData={fieldPageLd}
       />
 
       {/* ── Hero ─────────────────────────────────────────────── */}

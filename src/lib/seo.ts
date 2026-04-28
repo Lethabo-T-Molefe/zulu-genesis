@@ -1,8 +1,27 @@
-/** Canonical site URL — must match production deploy (Vercel custom domain). */
+/** Canonical site URL — must match production deploy. */
 export const SITE_URL = "https://sectinfinity.com";
 export const SITE_NAME = "Sec(t) Infinity SolutionZ";
 export const SITE_TAGLINE = "United Minds. Infinite Solutions.";
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/primary-logo.png`;
+export const SITE_PHONE = "+27 73 386 3841";
+export const SITE_EMAIL = "info@sectinfinity.com";
+export const SITE_LOCALE = "en_ZA";
+
+export interface BreadcrumbItem {
+  name: string;
+  path: string;
+}
+
+export interface SeoMetaInput {
+  title: string;
+  description: string;
+  path?: string;
+  keywords?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  breadcrumbLabel?: string;
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+}
 
 /**
  * Broad keyword coverage for meta keywords and consistency across pages.
@@ -189,7 +208,9 @@ const PATH_LABELS: Record<string, string> = {
   philosophies: "Philosophies",
   "solution-lab": "Solution Lab",
   academia: "Sec(t) Academia",
+  services: "Services",
   join: "Join the Network",
+  contact: "Contact",
 };
 
 export function mergeKeywords(...chunks: (string | undefined)[]): string {
@@ -207,13 +228,87 @@ export function mergeKeywords(...chunks: (string | undefined)[]): string {
   return out.join(", ");
 }
 
-/** Breadcrumb trail for JSON-LD (single-level routes). */
-export function breadcrumbItemsForPath(pathname: string): { name: string; path: string }[] {
-  const items: { name: string; path: string }[] = [{ name: "Home", path: "/" }];
+export function normalizeSitePath(path = ""): string {
+  if (!path || path === "/") return "/";
+  return path.startsWith("/") ? path.replace(/\/$/, "") || "/" : `/${path}`;
+}
+
+export function getAbsoluteUrl(path = "/"): string {
+  const normalizedPath = normalizeSitePath(path);
+  return normalizedPath === "/" ? `${SITE_URL}/` : `${SITE_URL}${normalizedPath}`;
+}
+
+export function breadcrumbItemsForPath(pathname: string, leafLabel?: string): BreadcrumbItem[] {
+  const items: BreadcrumbItem[] = [{ name: "Home", path: "/" }];
   const clean = pathname.replace(/\/$/, "") || "/";
   if (clean === "/") return items;
-  const segment = clean.slice(1).split("/")[0];
-  const label = PATH_LABELS[segment] ?? segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-  items.push({ name: label, path: `/${segment}` });
+  const parts = clean.slice(1).split("/");
+
+  parts.forEach((segment, index) => {
+    const path = `/${parts.slice(0, index + 1).join("/")}`;
+    const isLeaf = index === parts.length - 1;
+    const label =
+      isLeaf && leafLabel
+        ? leafLabel
+        : PATH_LABELS[segment] ??
+          segment.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
+    if (!items.some((item) => item.path === path)) {
+      items.push({ name: label, path });
+    }
+  });
+
   return items;
+}
+
+export function buildBaseStructuredData(path: string) {
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      alternateName: ["Sec(t) Infinity", "sectinfinity", "SolutionZ"],
+      slogan: SITE_TAGLINE,
+      url: SITE_URL,
+      logo: DEFAULT_OG_IMAGE,
+      image: DEFAULT_OG_IMAGE,
+      email: SITE_EMAIL,
+      telephone: SITE_PHONE,
+      areaServed: {
+        "@type": "Place",
+        name: "Africa",
+      },
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          email: SITE_EMAIL,
+          telephone: SITE_PHONE,
+          areaServed: "ZA",
+          availableLanguage: ["en"],
+          url: getAbsoluteUrl("/contact"),
+        },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description:
+        "A multidisciplinary innovation ecosystem uniting 12 fields of mastery across research, engineering, technology, education, business, and strategic design in Africa.",
+      inLanguage: "en-ZA",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${getAbsoluteUrl(path)}#webpage`,
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      about: { "@id": `${SITE_URL}/#organization` },
+      inLanguage: "en-ZA",
+    },
+  ];
 }

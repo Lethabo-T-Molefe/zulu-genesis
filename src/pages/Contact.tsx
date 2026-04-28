@@ -6,6 +6,7 @@ import PageHeader from "@/components/PageHeader";
 import SEOHead from "@/components/SEOHead";
 import { Mail, Globe, Clock, Phone, ArrowRight } from "lucide-react";
 import { brandLogos } from "@/lib/brand-assets";
+import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const CONTACT_EMAIL = ["info", "sectinfinity.com"].join("@");
 const CONTACT_PHONE = "+27 73 386 3841";
@@ -46,6 +47,34 @@ const reasons = [
   "Media, speaking, or panel requests",
   "General information about the Village of Knowledge",
 ];
+
+const contactStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": `${SITE_URL}/contact#contact-page`,
+  name: `Contact ${SITE_NAME}`,
+  description:
+    "Contact Sec(t) Infinity SolutionZ for research collaboration, services, training, and innovation partnerships.",
+  url: `${SITE_URL}/contact`,
+  mainEntity: {
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
+    name: SITE_NAME,
+    url: SITE_URL,
+    email: CONTACT_EMAIL,
+    telephone: CONTACT_PHONE,
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: CONTACT_EMAIL,
+        telephone: CONTACT_PHONE,
+        availableLanguage: ["en"],
+        areaServed: "ZA",
+      },
+    ],
+  },
+};
 
 const Contact = () => {
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -88,6 +117,7 @@ const Contact = () => {
         description="Contact Sec(t) Infinity SolutionZ for research collaboration, project enquiries, partnership opportunities, or to join our multidisciplinary innovation network across South Africa and beyond."
         path="/contact"
         keywords="contact Sec(t) Infinity, innovation network enquiry, research collaboration, sectinfinity email, Sec(t) Infinity contact email"
+        structuredData={contactStructuredData}
       />
       <PageHeader
         label="Contact"

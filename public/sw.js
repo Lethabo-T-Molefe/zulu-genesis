@@ -1,13 +1,9 @@
-const SW_VERSION = "v1.0.0";
+const SW_VERSION = "v1.1.0";
 const STATIC_CACHE = `sect-static-${SW_VERSION}`;
 const RUNTIME_CACHE = `sect-runtime-${SW_VERSION}`;
 
 const APP_SHELL = [
   "/",
-  "/index.html",
-  "/site.webmanifest",
-  "/robots.txt",
-  "/sitemap.xml",
   "/favicon-logo.png",
   "/primary-logo.png",
   "/secondary-logo.png",
@@ -17,7 +13,15 @@ const APP_SHELL = [
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(STATIC_CACHE).then((cache) => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()),
+    caches.open(STATIC_CACHE).then(async (cache) => {
+      await Promise.allSettled(
+        APP_SHELL.map(async (asset) => {
+          const response = await fetch(asset, { cache: "no-cache" });
+          if (!response.ok) return;
+          await cache.put(asset, response);
+        }),
+      );
+    }).then(() => self.skipWaiting()),
   );
 });
 

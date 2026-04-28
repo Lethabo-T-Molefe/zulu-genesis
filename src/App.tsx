@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, MemoryRouter, Route, Routes } from "react-router-dom";
+import { HelmetProvider, type FilledContext } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -17,28 +18,46 @@ import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/philosophies" element={<Philosophies />} />
-          <Route path="/fields" element={<Fields />} />
-          <Route path="/fields/:slug" element={<FieldDetail />} />
-          <Route path="/solution-lab" element={<SolutionLab />} />
-          <Route path="/academia" element={<Academia />} />
-          <Route path="/join" element={<Join />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+const AppRoutes = () => (
+  <Routes>
+    <Route path="/" element={<Index />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/philosophies" element={<Philosophies />} />
+    <Route path="/fields" element={<Fields />} />
+    <Route path="/fields/:slug" element={<FieldDetail />} />
+    <Route path="/solution-lab" element={<SolutionLab />} />
+    <Route path="/academia" element={<Academia />} />
+    <Route path="/join" element={<Join />} />
+    <Route path="/contact" element={<Contact />} />
+    <Route path="/services" element={<Services />} />
+    <Route path="*" element={<NotFound />} />
+  </Routes>
 );
+
+interface AppProps {
+  router?: "browser" | "memory";
+  initialPath?: string;
+  helmetContext?: FilledContext;
+}
+
+const App = ({ router = "browser", initialPath = "/", helmetContext }: AppProps) => {
+  const Router = router === "memory" ? MemoryRouter : BrowserRouter;
+  const routerProps =
+    router === "memory" ? { initialEntries: [initialPath] } : {};
+
+  return (
+    <HelmetProvider context={helmetContext}>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Router {...routerProps}>
+            <AppRoutes />
+          </Router>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
+  );
+};
 
 export default App;

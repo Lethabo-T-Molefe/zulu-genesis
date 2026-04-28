@@ -5,6 +5,7 @@ import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
 import SEOHead from "@/components/SEOHead";
 import { GraduationCap, Code, BookOpen, Users, Globe, Lightbulb } from "lucide-react";
+import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const programs = [
   {
@@ -34,6 +35,38 @@ const features = [
   { icon: Users, title: "Expert Mentors", desc: "Learn directly from specialists operating within each of the 12 knowledge huts." },
   { icon: Globe, title: "Global Reach", desc: "Online delivery makes our programs accessible to students across Africa and beyond." },
   { icon: Lightbulb, title: "Innovation-First", desc: "Every curriculum is designed around the Divine Triangle — Deep Work, Kaizen, Goldilocks Rule." },
+];
+
+const academiaStructuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "@id": `${SITE_URL}/academia#academy`,
+    name: "Sec(t) Academia",
+    url: `${SITE_URL}/academia`,
+    parentOrganization: { "@id": `${SITE_URL}/#organization` },
+    description:
+      "Hybrid tutoring, coding classes, and multidisciplinary learning programmes from Grade 8 to postgraduate level.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Sec(t) Academia programmes",
+    itemListElement: programs.map((program, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Course",
+        name: program.title,
+        description: program.desc,
+        provider: {
+          "@type": "Organization",
+          name: SITE_NAME,
+          url: SITE_URL,
+        },
+      },
+    })),
+  },
 ];
 
 const Academia = () => {
@@ -68,6 +101,7 @@ const Academia = () => {
         description="Sec(t) Academia provides hybrid tutoring, holiday coding classes, and multidisciplinary learning from Grade 8 to postgraduate level, helping learners in South Africa build STEM, AI, and innovation capabilities."
         path="/academia"
         keywords="Sec(t) Academia, hybrid tutoring, coding classes Africa, multidisciplinary education, STEM Africa, Lethabo Molefe, online tutoring South Africa, postgraduate programmes"
+        structuredData={academiaStructuredData}
       />
       <PageHeader
         label="Sec(t) Academia"

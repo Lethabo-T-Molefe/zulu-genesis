@@ -8,6 +8,7 @@ import {
   Cpu, FlaskConical, Building2, Scale, ArrowRight,
 } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
+import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const whatWeDo = [
   { icon: FlaskConical, title: "Invest in Research", desc: "Funding and conducting deep scientific inquiry across all 12 fields of specialization to generate breakthrough knowledge." },
@@ -41,6 +42,33 @@ const directors = [
       "Lethabo Tshegofatso Molefe is the Director of Sec(t) Academia and Curriculum Developer for Sec(t) Infinity Tutoring, the education arm of Sec(t) Infinity SolutionZ. He designs and leads hybrid learning programmes (physical + online) for students from Grade 8 to postgraduate level, integrating the organisation's 12 fields of specialisation with the Divine Triangle of Success — Deep Work, Kaizen, and the Goldilocks Rule.",
       "With over four years of experience at Tshwane University of Technology, Lethabo has served as an Academic Java Tutor, facilitated first-year orientation bootcamps, and led leadership development camps. As Lead Developer and mentor at the Informatics Community Engagement Project (ICEP), he guided intern teams through real-world projects using Agile methodologies.",
     ],
+  },
+];
+
+const aboutStructuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${SITE_URL}/about#about-page`,
+    name: `About ${SITE_NAME}`,
+    description:
+      "Learn about Sec(t) Infinity SolutionZ, its mission, leadership, and multidisciplinary innovation model for Africa.",
+    url: `${SITE_URL}/about`,
+    about: { "@id": `${SITE_URL}/#organization` },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Sec(t) Infinity directors",
+    itemListElement: directors.map((director, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Person",
+        name: director.name,
+        jobTitle: director.role,
+      },
+    })),
   },
 ];
 
@@ -81,6 +109,7 @@ const About = () => {
         description="Learn the mission, leadership, and operating model of Sec(t) Infinity SolutionZ in South Africa, including founder Sibusiso Gumede, multidisciplinary directors, and the end-to-end system used to build integrated innovation solutions for Africa."
         path="/about"
         keywords="Sec(t) Infinity about, Sibusiso Gumede, African innovation, multidisciplinary team, innovation ecosystem Africa"
+        structuredData={aboutStructuredData}
       />
       <PageHeader
         label="About Us"
