@@ -5,21 +5,24 @@ import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
 import SEOHead from "@/components/SEOHead";
 import { Mail, Globe, Clock, Phone, ArrowRight } from "lucide-react";
+import { brandLogos } from "@/lib/brand-assets";
 
-const contactEmail = ["info", "sectinfinity.com"].join("@");
+const CONTACT_EMAIL = "info@sectinfinity.com";
+const CONTACT_PHONE = "+27 73 386 3841";
+const CONTACT_TEL = "tel:+27733863841";
 
 const contactDetails = [
   {
     icon: Mail,
     label: "Email",
-    value: contactEmail,
-    href: `mailto:${contactEmail}`,
+    value: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+27 73 386 3841",
-    href: "tel:+27733863841",
+    value: CONTACT_PHONE,
+    href: CONTACT_TEL,
   },
   {
     icon: Globe,
@@ -46,20 +49,8 @@ const reasons = [
 
 const Contact = () => {
   const detailsRef = useRef<HTMLDivElement>(null);
-  const formContainerRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState({ details: false, cta: false });
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitState, setSubmitState] = useState<{
-    type: "success" | "error" | null;
-    message: string;
-  }>({ type: null, message: "" });
 
   useEffect(() => {
     const observe = (el: HTMLElement | null, key: keyof typeof revealed) => {
@@ -90,52 +81,6 @@ const Contact = () => {
     };
   }, [revealed]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitState({ type: null, message: "" });
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const raw = await response.text();
-      let data: { error?: string; ok?: boolean } = {};
-      try {
-        data = raw ? JSON.parse(raw) : {};
-      } catch {
-        data = {};
-      }
-
-      if (!response.ok) {
-        throw new Error(
-          data?.error ||
-            `Unable to send message right now (status ${response.status}).`,
-        );
-      }
-
-      setSubmitState({
-        type: "success",
-        message: "Message sent successfully. We'll get back to you soon.",
-      });
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "Unable to send message right now.";
-      setSubmitState({ type: "error", message });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const inputClass =
-    "w-full bg-background/50 border border-gold/20 rounded-sm px-4 py-3 text-base text-foreground placeholder-ash/40 focus:outline-none focus:border-gold/50 transition-colors duration-300";
-
   return (
     <PageLayout>
       <SEOHead
@@ -151,7 +96,7 @@ const Contact = () => {
         description="Whether you're looking to collaborate on a project, partner with us, join the network, or simply learn more — we'd love to hear from you."
       />
 
-      {/* Contact details + form */}
+      {/* Contact details + reach out card */}
       <section ref={detailsRef} className="py-20 md:py-32">
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -188,6 +133,7 @@ const Contact = () => {
                       {detail.href ? (
                         <a
                           href={detail.href}
+                          aria-label={`${detail.label}: ${detail.value}`}
                           className="text-base md:text-lg text-foreground hover:text-gold transition-colors"
                         >
                           {detail.value}
@@ -227,109 +173,63 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Right: contact form (temporarily disabled)
-            <div ref={formContainerRef}>
-              <form
-                onSubmit={handleSubmit}
-                className="anim-item bg-hut rounded-sm p-6 md:p-8 lg:p-10 border border-gold/20 glow-gold space-y-5"
-                style={{ opacity: 0 }}
-              >
-                <div>
-                  <div className="text-mono text-xs uppercase tracking-[0.3em] text-gold mb-6">
-                    Send a Message
-                  </div>
-                  <p className="text-base text-ash leading-relaxed mb-6">
-                    Fill in the form below to send your enquiry directly to
-                    {" "}{contactEmail}.
-                  </p>
-                </div>
+            {/* Right: reach out card */}
+            <div
+              className="anim-item bg-hut glow-gold rounded-sm p-6 md:p-8 lg:p-10 border border-gold/20"
+              style={{ opacity: 0 }}
+            >
+              <img
+                src={brandLogos.secondary}
+                alt=""
+                className="h-12 sm:h-14 w-auto max-w-full object-contain mb-6 opacity-90"
+              />
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-2">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData((p) => ({ ...p, name: e.target.value }))
-                      }
-                      className={inputClass}
-                      placeholder="Your full name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData((p) => ({ ...p, email: e.target.value }))
-                      }
-                      className={inputClass}
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                </div>
+              <div className="text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4">
+                Send a Message
+              </div>
+              <h3 className="text-display text-2xl text-foreground mb-4">
+                We'd Love to Hear From You
+              </h3>
+              <p className="text-base text-ash leading-relaxed mb-8">
+                The fastest way to reach us is directly by email or phone. We
+                respond to all enquiries within one business day.
+              </p>
 
-                <div>
-                  <label className="block text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-2">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.subject}
-                    onChange={(e) =>
-                      setFormData((p) => ({ ...p, subject: e.target.value }))
-                    }
-                    className={inputClass}
-                    placeholder="What is this about?"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    required
-                    rows={6}
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData((p) => ({ ...p, message: e.target.value }))
-                    }
-                    className={`${inputClass} resize-none`}
-                    placeholder="Tell us about your project, idea, or enquiry..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
+              <div className="space-y-4">
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  aria-label="Send us an email"
                   className="btn-ember text-xs w-full justify-center"
                 >
-                  {isSubmitting ? "Sending..." : "Send Message"}{" "}
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                  Email Us <ArrowRight className="w-4 h-4" />
+                </a>
+                <a
+                  href={CONTACT_TEL}
+                  aria-label="Call us"
+                  className="btn-gold-outline text-xs w-full justify-center"
+                >
+                  Call Us
+                </a>
+              </div>
 
-                {submitState.type && (
-                  <p
-                    className={`text-[11px] text-center leading-relaxed ${
-                      submitState.type === "success" ? "text-emerald-300" : "text-rose-300"
-                    }`}
-                  >
-                    {submitState.message}
-                  </p>
-                )}
-              </form>
+              <div className="mt-6 pt-6 border-t border-gold/10 space-y-2">
+                <div className="flex items-center gap-2 text-ash text-sm">
+                  <Mail className="w-4 h-4 text-gold/50 shrink-0" strokeWidth={1.5} />
+                  <span>{CONTACT_EMAIL}</span>
+                </div>
+                <div className="flex items-center gap-2 text-ash text-sm">
+                  <Phone className="w-4 h-4 text-gold/50 shrink-0" strokeWidth={1.5} />
+                  <span>{CONTACT_PHONE}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 mt-6">
+                <span className="w-2 h-2 rounded-full bg-ember animate-pulse-gold" />
+                <span className="text-mono text-[10px] uppercase tracking-widest text-ember">
+                  Accepting Projects
+                </span>
+              </div>
             </div>
-            */}
           </div>
         </div>
       </section>
