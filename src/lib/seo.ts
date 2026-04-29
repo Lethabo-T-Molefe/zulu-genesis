@@ -4,7 +4,7 @@ export const SITE_NAME = "Sec(t) Infinity SolutionZ";
 export const SITE_TAGLINE = "United Minds. Infinite Solutions.";
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/primary-logo.png`;
 export const SITE_PHONE = "+27 73 386 3841";
-export const SITE_EMAIL = "info@sectinfinity.com";
+export const SITE_EMAIL = ["info", "sectinfinity.com"].join("@");
 export const SITE_LOCALE = "en_ZA";
 
 export interface BreadcrumbItem {
