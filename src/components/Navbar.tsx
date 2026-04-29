@@ -130,17 +130,7 @@ const Navbar = () => {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8 pt-20"
           >
-            <Link
-              to="/"
-              onClick={() => setMenuOpen(false)}
-              className="absolute top-20 left-1/2 -translate-x-1/2"
-            >
-              <img
-                src={brandLogos.sect}
-                alt=""
-                className="h-12 w-auto max-w-[min(220px,85vw)] object-contain opacity-90"
-              />
-            </Link>
+            
             {navLinks.map((link, i) => (
               <motion.div
                 key={link.label}
