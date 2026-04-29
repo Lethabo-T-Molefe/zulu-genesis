@@ -30,8 +30,8 @@ const directors = [
     image: "/tebogo-sako.jpeg",
     role: "Director · Sec(t) Infinity",
     bio: [
-      "Tebogo Sako is a technology professional and aspiring data scientist with a strong focus on artificial intelligence, machine learning, and full-stack development. She is currently advancing her academic journey in computer science, equipping herself with both technical expertise and practical insight.",
-      "She has built a solid reputation as a speaker, panel moderator, and facilitator, contributing to discussions on technology, entrepreneurship, and innovation. Tebogo is particularly passionate about digital transformation and the role of technology in empowering individuals and communities.",
+      "Tebogo Sako is a technology professional and aspiring data scientist with a strong focus on artificial intelligence, machine learning, and full-stack development. She is currently advancing her academic journey in computer science, equipping herself with both technical expertise and practical insight into building intelligent, data-driven systems that solve meaningful problems.",
+      "She has built a solid reputation as a speaker, panel moderator, and facilitator, contributing to discussions on technology, entrepreneurship, and innovation across South Africa. Tebogo is particularly passionate about digital transformation and the role of technology in empowering individuals and communities — bringing that same conviction to her work within Sec(t) Infinity's innovation ecosystem.",
     ],
   },
   {
@@ -41,6 +41,15 @@ const directors = [
     bio: [
       "Lethabo Tshegofatso Molefe is the Director of Sec(t) Academia and Curriculum Developer for Sec(t) Infinity Tutoring, the education arm of Sec(t) Infinity SolutionZ. He designs and leads hybrid learning programmes (physical + online) for students from Grade 8 to postgraduate level, integrating the organisation's 12 fields of specialisation with the Divine Triangle of Success — Deep Work, Kaizen, and the Goldilocks Rule.",
       "With over four years of experience at Tshwane University of Technology, Lethabo has served as an Academic Java Tutor, facilitated first-year orientation bootcamps, and led leadership development camps. As Lead Developer and mentor at the Informatics Community Engagement Project (ICEP), he guided intern teams through real-world projects using Agile methodologies.",
+    ],
+  },
+  {
+    name: "Brian Shoko",
+    image: "/brian-shoko.jpeg",
+    role: "Director · Sec(t) Infinity",
+    bio: [
+      "Brian Shoko is a registered Chemical Engineer with the Engineering Council of South Africa (ECSA), serving as Group Director of The Mega Science Engineering Group — specialists in road construction and maintenance — and as Director of ANB Transport Logistics, delivering logistics compliance and transport solutions across Southern Africa. His dual leadership reflects a rare ability to bridge technical engineering with large-scale operational complexity.",
+      "Currently working as a Business Analyst at one of South Africa's top five banking institutions, Brian applies data-driven thinking at the intersection of finance and technology. He is simultaneously pursuing postgraduate research in artificial intelligence and data protection, positioning himself at the cutting edge of Africa's digital transformation.",
     ],
   },
 ];
@@ -116,6 +125,35 @@ const About = () => {
         title="A Multidisciplinary"
         titleAccent="Innovation Ecosystem"
         description="A global intellectual ecosystem where leading thinkers collaborate to develop integrated solutions for complex challenges. Inspired by African knowledge traditions and powered by modern innovation."
+        graphic={
+          <svg viewBox="0 0 240 240" fill="none" stroke="currentColor" strokeLinecap="round" className="w-full h-auto">
+            {/* Center-to-outer spokes */}
+            <line x1="120" y1="120" x2="120" y2="40" strokeWidth="0.8" opacity="0.4"/>
+            <line x1="120" y1="120" x2="189" y2="80" strokeWidth="0.8" opacity="0.4"/>
+            <line x1="120" y1="120" x2="189" y2="160" strokeWidth="0.8" opacity="0.4"/>
+            <line x1="120" y1="120" x2="120" y2="200" strokeWidth="0.8" opacity="0.4"/>
+            <line x1="120" y1="120" x2="51" y2="160" strokeWidth="0.8" opacity="0.4"/>
+            <line x1="120" y1="120" x2="51" y2="80" strokeWidth="0.8" opacity="0.4"/>
+            {/* Outer hexagon ring */}
+            <line x1="120" y1="40" x2="189" y2="80" strokeWidth="0.8" opacity="0.22"/>
+            <line x1="189" y1="80" x2="189" y2="160" strokeWidth="0.8" opacity="0.22"/>
+            <line x1="189" y1="160" x2="120" y2="200" strokeWidth="0.8" opacity="0.22"/>
+            <line x1="120" y1="200" x2="51" y2="160" strokeWidth="0.8" opacity="0.22"/>
+            <line x1="51" y1="160" x2="51" y2="80" strokeWidth="0.8" opacity="0.22"/>
+            <line x1="51" y1="80" x2="120" y2="40" strokeWidth="0.8" opacity="0.22"/>
+            {/* Outer nodes */}
+            <circle cx="120" cy="40" r="8" strokeWidth="1.2" opacity="0.65"/>
+            <circle cx="189" cy="80" r="8" strokeWidth="1.2" opacity="0.65"/>
+            <circle cx="189" cy="160" r="8" strokeWidth="1.2" opacity="0.65"/>
+            <circle cx="120" cy="200" r="8" strokeWidth="1.2" opacity="0.65"/>
+            <circle cx="51" cy="160" r="8" strokeWidth="1.2" opacity="0.65"/>
+            <circle cx="51" cy="80" r="8" strokeWidth="1.2" opacity="0.65"/>
+            {/* Center node */}
+            <circle cx="120" cy="120" r="22" strokeWidth="1.5" opacity="0.85"/>
+            <circle cx="120" cy="120" r="11" fill="currentColor" opacity="0.18"/>
+            <path d="M120 109 L131 120 L120 131 L109 120 Z" strokeWidth="1.1" opacity="0.7"/>
+          </svg>
+        }
       />
 
       <section ref={missionRef} className="py-20 md:py-32">
@@ -167,7 +205,7 @@ const About = () => {
           <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-12 md:mb-16" style={{ opacity: 0 }}>
             Meet the <span className="text-gold-gradient">Leadership</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {directors.map((d) => (
               <div key={d.name} className="anim-item bg-hut rounded-sm border border-gold/10 overflow-hidden flex flex-col" style={{ opacity: 0 }}>
                 <div className="w-full aspect-[4/3] overflow-hidden">

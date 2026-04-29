@@ -124,6 +124,25 @@ const Contact = () => {
         title="Get In Touch"
         titleAccent="With Our Team"
         description="Whether you're looking to collaborate on a project, partner with us, join the network, or simply learn more — we'd love to hear from you."
+        graphic={
+          <svg viewBox="0 0 240 200" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="w-full h-auto">
+            {/* Envelope body */}
+            <rect x="14" y="44" width="212" height="142" rx="4" strokeWidth="1.4" opacity="0.82"/>
+            {/* Top flap — V fold from top corners down to centre */}
+            <path d="M14 44 L120 132 L226 44" strokeWidth="1.3" opacity="0.75"/>
+            {/* Bottom corner fold lines */}
+            <line x1="14" y1="186" x2="94" y2="124" strokeWidth="1" opacity="0.4"/>
+            <line x1="226" y1="186" x2="146" y2="124" strokeWidth="1" opacity="0.4"/>
+            {/* Wax seal circle at fold point */}
+            <circle cx="120" cy="132" r="13" strokeWidth="1.2" opacity="0.68"/>
+            <path d="M120 123 L125 132 L120 141 L115 132 Z" fill="currentColor" opacity="0.38"/>
+            {/* Postage stamp — top right */}
+            <rect x="184" y="57" width="26" height="30" rx="2" strokeWidth="1" opacity="0.42"/>
+            <line x1="190" y1="65" x2="204" y2="65" strokeWidth="0.7" opacity="0.35"/>
+            <line x1="190" y1="72" x2="204" y2="72" strokeWidth="0.7" opacity="0.35"/>
+            <line x1="190" y1="79" x2="200" y2="79" strokeWidth="0.7" opacity="0.35"/>
+          </svg>
+        }
       />
 
       {/* Contact details + reach out card */}
@@ -205,7 +224,7 @@ const Contact = () => {
 
             {/* Right: reach out card */}
             <div
-              className="anim-item bg-hut glow-gold rounded-sm p-6 md:p-8 lg:p-10 border border-gold/20"
+              className="anim-item bg-hut glow-gold rounded-sm p-6 md:p-8 lg:p-10 border border-gold/20 lg:mt-[7.5rem]"
               style={{ opacity: 0 }}
             >
               <img

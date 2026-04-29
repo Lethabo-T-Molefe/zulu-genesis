@@ -184,6 +184,38 @@ const Services = () => {
         title="What We"
         titleAccent="Deliver"
         description="From applied research and integrated solution modelling to education, business consulting, and strategic design — Sec(t) Infinity SolutionZ brings twelve fields of specialization to bear on your most complex challenges."
+        graphic={
+          <svg viewBox="0 0 240 210" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="w-full h-auto">
+            {/* Briefcase body */}
+            <rect x="18" y="72" width="204" height="128" rx="6" strokeWidth="1.4" opacity="0.82"/>
+            {/* Handle arch */}
+            <path d="M86 72 L86 52 Q86 42 96 42 L144 42 Q154 42 154 52 L154 72" strokeWidth="1.3" fill="none"/>
+            {/* Handle brackets */}
+            <rect x="82" y="65" width="12" height="14" rx="2" strokeWidth="1.1" opacity="0.7"/>
+            <rect x="146" y="65" width="12" height="14" rx="2" strokeWidth="1.1" opacity="0.7"/>
+            {/* Horizontal mid-divider */}
+            <line x1="18" y1="136" x2="222" y2="136" strokeWidth="1.1" opacity="0.5"/>
+            {/* Centre latch */}
+            <rect x="107" y="124" width="26" height="22" rx="4" strokeWidth="1.2" opacity="0.8"/>
+            <circle cx="120" cy="135" r="3.5" fill="currentColor" opacity="0.4"/>
+            {/* Left panel document lines – upper section */}
+            <line x1="44" y1="97" x2="92" y2="97" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="44" y1="109" x2="86" y2="109" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="44" y1="121" x2="92" y2="121" strokeWidth="0.9" opacity="0.4"/>
+            {/* Right panel document lines – upper section */}
+            <line x1="148" y1="97" x2="196" y2="97" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="148" y1="109" x2="190" y2="109" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="148" y1="121" x2="196" y2="121" strokeWidth="0.9" opacity="0.4"/>
+            {/* Left panel lines – lower section */}
+            <line x1="44" y1="154" x2="92" y2="154" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="44" y1="166" x2="80" y2="166" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="44" y1="178" x2="92" y2="178" strokeWidth="0.9" opacity="0.4"/>
+            {/* Right panel lines – lower section */}
+            <line x1="148" y1="154" x2="196" y2="154" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="148" y1="166" x2="184" y2="166" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="148" y1="178" x2="196" y2="178" strokeWidth="0.9" opacity="0.4"/>
+          </svg>
+        }
       />
 
       {/* Services list */}

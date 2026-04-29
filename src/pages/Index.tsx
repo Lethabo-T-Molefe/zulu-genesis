@@ -2,8 +2,12 @@ import PageLayout from "@/components/PageLayout";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import HutGrid from "@/components/HutGrid";
+import SolutionLabSection from "@/components/SolutionLabSection";
 import PhilosophySection from "@/components/PhilosophySection";
 import AcademiaSection from "@/components/AcademiaSection";
+import ServicesSection from "@/components/ServicesSection";
+import JoinSection from "@/components/JoinSection";
+import ContactSection from "@/components/ContactSection";
 import SEOHead from "@/components/SEOHead";
 import { SITE_URL } from "@/lib/seo";
 
@@ -54,8 +58,12 @@ const Index = () => {
       <HeroSection />
       <AboutSection />
       <HutGrid />
+      <SolutionLabSection />
       <PhilosophySection />
       <AcademiaSection />
+      <ServicesSection />
+      <JoinSection />
+      <ContactSection />
     </PageLayout>
   );
 };

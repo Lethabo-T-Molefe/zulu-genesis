@@ -65,6 +65,35 @@ const Join = () => {
         title="Together We Build"
         titleAccent="Infinite Solutions"
         description="Researchers, innovators, engineers, thinkers, artists, and problem solvers are invited to join the Sec(t) Infinity intellectual network."
+        graphic={
+          <svg viewBox="0 0 240 240" fill="none" stroke="currentColor" strokeLinecap="round" className="w-full h-auto">
+            {/* Pentagon outline */}
+            <polygon points="120,28 207,90 174,192 66,192 33,90" strokeWidth="1" opacity="0.32"/>
+            {/* Diagonals (all non-adjacent pairs) */}
+            <line x1="120" y1="28" x2="174" y2="192" strokeWidth="0.7" opacity="0.22"/>
+            <line x1="120" y1="28" x2="66" y2="192" strokeWidth="0.7" opacity="0.22"/>
+            <line x1="207" y1="90" x2="66" y2="192" strokeWidth="0.7" opacity="0.22"/>
+            <line x1="207" y1="90" x2="33" y2="90" strokeWidth="0.7" opacity="0.22"/>
+            <line x1="174" y1="192" x2="33" y2="90" strokeWidth="0.7" opacity="0.22"/>
+            {/* Center to outer spokes */}
+            <line x1="120" y1="120" x2="120" y2="28" strokeWidth="0.8" opacity="0.38"/>
+            <line x1="120" y1="120" x2="207" y2="90" strokeWidth="0.8" opacity="0.38"/>
+            <line x1="120" y1="120" x2="174" y2="192" strokeWidth="0.8" opacity="0.38"/>
+            <line x1="120" y1="120" x2="66" y2="192" strokeWidth="0.8" opacity="0.38"/>
+            <line x1="120" y1="120" x2="33" y2="90" strokeWidth="0.8" opacity="0.38"/>
+            {/* Outer nodes */}
+            <circle cx="120" cy="28" r="9" strokeWidth="1.2" opacity="0.72"/>
+            <circle cx="207" cy="90" r="9" strokeWidth="1.2" opacity="0.72"/>
+            <circle cx="174" cy="192" r="9" strokeWidth="1.2" opacity="0.72"/>
+            <circle cx="66" cy="192" r="9" strokeWidth="1.2" opacity="0.72"/>
+            <circle cx="33" cy="90" r="9" strokeWidth="1.2" opacity="0.72"/>
+            {/* Center node */}
+            <circle cx="120" cy="120" r="18" strokeWidth="1.4" opacity="0.85"/>
+            <circle cx="120" cy="120" r="8" fill="currentColor" opacity="0.2"/>
+            <line x1="112" y1="120" x2="128" y2="120" strokeWidth="1.2" opacity="0.65"/>
+            <line x1="120" y1="112" x2="120" y2="128" strokeWidth="1.2" opacity="0.65"/>
+          </svg>
+        }
       />
 
       <section ref={rolesRef} className="py-20 md:py-32">

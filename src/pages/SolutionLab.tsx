@@ -59,6 +59,42 @@ const SolutionLab = () => {
         title="The Central Hall"
         titleAccent="Where Fields Converge"
         description="The heart of Sec(t) Infinity — where 36 elite specialists from 12 disciplines synthesize multidisciplinary knowledge into unified, powerful Integrated Solution Models."
+        graphic={
+          <svg viewBox="0 0 240 240" fill="none" stroke="currentColor" strokeLinecap="round" className="w-full h-auto">
+            {/* Outer dashed orbit */}
+            <circle cx="120" cy="120" r="92" strokeWidth="0.6" opacity="0.18" strokeDasharray="2 5"/>
+            {/* 12 spokes from center to orbit */}
+            <line x1="120" y1="120" x2="212" y2="120" strokeWidth="0.8" opacity="0.45"/>
+            <line x1="120" y1="120" x2="200" y2="74" strokeWidth="0.8" opacity="0.45"/>
+            <line x1="120" y1="120" x2="166" y2="40" strokeWidth="0.8" opacity="0.45"/>
+            <line x1="120" y1="120" x2="120" y2="28" strokeWidth="0.8" opacity="0.45"/>
+            <line x1="120" y1="120" x2="74" y2="40" strokeWidth="0.8" opacity="0.45"/>
+            <line x1="120" y1="120" x2="40" y2="74" strokeWidth="0.8" opacity="0.45"/>
+            <line x1="120" y1="120" x2="28" y2="120" strokeWidth="0.8" opacity="0.45"/>
+            <line x1="120" y1="120" x2="40" y2="166" strokeWidth="0.8" opacity="0.45"/>
+            <line x1="120" y1="120" x2="74" y2="200" strokeWidth="0.8" opacity="0.45"/>
+            <line x1="120" y1="120" x2="120" y2="212" strokeWidth="0.8" opacity="0.45"/>
+            <line x1="120" y1="120" x2="166" y2="200" strokeWidth="0.8" opacity="0.45"/>
+            <line x1="120" y1="120" x2="200" y2="166" strokeWidth="0.8" opacity="0.45"/>
+            {/* 12 outer field nodes */}
+            <circle cx="212" cy="120" r="5" strokeWidth="1.2" opacity="0.7"/>
+            <circle cx="200" cy="74" r="5" strokeWidth="1.2" opacity="0.7"/>
+            <circle cx="166" cy="40" r="5" strokeWidth="1.2" opacity="0.7"/>
+            <circle cx="120" cy="28" r="5" strokeWidth="1.2" opacity="0.7"/>
+            <circle cx="74" cy="40" r="5" strokeWidth="1.2" opacity="0.7"/>
+            <circle cx="40" cy="74" r="5" strokeWidth="1.2" opacity="0.7"/>
+            <circle cx="28" cy="120" r="5" strokeWidth="1.2" opacity="0.7"/>
+            <circle cx="40" cy="166" r="5" strokeWidth="1.2" opacity="0.7"/>
+            <circle cx="74" cy="200" r="5" strokeWidth="1.2" opacity="0.7"/>
+            <circle cx="120" cy="212" r="5" strokeWidth="1.2" opacity="0.7"/>
+            <circle cx="166" cy="200" r="5" strokeWidth="1.2" opacity="0.7"/>
+            <circle cx="200" cy="166" r="5" strokeWidth="1.2" opacity="0.7"/>
+            {/* Central Hall hub */}
+            <circle cx="120" cy="120" r="26" strokeWidth="1.5" opacity="0.85"/>
+            <circle cx="120" cy="120" r="14" fill="currentColor" opacity="0.15"/>
+            <path d="M120 108 L132 120 L120 132 L108 120 Z" strokeWidth="1.1" opacity="0.7"/>
+          </svg>
+        }
       />
 
       <section ref={prinRef} className="py-20 md:py-32">

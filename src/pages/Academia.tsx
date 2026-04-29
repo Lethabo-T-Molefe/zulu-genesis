@@ -108,6 +108,36 @@ const Academia = () => {
         title="Cultivating"
         titleAccent="Hybrid Professionals"
         description="Our learning institution produces professionals fluent across multiple disciplines — thinkers who bridge Science and Commerce, Engineering and Law, Technology and African Heritage."
+        graphic={
+          <svg viewBox="0 0 240 190" fill="none" stroke="currentColor" strokeLinecap="round" className="w-full h-auto">
+            {/* Spine */}
+            <line x1="120" y1="32" x2="120" y2="158" strokeWidth="2" opacity="0.55"/>
+            {/* Left page */}
+            <path d="M28 38 Q75 32 118 38 L118 158 Q75 152 28 158 Z" strokeWidth="1.3" opacity="0.65"/>
+            {/* Right page */}
+            <path d="M122 38 Q165 32 212 38 L212 158 Q165 152 122 158 Z" strokeWidth="1.3" opacity="0.65"/>
+            {/* Left page text lines */}
+            <line x1="44" y1="60" x2="104" y2="60" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="44" y1="73" x2="104" y2="73" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="44" y1="86" x2="92" y2="86" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="44" y1="99" x2="104" y2="99" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="44" y1="112" x2="88" y2="112" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="44" y1="125" x2="104" y2="125" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="44" y1="138" x2="72" y2="138" strokeWidth="0.9" opacity="0.4"/>
+            {/* Right page text lines */}
+            <line x1="136" y1="60" x2="196" y2="60" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="136" y1="73" x2="196" y2="73" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="136" y1="86" x2="182" y2="86" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="136" y1="99" x2="196" y2="99" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="136" y1="112" x2="186" y2="112" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="136" y1="125" x2="196" y2="125" strokeWidth="0.9" opacity="0.4"/>
+            <line x1="136" y1="138" x2="164" y2="138" strokeWidth="0.9" opacity="0.4"/>
+            {/* Diamond accent above book */}
+            <path d="M120 10 L128 19 L120 28 L112 19 Z" strokeWidth="1.1" opacity="0.65"/>
+            {/* Bottom shadow arc */}
+            <path d="M50 162 Q120 172 190 162" strokeWidth="0.7" opacity="0.2" strokeDasharray="3 5"/>
+          </svg>
+        }
       />
 
       <section ref={progRef} className="py-20 md:py-32">

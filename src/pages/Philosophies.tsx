@@ -85,6 +85,29 @@ const Philosophies = () => {
         title="The Divine Triangle"
         titleAccent="of Success"
         description="The Supreme Law governing ALL Sec(t) Infinity businesses and SolutionZ — three interlocking principles scientifically modelled for sustainable excellence."
+        graphic={
+          <svg viewBox="0 0 240 215" fill="none" stroke="currentColor" strokeLinecap="round" className="w-full h-auto">
+            {/* Outer triangle */}
+            <polygon points="120,28 210,172 30,172" strokeWidth="1.3" opacity="0.65"/>
+            {/* Inner triangle (Kaizen — continuous refinement) */}
+            <polygon points="120,72 175,148 65,148" strokeWidth="1" opacity="0.38"/>
+            {/* Dashed centroid spokes */}
+            <line x1="120" y1="123" x2="120" y2="42" strokeWidth="0.6" opacity="0.2" strokeDasharray="3 5"/>
+            <line x1="120" y1="123" x2="55" y2="158" strokeWidth="0.6" opacity="0.2" strokeDasharray="3 5"/>
+            <line x1="120" y1="123" x2="185" y2="158" strokeWidth="0.6" opacity="0.2" strokeDasharray="3 5"/>
+            {/* Centroid balance circle */}
+            <circle cx="120" cy="123" r="9" strokeWidth="1" opacity="0.45"/>
+            {/* Top vertex — Deep Work — diamond ◆ */}
+            <circle cx="120" cy="28" r="13" strokeWidth="1.3" opacity="0.8"/>
+            <path d="M120 19 L127.5 28 L120 37 L112.5 28 Z" fill="currentColor" opacity="0.45"/>
+            {/* Bottom-left vertex — Kaizen — upward triangle */}
+            <circle cx="30" cy="172" r="13" strokeWidth="1.3" opacity="0.8"/>
+            <polygon points="30,163 38,179 22,179" fill="currentColor" opacity="0.45"/>
+            {/* Bottom-right vertex — Goldilocks — circle */}
+            <circle cx="210" cy="172" r="13" strokeWidth="1.3" opacity="0.8"/>
+            <circle cx="210" cy="172" r="5.5" fill="currentColor" opacity="0.45"/>
+          </svg>
+        }
       />
 
       <section ref={cardsRef} className="py-20 md:py-32">

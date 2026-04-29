@@ -39,6 +39,33 @@ const Fields = () => {
         title="12 Fields."
         titleAccent="Infinite Possibilities."
         description="Twelve interconnected disciplines form the Village of Knowledge — each a powerhouse of specialized expertise, each running its own Infinity Business Department."
+        graphic={
+          <svg viewBox="0 0 200 148" fill="none" stroke="currentColor" className="w-full h-auto">
+            {/* Honeycomb — 3 rows × 4 cols = 12 hexagons (pointy-top, r=18) */}
+            {/* Row 0 y=35: cx = 35, 66, 97, 128 */}
+            <polygon points="35,17 50.6,26 50.6,44 35,53 19.4,44 19.4,26" strokeWidth="1.2" opacity="0.7"/>
+            <polygon points="66,17 81.6,26 81.6,44 66,53 50.4,44 50.4,26" strokeWidth="1.2" opacity="0.7"/>
+            <polygon points="97,17 112.6,26 112.6,44 97,53 81.4,44 81.4,26" strokeWidth="1.2" opacity="0.7"/>
+            <polygon points="128,17 143.6,26 143.6,44 128,53 112.4,44 112.4,26" strokeWidth="1.2" opacity="0.7"/>
+            {/* Row 1 y=62: cx = 50.6, 81.6, 112.6, 143.6 (offset) */}
+            <polygon points="50.6,44 66.2,53 66.2,71 50.6,80 35,71 35,53" strokeWidth="1.2" opacity="0.7"/>
+            <polygon points="81.6,44 97.2,53 97.2,71 81.6,80 66,71 66,53" strokeWidth="1.2" opacity="0.7"/>
+            <polygon points="112.6,44 128.2,53 128.2,71 112.6,80 97,71 97,53" strokeWidth="1.2" opacity="0.7"/>
+            <polygon points="143.6,44 159.2,53 159.2,71 143.6,80 128,71 128,53" strokeWidth="1.2" opacity="0.7"/>
+            {/* Row 2 y=89: cx = 35, 66, 97, 128 */}
+            <polygon points="35,71 50.6,80 50.6,98 35,107 19.4,98 19.4,80" strokeWidth="1.2" opacity="0.7"/>
+            <polygon points="66,71 81.6,80 81.6,98 66,107 50.4,98 50.4,80" strokeWidth="1.2" opacity="0.7"/>
+            <polygon points="97,71 112.6,80 112.6,98 97,107 81.4,98 81.4,80" strokeWidth="1.2" opacity="0.7"/>
+            <polygon points="128,71 143.6,80 143.6,98 128,107 112.4,98 112.4,80" strokeWidth="1.2" opacity="0.7"/>
+            {/* Small fill dots in alternating hexes for depth */}
+            <circle cx="35" cy="35" r="3" fill="currentColor" opacity="0.25"/>
+            <circle cx="97" cy="35" r="3" fill="currentColor" opacity="0.25"/>
+            <circle cx="81.6" cy="62" r="3" fill="currentColor" opacity="0.25"/>
+            <circle cx="143.6" cy="62" r="3" fill="currentColor" opacity="0.25"/>
+            <circle cx="35" cy="89" r="3" fill="currentColor" opacity="0.25"/>
+            <circle cx="97" cy="89" r="3" fill="currentColor" opacity="0.25"/>
+          </svg>
+        }
       />
 
       <section ref={gridRef} className="py-12 md:py-20">
