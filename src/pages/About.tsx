@@ -52,6 +52,16 @@ const directors = [
       "Currently working as a Business Analyst at one of South Africa's top five banking institutions, Brian applies data-driven thinking at the intersection of finance and technology. He is simultaneously pursuing postgraduate research in artificial intelligence and data protection, positioning himself at the cutting edge of Africa's digital transformation.",
     ],
   },
+  {
+    name: "Ngwako Brendan Lebea",
+    image: "/ngwako-brendan-lebea.jpeg",
+    imageStyle: { objectPosition: "center 28%" },
+    role: "Director · Sec(t) Infinity",
+    bio: [
+      "Ngwako Brendan Lebea is a Chemical Engineer by profession and a cloud and data professional currently working as a Cloud & Data Analyst at a leading global professional services firm. He has experience across data engineering, analytics, cloud platforms, data governance, and AI-enabled solutions.",
+      "As Director, Brendan contributes to Sec(t) Infinity SolutionZ's multidisciplinary vision by connecting business priorities with engineering-led thinking, reliable technology, and measurable impact. He is focused on practical solutions that support innovation, execution, and Africa's broader digital transformation agenda.",
+    ],
+  },
 ];
 
 const aboutStructuredData = [
@@ -205,11 +215,11 @@ const About = () => {
           <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-12 md:mb-16" style={{ opacity: 0 }}>
             Meet the <span className="text-gold-gradient">Leadership</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {directors.map((d) => (
               <div key={d.name} className="anim-item bg-hut rounded-sm border border-gold/10 overflow-hidden flex flex-col" style={{ opacity: 0 }}>
-                <div className="w-full aspect-[4/3] overflow-hidden">
-                  <img src={d.image} alt={d.name} className="w-full h-full object-cover object-top" />
+                <div className="w-full aspect-[4/3] overflow-hidden" style={d.imageContainerStyle}>
+                  <img src={d.image} alt={d.name} className="w-full h-full object-cover" style={d.imageStyle ?? { objectPosition: "top" }} />
                 </div>
                 <div className="p-8 flex flex-col gap-4">
                   <div>

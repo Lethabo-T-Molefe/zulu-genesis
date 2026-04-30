@@ -197,6 +197,8 @@ export const MASTER_KEYWORDS = [
   "Zafenate Infinity",
   "Lethabo Molefe",
   "Tebogo Sako",
+  "Ngwako Brendan Lebea",
+  "Brendan Lebea",
   "contact sectinfinity",
   "contact sec t infinity",
   "sectinfinity email",
