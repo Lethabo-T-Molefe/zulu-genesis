@@ -6,6 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import { FieldIllustration } from "@/components/FieldIllustration";
 import { fieldsData } from "@/data/fieldsData";
 import NotFound from "./NotFound";
+import { useAuth } from "@/context/AuthContext";
 import {
   ArrowLeft, ArrowRight, BookOpen, Briefcase,
   FlaskConical, Globe2, Users, TrendingUp,
@@ -72,6 +73,7 @@ const EcosystemFlow = ({ fieldName }: { fieldName: string }) => {
 
 /* ── Page ────────────────────────────────────────────────────── */
 const FieldDetail = () => {
+  const { authenticated } = useAuth();
   const { slug } = useParams<{ slug: string }>();
   const contentRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -281,12 +283,15 @@ const FieldDetail = () => {
           <Metric value="∞" label="Business Dept. Active" accent />
         </div>
 
-        {/* Ecosystem flow */}
+        {/* Ecosystem flow — authenticated only */}
+        {authenticated && (
         <div className="reveal-block" style={{ opacity: 0 }}>
           <EcosystemFlow fieldName={field.name} />
         </div>
+        )}
 
-        {/* Core Focus */}
+        {/* Core Focus — authenticated only */}
+        {authenticated && (
         <div className="reveal-block" style={{ opacity: 0 }}>
           <div className="bg-hut rounded-sm p-6 md:p-10 border border-gold/10">
             <div className="flex items-center gap-3 mb-2">
@@ -304,8 +309,10 @@ const FieldDetail = () => {
             </div>
           </div>
         </div>
+        )}
 
-        {/* Key Focus Areas */}
+        {/* Key Focus Areas — authenticated only */}
+        {authenticated && (
         <div className="reveal-block" style={{ opacity: 0 }}>
           <SectionLabel>Key Focus Areas</SectionLabel>
           <SectionTitle>What disciplines does it draw from?</SectionTitle>
@@ -321,8 +328,10 @@ const FieldDetail = () => {
             ))}
           </div>
         </div>
+        )}
 
-        {/* Curriculum */}
+        {/* Curriculum — authenticated only */}
+        {authenticated && (
         <div className="reveal-block" style={{ opacity: 0 }}>
           <div className="bg-hut rounded-sm border border-gold/10 overflow-hidden">
             <div className="px-6 md:px-10 pt-6 md:pt-8 pb-5 border-b border-gold/10">
@@ -349,6 +358,7 @@ const FieldDetail = () => {
             </div>
           </div>
         </div>
+        )}
 
         {/* Related pages for stronger internal linking */}
         <div className="reveal-block" style={{ opacity: 0 }}>
@@ -372,7 +382,8 @@ const FieldDetail = () => {
           </div>
         </div>
 
-        {/* Research Hub + Central Hall – two col with mini visual */}
+        {/* Research Hub + Central Hall — authenticated only */}
+        {authenticated && (
         <div className="reveal-block grid grid-cols-1 md:grid-cols-2 gap-6" style={{ opacity: 0 }}>
           <div className="bg-hut rounded-sm border border-gold/10 overflow-hidden">
             <div className="p-6 md:p-8 border-b border-gold/10">
@@ -429,8 +440,10 @@ const FieldDetail = () => {
             </div>
           </div>
         </div>
+        )}
 
-        {/* Business Department */}
+        {/* Business Department — authenticated only */}
+        {authenticated && (
         <div className="reveal-block" style={{ opacity: 0 }}>
           <div className="bg-hut rounded-sm border border-gold/20 overflow-hidden relative">
             <div className="absolute inset-0 bg-gradient-to-r from-gold/[0.04] to-transparent pointer-events-none" />
@@ -465,6 +478,7 @@ const FieldDetail = () => {
             </div>
           </div>
         </div>
+        )}
 
         {/* South African Relevance */}
         <div className="reveal-block" style={{ opacity: 0 }}>

@@ -4,6 +4,7 @@ import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
 import SEOHead from "@/components/SEOHead";
+import { useAuth } from "@/context/AuthContext";
 
 const pillars = [
   {
@@ -48,6 +49,7 @@ const pillars = [
 ];
 
 const Philosophies = () => {
+  const { authenticated } = useAuth();
   const cardsRef = useRef<HTMLDivElement>(null);
   const intRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState({ cards: false, int: false });
@@ -114,29 +116,38 @@ const Philosophies = () => {
         <div className="container mx-auto px-6 md:px-12">
           <div className="space-y-12">
             {pillars.map((pillar, idx) => (
-              <div key={pillar.name} className="anim-item grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 bg-hut rounded-sm p-6 md:p-8 lg:p-12 border border-gold/10" style={{ opacity: 0 }}>
-                <div className="lg:col-span-2">
+              <div
+                key={pillar.name}
+                className={`anim-item bg-hut rounded-sm p-6 md:p-8 lg:p-12 border border-gold/10${authenticated ? " grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8" : ""}`}
+                style={{ opacity: 0 }}
+              >
+                <div className={authenticated ? "lg:col-span-2" : ""}>
                   <div className="text-mono text-xs text-gold/40 mb-2">{pillar.number}</div>
                   <div className="text-5xl text-gold/30 mb-4">{pillar.symbol}</div>
                   <h3 className="text-display text-2xl md:text-3xl lg:text-4xl text-foreground mb-2">{pillar.name}</h3>
                   <div className="text-mono text-xs uppercase tracking-widest text-gold/60 mb-4">{pillar.tagline}</div>
                   <p className="text-base text-ash leading-relaxed">{pillar.description}</p>
                 </div>
-                <div className="lg:col-span-3 space-y-4">
-                  <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">How It Applies</div>
-                  {pillar.details.map((detail, i) => (
-                    <div key={i} className="flex items-start gap-3 p-4 bg-background/50 rounded-sm">
-                      <span className="text-gold text-xs mt-1 shrink-0">◆</span>
-                      <span className="text-base text-foreground leading-relaxed">{detail}</span>
+                {authenticated && (
+                  <div className="lg:col-span-3">
+                    <div className="space-y-4">
+                      <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">How It Applies</div>
+                      {pillar.details.map((detail, i) => (
+                        <div key={i} className="flex items-start gap-3 p-4 bg-background/50 rounded-sm">
+                          <span className="text-gold text-xs mt-1 shrink-0">◆</span>
+                          <span className="text-base text-foreground leading-relaxed">{detail}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {authenticated && (
       <section ref={intRef} className="py-20 md:py-32 bg-charcoal relative">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
         <div className="container mx-auto px-6 md:px-12 text-center">
@@ -168,6 +179,7 @@ const Philosophies = () => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
       </section>
+      )}
     </PageLayout>
   );
 };

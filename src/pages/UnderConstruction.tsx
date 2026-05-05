@@ -1,5 +1,3 @@
-import { SITE_NAME } from "@/lib/seo";
-
 const GOLD = "hsl(42, 76%, 46%)";
 const GOLD_DIM = "hsl(42, 76%, 46%, 0.18)";
 const BG = "hsl(0, 0%, 4%)";
@@ -56,11 +54,13 @@ const UnderConstruction = () => (
       }}
     />
 
-    {/* Site name */}
+    {/* Logo */}
     <div className="z-10 mb-10">
-      <span className="font-mono text-xs uppercase tracking-[0.35em] text-gold/50">
-        {SITE_NAME}
-      </span>
+      <img
+        src="/secondary-logo.png"
+        alt="Sec(t) Infinity SolutionZ"
+        className="h-14 w-auto opacity-80"
+      />
     </div>
 
     {/* Animated gears SVG */}

@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { animate, stagger } from "animejs";
 import { brandLogos } from "@/lib/brand-assets";
+import { useAuth } from "@/context/AuthContext";
+import { REQUIRE_LOGIN } from "@/lib/auth-gate";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -21,6 +23,7 @@ const Navbar = () => {
   const logoRef = useRef<HTMLImageElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
+  const { logout, authenticated } = useAuth();
 
   useEffect(() => {
     animate(logoRef.current, {
@@ -112,6 +115,22 @@ const Navbar = () => {
             Join the Network
             <span className="text-base leading-none">+</span>
           </NavLink>
+          {REQUIRE_LOGIN && !authenticated && (
+            <Link
+              to="/login"
+              className="hidden sm:inline-flex text-mono text-[9px] uppercase tracking-widest text-gold/50 hover:text-gold transition-colors duration-300 border border-gold/20 px-3 py-1.5 rounded-sm hover:border-gold/40"
+            >
+              Member Login
+            </Link>
+          )}
+          {REQUIRE_LOGIN && authenticated && (
+            <button
+              onClick={logout}
+              className="hidden sm:inline-flex text-mono text-[9px] uppercase tracking-widest text-ash/40 hover:text-ember transition-colors duration-300"
+            >
+              Exit
+            </button>
+          )}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden text-mono text-xs uppercase tracking-widest text-foreground hover:text-gold transition-colors"
@@ -157,6 +176,7 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
+              className="flex flex-col items-center gap-4"
             >
               <NavLink
                 to="/join"
@@ -167,6 +187,23 @@ const Navbar = () => {
               >
                 Join the Network +
               </NavLink>
+              {REQUIRE_LOGIN && !authenticated && (
+                <Link
+                  to="/login"
+                  onClick={() => setMenuOpen(false)}
+                  className="text-mono text-[10px] uppercase tracking-widest text-gold/50 hover:text-gold transition-colors duration-300"
+                >
+                  Member Login
+                </Link>
+              )}
+              {REQUIRE_LOGIN && authenticated && (
+                <button
+                  onClick={() => { setMenuOpen(false); logout(); }}
+                  className="text-mono text-[10px] uppercase tracking-widest text-ash/40 hover:text-ember transition-colors duration-300"
+                >
+                  Exit Session
+                </button>
+              )}
             </motion.div>
           </motion.div>
         )}

@@ -6,6 +6,7 @@ import PageHeader from "@/components/PageHeader";
 import SEOHead from "@/components/SEOHead";
 import { GraduationCap, Code, BookOpen, Users, Globe, Lightbulb } from "lucide-react";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { useAuth } from "@/context/AuthContext";
 
 const programs = [
   {
@@ -70,6 +71,7 @@ const academiaStructuredData = [
 ];
 
 const Academia = () => {
+  const { authenticated } = useAuth();
   const progRef = useRef<HTMLDivElement>(null);
   const featRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState({ prog: false, feat: false });
@@ -149,13 +151,14 @@ const Academia = () => {
           <div className="space-y-8">
             {programs.map((prog) => (
               <div key={prog.title} className="anim-item bg-hut rounded-sm p-6 md:p-8 lg:p-10 border border-gold/10" style={{ opacity: 0 }}>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className={authenticated ? "grid grid-cols-1 lg:grid-cols-2 gap-8" : ""}>
                   <div>
                     <prog.icon className="w-8 h-8 text-gold/70 mb-4" strokeWidth={1.5} />
                     <h3 className="text-display text-2xl text-foreground mb-1">{prog.title}</h3>
                     <div className="text-mono text-[10px] uppercase tracking-widest text-gold/60 mb-4">{prog.subtitle}</div>
                     <p className="text-base text-ash leading-relaxed">{prog.desc}</p>
                   </div>
+                  {authenticated && (
                   <div>
                     <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-4">Includes</div>
                     <div className="space-y-3">
@@ -167,6 +170,7 @@ const Academia = () => {
                       ))}
                     </div>
                   </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -174,6 +178,7 @@ const Academia = () => {
         </div>
       </section>
 
+      {authenticated && (
       <section ref={featRef} className="py-20 md:py-32 bg-charcoal relative">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
         <div className="container mx-auto px-6 md:px-12">
@@ -202,6 +207,7 @@ const Academia = () => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
       </section>
+      )}
     </PageLayout>
   );
 };

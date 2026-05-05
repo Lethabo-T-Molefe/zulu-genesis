@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { useAuth } from "@/context/AuthContext";
 
 const whatWeDo = [
   { icon: FlaskConical, title: "Invest in Research", desc: "Funding and conducting deep scientific inquiry across all 12 fields of specialization to generate breakthrough knowledge." },
@@ -92,6 +93,7 @@ const aboutStructuredData = [
 ];
 
 const About = () => {
+  const { authenticated } = useAuth();
   const missionRef = useRef<HTMLDivElement>(null);
   const teamRef = useRef<HTMLDivElement>(null);
   const whatRef = useRef<HTMLDivElement>(null);
@@ -226,8 +228,8 @@ const About = () => {
                     <h3 className="text-display text-xl text-foreground">{d.name}</h3>
                     <p className="mt-1 text-mono text-xs uppercase tracking-[0.2em] text-gold/60">{d.role}</p>
                   </div>
-                  {d.bio.map((para, i) => (
-                    <p key={i} className="text-base text-ash leading-relaxed">{para}</p>
+                  {authenticated && d.bio.map((para, i) => (
+                    <p key={i} className="text-base text-ash leading-relaxed text-left mb-3">{para}</p>
                   ))}
                 </div>
               </div>
@@ -236,6 +238,7 @@ const About = () => {
         </div>
       </section>
 
+      {authenticated && (
       <section ref={whatRef} className="py-20 md:py-32 bg-charcoal relative">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
         <div className="container mx-auto px-6 md:px-12">
@@ -255,7 +258,9 @@ const About = () => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
       </section>
+      )}
 
+      {authenticated && (
       <section ref={pipeRef} className="py-20 md:py-32">
         <div className="container mx-auto px-6 md:px-12">
           <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>How We Operate</div>
@@ -283,6 +288,7 @@ const About = () => {
           </div>
         </div>
       </section>
+      )}
     </PageLayout>
   );
 };

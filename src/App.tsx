@@ -16,7 +16,9 @@ import Contact from "./pages/Contact.tsx";
 import Services from "./pages/Services.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import UnderConstruction from "./pages/UnderConstruction.tsx";
+import Login from "./pages/Login.tsx";
 import { MAINTENANCE_MODE } from "./lib/maintenance.ts";
+import { AuthProvider } from "./context/AuthContext.tsx";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,7 @@ const AppRoutes = () => {
       </Routes>
     );
   }
+
   return (
     <Routes>
       <Route path="/" element={<Index />} />
@@ -40,6 +43,7 @@ const AppRoutes = () => {
       <Route path="/join" element={<Join />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/services" element={<Services />} />
+      <Route path="/login" element={<Login />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
@@ -60,11 +64,13 @@ const App = ({ router = "browser", initialPath = "/", helmetContext }: AppProps)
     <HelmetProvider context={helmetContext}>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <Router {...routerProps}>
-            <AppRoutes />
-          </Router>
+          <AuthProvider>
+            <Toaster />
+            <Sonner />
+            <Router {...routerProps}>
+              <AppRoutes />
+            </Router>
+          </AuthProvider>
         </TooltipProvider>
       </QueryClientProvider>
     </HelmetProvider>

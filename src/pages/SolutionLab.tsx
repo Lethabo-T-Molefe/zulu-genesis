@@ -5,6 +5,7 @@ import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
 import SEOHead from "@/components/SEOHead";
 import { Users, Atom, BarChart3, Infinity } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 const process = [
   { step: "01", title: "Field Delegation", desc: "Three elite specialists are selected from each of the 12 huts — chosen for their depth, range, and collaborative capacity." },
@@ -22,6 +23,7 @@ const principles = [
 ];
 
 const SolutionLab = () => {
+  const { authenticated } = useAuth();
   const prinRef = useRef<HTMLDivElement>(null);
   const procRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState({ prin: false, proc: false });
@@ -108,13 +110,16 @@ const SolutionLab = () => {
               <div key={p.title} className="anim-item bg-hut rounded-sm p-8 border border-gold/10 group hover:border-gold/30 transition-colors duration-500" style={{ opacity: 0 }}>
                 <p.icon className="w-8 h-8 text-gold/60 mb-4 group-hover:text-gold transition-colors" strokeWidth={1.5} />
                 <h3 className="text-display text-xl text-foreground mb-3">{p.title}</h3>
-                <p className="text-base text-ash leading-relaxed">{p.desc}</p>
+                {authenticated && (
+                  <p className="text-base text-ash leading-relaxed">{p.desc}</p>
+                )}
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {authenticated && (
       <section ref={procRef} className="py-20 md:py-32 bg-charcoal relative">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
         <div className="container mx-auto px-6 md:px-12">
@@ -149,6 +154,7 @@ const SolutionLab = () => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
       </section>
+      )}
     </PageLayout>
   );
 };

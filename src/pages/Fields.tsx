@@ -6,8 +6,10 @@ import PageHeader from "@/components/PageHeader";
 import SEOHead from "@/components/SEOHead";
 import { fieldsData } from "@/data/fieldsData";
 import { ArrowRight } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 const Fields = () => {
+  const { authenticated } = useAuth();
   const gridRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState(false);
 
@@ -83,7 +85,7 @@ const Fields = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
                   {/* Left: icon + name + desc */}
-                  <div className="lg:col-span-5">
+                  <div className={authenticated ? "lg:col-span-5" : "lg:col-span-9"}>
                     <div className="flex items-center gap-4 mb-4">
                       <field.icon className="w-8 h-8 text-gold/70 group-hover:text-gold transition-colors duration-300" strokeWidth={1.5} />
                       <div>
@@ -98,7 +100,8 @@ const Fields = () => {
                     <p className="text-base text-ash leading-relaxed">{field.desc}</p>
                   </div>
 
-                  {/* Middle: focus areas */}
+                  {/* Middle: focus areas — authenticated only */}
+                  {authenticated && (
                   <div className="lg:col-span-4">
                     <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-3">Key Focus Areas</div>
                     <div className="space-y-2">
@@ -110,15 +113,20 @@ const Fields = () => {
                       ))}
                     </div>
                   </div>
+                  )}
 
                   {/* Right: business dept + explore CTA */}
                   <div className="lg:col-span-3">
-                    <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-3">∞ Business Department</div>
-                    <p className="text-base text-ash leading-relaxed">{field.business}</p>
-                    <div className="flex items-center gap-2 mt-4">
-                      <span className="w-2 h-2 rounded-full bg-ember animate-pulse-gold" />
-                      <span className="text-mono text-[9px] uppercase tracking-widest text-ember">Active</span>
+                    {authenticated && (
+                    <div className="mb-4">
+                      <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-3">∞ Business Department</div>
+                      <p className="text-base text-ash leading-relaxed">{field.business}</p>
+                      <div className="flex items-center gap-2 mt-4">
+                        <span className="w-2 h-2 rounded-full bg-ember animate-pulse-gold" />
+                        <span className="text-mono text-[9px] uppercase tracking-widest text-ember">Active</span>
+                      </div>
                     </div>
+                    )}
                     <div className="flex items-center gap-1.5 mt-5 text-mono text-[9px] uppercase tracking-widest text-gold/40 group-hover:text-gold transition-colors duration-300">
                       <span>Explore Field</span>
                       <ArrowRight className="w-3 h-3" />

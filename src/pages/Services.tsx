@@ -4,6 +4,7 @@ import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
 import SEOHead from "@/components/SEOHead";
+import { useAuth } from "@/context/AuthContext";
 import {
   Microscope,
   Atom,
@@ -138,6 +139,7 @@ const servicesStructuredData = [
 ];
 
 const Services = () => {
+  const { authenticated } = useAuth();
   const servicesRef = useRef<HTMLDivElement>(null);
   const highlightsRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -233,7 +235,7 @@ const Services = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
                   {/* Left: icon + title + desc */}
-                  <div className="lg:col-span-5">
+                  <div className={authenticated ? "lg:col-span-5" : "lg:col-span-9"}>
                     <div className="flex items-center gap-4 mb-4">
                       <service.icon
                         className="w-8 h-8 text-gold/70 group-hover:text-gold transition-colors duration-300 shrink-0"
@@ -248,10 +250,13 @@ const Services = () => {
                         </h3>
                       </div>
                     </div>
-                    <p className="text-base text-ash leading-relaxed">{service.desc}</p>
+                    {authenticated && (
+                      <p className="text-base text-ash leading-relaxed">{service.desc}</p>
+                    )}
                   </div>
 
-                  {/* Middle: details */}
+                  {/* Middle: details — authenticated only */}
+                  {authenticated && (
                   <div className="lg:col-span-4">
                     <div className="text-mono text-[10px] uppercase tracking-widest text-gold/50 mb-3">
                       What's Included
@@ -265,6 +270,7 @@ const Services = () => {
                       ))}
                     </div>
                   </div>
+                  )}
 
                   {/* Right: CTA */}
                   <div className="lg:col-span-3 flex flex-col justify-between">
@@ -289,7 +295,8 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Why Sec(t) */}
+      {/* Why Sec(t) — authenticated only */}
+      {authenticated && (
       <section ref={highlightsRef} className="py-20 md:py-32 bg-charcoal relative">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
         <div className="container mx-auto px-6 md:px-12">
@@ -334,6 +341,7 @@ const Services = () => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
       </section>
+      )}
 
       {/* Bottom CTA */}
       <section ref={ctaRef} className="py-20 md:py-32">
