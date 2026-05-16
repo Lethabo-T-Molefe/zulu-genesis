@@ -224,7 +224,7 @@ const About = () => {
             Team
           </div>
           <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-2" style={{ opacity: 0 }}>
-            Founder & <span className="text-gold-gradient">Executive Director</span>
+            Founder & <span className="text-gold-gradient">CEO</span>
           </h2>
           <p className="anim-item text-mono text-xs text-gold/60 uppercase tracking-widest mb-12 md:mb-16" style={{ opacity: 0 }}>
             Sibusiso Bhekani Nhlonipho Gumede (Mnguni / Zafenate Infinity)
