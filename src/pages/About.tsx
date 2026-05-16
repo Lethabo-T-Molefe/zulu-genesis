@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
 import PageLayout from "@/components/PageLayout";
 import PageHeader from "@/components/PageHeader";
+import { TeamPortraitFrame } from "@/components/TeamPortraitFrame";
 import { brandLogos } from "@/lib/brand-assets";
 import {
   Cpu, FlaskConical, Building2, Scale, ArrowRight,
@@ -23,6 +24,14 @@ const pipeline = [
   { step: "02", label: "Design", desc: "Systems architecture, prototyping, and integrated solution modelling." },
   { step: "03", label: "Execution", desc: "Disciplined implementation through Deep Work and Kaizen principles." },
   { step: "04", label: "Commissioning", desc: "Deployment, measurement, and continuous refinement of delivered solutions." },
+];
+
+const founderBio = [
+  "Sibusiso Bhekani Nhlonipho Gumede, known as Mnguni or Zafenate Infinity, is a Chemical Engineering Honours graduate from the University of Cape Town and the University of Johannesburg. He is an experienced Process and Project Management Chemical Engineer with a strong track record in designing, optimizing, and managing efficient process systems that deliver high yield, recovery, and sustainable results.",
+  "His expertise focuses on ensuring process integrity, maximizing resource efficiency, minimizing waste, and driving economically viable engineering solutions. He has worked with prestigious companies, delivering measurable impact through system optimization and performance improvement.",
+  "Mnguni is deeply passionate about the integration of computer science, coding, data science, and artificial intelligence across all disciplines. He advocates for leveraging Fourth and Fifth Industrial Revolution technologies to transform industries, enhance productivity, and solve complex global challenges.",
+  "He is a strong proponent of the circular economy, promoting sustainable systems that enable clean environments, efficient resource use, and economically active communities. His vision emphasizes the convergence of engineering, science, and technology to develop practical, scalable solutions.",
+  "As a researcher, philosopher, innovator, and problem solver, he is the founder of the Sec(t) Infinity Family Businesses, which brings together multidisciplinary experts to develop integrated, future-focused solutions. His work is guided by key philosophies of Deep Work, Kaizen, and the Goldilocks Rule, forming a blueprint for continuous growth, innovation, and excellence.",
 ];
 
 const directors = [
@@ -214,26 +223,60 @@ const About = () => {
           <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>
             Team
           </div>
-          <h2 className="anim-item text-display text-3xl md:text-4xl lg:text-5xl text-foreground mb-12 md:mb-16" style={{ opacity: 0 }}>
-            Meet the <span className="text-gold-gradient">Leadership</span>
+          <h2 className="anim-item text-display text-2xl md:text-4xl lg:text-5xl text-foreground mb-2" style={{ opacity: 0 }}>
+            Founder & <span className="text-gold-gradient">Executive Director</span>
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {directors.map((d) => (
-              <div key={d.name} className="anim-item bg-hut rounded-sm border border-gold/10 overflow-hidden flex flex-col" style={{ opacity: 0 }}>
-                <div className="w-full aspect-[4/3] overflow-hidden" style={d.imageContainerStyle}>
-                  <img src={d.image} alt={d.name} className="w-full h-full object-cover" style={d.imageStyle ?? { objectPosition: "top" }} />
-                </div>
-                <div className="p-8 flex flex-col gap-4">
-                  <div>
-                    <h3 className="text-display text-xl text-foreground">{d.name}</h3>
-                    <p className="mt-1 text-mono text-xs uppercase tracking-[0.2em] text-gold/60">{d.role}</p>
-                  </div>
-                  {authenticated && d.bio.map((para, i) => (
-                    <p key={i} className="text-base text-ash leading-relaxed text-left mb-3">{para}</p>
-                  ))}
-                </div>
+          <p className="anim-item text-mono text-xs text-gold/60 uppercase tracking-widest mb-12 md:mb-16" style={{ opacity: 0 }}>
+            Sibusiso Bhekani Nhlonipho Gumede (Mnguni / Zafenate Infinity)
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            <div className="lg:col-span-5 anim-item" style={{ opacity: 0 }}>
+              <TeamPortraitFrame
+                src="/sibusiso.jpeg"
+                alt="Sibusiso Bhekani Nhlonipho Gumede"
+                caption="Sec(t) Infinity · United Minds"
+              />
+            </div>
+            <div className="lg:col-span-7 space-y-6">
+              <div className="anim-item" style={{ opacity: 0 }}>
+                <h3 className="text-display text-xl md:text-2xl text-foreground">
+                  Sibusiso Bhekani Nhlonipho Gumede
+                </h3>
+                <p className="mt-2 text-mono text-xs uppercase tracking-[0.2em] text-gold/70">
+                  Mnguni · Zafenate Infinity
+                </p>
               </div>
-            ))}
+              {founderBio.map((text, i) => (
+                <p key={i} className="anim-item text-sm md:text-base text-ash leading-relaxed" style={{ opacity: 0 }}>
+                  {text}
+                </p>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-20 md:mt-28">
+            <div className="anim-item text-mono text-xs uppercase tracking-[0.3em] text-gold mb-4" style={{ opacity: 0 }}>
+              Directors
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {directors.map((d) => (
+                <div key={d.name} className="anim-item bg-hut rounded-sm border border-gold/10 overflow-hidden flex flex-col" style={{ opacity: 0 }}>
+                  <div className="w-full aspect-[4/3] overflow-hidden" style={d.imageContainerStyle}>
+                    <img src={d.image} alt={d.name} className="w-full h-full object-cover" style={d.imageStyle ?? { objectPosition: "top" }} />
+                  </div>
+                  <div className="p-8 flex flex-col gap-4">
+                    <div>
+                      <h3 className="text-display text-xl text-foreground">{d.name}</h3>
+                      <p className="mt-1 text-mono text-xs uppercase tracking-[0.2em] text-gold/60">{d.role}</p>
+                    </div>
+                    {authenticated && d.bio.map((para, i) => (
+                      <p key={i} className="text-base text-ash leading-relaxed text-left mb-3">{para}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
