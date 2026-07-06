@@ -2,7 +2,7 @@
 // Visitors without a valid session see only the login gate — no site content is visible.
 export const REQUIRE_LOGIN = true;
 
-const ACCESS_CODE = import.meta.env.VITE_ACCESS_CODE ?? "528792";
+const ACCESS_CODE = import.meta.env.VITE_ACCESS_CODE ?? "741963";
 const SESSION_KEY = "sect_auth_session";
 const SESSION_TOKEN = "sect_authenticated";
 const SESSION_DURATION_MS = 8 * 60 * 60 * 1000; // 8 hours
